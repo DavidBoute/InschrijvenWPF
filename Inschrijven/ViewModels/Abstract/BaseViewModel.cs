@@ -7,19 +7,29 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace Inschrijven.ViewModels.Abstract
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
-        // Constructor
-        public BaseViewModel(InschrijvingContext db)
-        {
+        internal InschrijvingContext db;
+        internal Page page;
+        internal Frame frame;
 
+        // Constructors
+        #region Constructors
+ 
+        public BaseViewModel(InschrijvingContext db, Frame frame, Page page)
+        {
+            this.db = db;
+            this.frame = frame;
+            this.page = page;
         }
 
-        public BaseViewModel():this(new InschrijvingContext()) { }
-        
+        #endregion
+
         // INotifyPropertyChanged Implementation
         #region INotifyPropertyChanged
 
