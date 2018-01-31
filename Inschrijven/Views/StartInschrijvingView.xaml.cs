@@ -1,5 +1,6 @@
 ﻿using Inschrijven.DAL;
 using Inschrijven.Model;
+using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -23,9 +24,9 @@ namespace Inschrijven.Views
     /// </summary>
     public partial class StartInschrijvingView : Page
     {
-        public StartInschrijvingView(InschrijvingContext db, Frame frame, Leerkracht leerkracht)
+        public StartInschrijvingView(IGegevensService dataService, Frame frame, Leerkracht leerkracht)
         {
-            DataContext = new StartInschrijvingViewModel(db, frame, this, leerkracht);
+            DataContext = new StartInschrijvingViewModel(dataService, frame, this, leerkracht);
 
             InitializeComponent();
         }

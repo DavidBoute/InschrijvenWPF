@@ -1,5 +1,9 @@
 ﻿using Inschrijven.DAL;
+using Inschrijven.Extensions;
+using Inschrijven.Helpers;
 using Inschrijven.Model;
+using Inschrijven.Services;
+using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels.Abstract;
 using System;
 using System.Collections.Generic;
@@ -7,7 +11,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Inschrijven.ViewModels
 {
@@ -62,8 +68,8 @@ namespace Inschrijven.ViewModels
             set
             {
                 _jaar = value;
-                RichtingenGefilterd = new ObservableCollection<Richting>(
-                    _alleRichtingen.Where(x => x.Jaar == value));
+                RichtingenGefilterd = _alleRichtingen.Where(x => x.Jaar == value)
+                                                    .ToObservableCollection();
 
                 OnPropertyChanged();
             }
@@ -76,8 +82,8 @@ namespace Inschrijven.ViewModels
             set
             {
                 _richting = value;
-                OptiesGefilterd = new ObservableCollection<Optie>(
-                    _alleOpties.Where(x => x.Richtingen.Contains(Richting)));
+                OptiesGefilterd = _alleOpties.Where(x => x.Richtingen.Contains(Richting))
+                                            .ToObservableCollection();
 
                 OnPropertyChanged();
             }
@@ -92,17 +98,44 @@ namespace Inschrijven.ViewModels
 
         #endregion
 
+        // Commands
+        #region Commands
+
+        public ICommand StartInschrijvingCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                   (object obj) =>
+                   {
+                       ValidationService.ValidateAll();
+
+                       //frame.Content = new StartInschrijvingView(_dataService, frame, HuidigeLeerkracht);
+                   });
+            }
+        }
+
+        #endregion
+
+        //// Validation
+        //#region Validation
+
+        //private void AddValidation()
+        //{
+        //    var validationService = new ValidationService();
+
+        //    validationService.RegisterRule(page.FindName("cboRichting") as UIElement, 
+        //                                    x => !String.IsNullOrWhiteSpace(x));
+        //}
+
+        //#endregion
+
         // Constructors
         #region Constructors
 
-        public StartInschrijvingViewModel(InschrijvingContext db, Frame frame, Page page, Leerkracht inschrijvendeLeerkracht, Inschrijving inschrijving = null)
-            : base(db, frame, page)
+        public StartInschrijvingViewModel(IGegevensService dataService, Frame frame, Page page, Leerkracht inschrijvendeLeerkracht, Inschrijving inschrijving = null)
+            : base(dataService, frame, page)
         {
-            SchooljarenLijst = new ObservableCollection<Schooljaar>(db.Schooljaren);
-            Jaren = new ObservableCollection<int>(new int[] { 1, 2, 3, 4, 5, 6 });
-            _alleRichtingen = new List<Richting>(db.Richtingen.Include("Opties"));
-            _alleOpties = new List<Optie>(db.Opties);
-
             if (inschrijving != null)
             {
                 Schooljaar = inschrijving.Schooljaar;
@@ -110,44 +143,19 @@ namespace Inschrijven.ViewModels
             }
             else
             {
-                DateTime vandaag = DateTime.Today;
-
-                int jaarAanpassing = 0;
-                if (vandaag.Month <= 3) jaarAanpassing = -1;
-
-                // Indien schooljaar nog niet bestaat, aanvullen
-                if (!db.Schooljaren
-                        .Any(x => x.SchooljaarStartDatum.Year == vandaag.Year + jaarAanpassing))
-                {
-                    try
-                    {
-                        db.Schooljaren.Add(new Schooljaar
-                        {
-                            SchooljaarStartDatum = new DateTime(vandaag.Year + jaarAanpassing, 9, 1),
-                            SchooljaarNaam = $"{vandaag.Year + jaarAanpassing}-{vandaag.Year + jaarAanpassing + 1}"
-                        });
-
-                        db.SaveChanges();
-
-                        SchooljarenLijst = new ObservableCollection<Schooljaar>(db.Schooljaren);
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-                }
-
-                Schooljaar = db.Schooljaren
-                        .SingleOrDefault(x => x.SchooljaarStartDatum.Year == vandaag.Year + jaarAanpassing);
-
+                Schooljaar = dataService.GetStandaardSchooljaar();
                 _inschrijving = new Inschrijving()
                 {
                     Leerkracht = inschrijvendeLeerkracht
                 };
             }
 
+            SchooljarenLijst = dataService.GetAlleSchooljaren().ToObservableCollection();
+            Jaren = new int[] { 1, 2, 3, 4, 5, 6 }.ToObservableCollection();
+            _alleRichtingen = dataService.GetAlleRichtingen();
+            _alleOpties = dataService.GetAlleOpties();
 
-
+            ValidationService = new ValidationService();
         }
 
         # endregion

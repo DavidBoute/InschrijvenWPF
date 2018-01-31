@@ -1,4 +1,5 @@
 ﻿using Inschrijven.DAL;
+using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,9 @@ namespace Inschrijven.Views
     /// </summary>
     public partial class LoginPage : Page
     {
-        public LoginPage(InschrijvingContext db, Frame frame)
+        public LoginPage(IGegevensService dataService, Frame frame)
         {
-            DataContext = new LoginViewModel(db, frame, this);
+            DataContext = new LoginViewModel(dataService, frame, this);
 
             InitializeComponent();
         }

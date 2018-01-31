@@ -9,11 +9,11 @@ namespace Inschrijven.Helpers
 {
     public class RelayCommand : ICommand
     {
-
         //These delegates store methods to be called that contains the body of the Execute and CanExecue methods
-        //for each particular instance of DelegateCommand.
+        //for each particular instance of RelayCommand.
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _Execute;
+
         //Two Constructors, for convenience and clean code - often you won't need CanExecute
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
@@ -23,6 +23,7 @@ namespace Inschrijven.Helpers
         public RelayCommand(Action<object> execute)
           : this(execute, null)
         { }
+
         //CanExecute and Execute come from ICommand
         public event EventHandler CanExecuteChanged;
         public bool CanExecute(object parameter)
@@ -35,6 +36,7 @@ namespace Inschrijven.Helpers
                 return;
             _Execute(parameter);
         }
+
         /// <summary>
         /// Not a part of ICommand, but commonly added so you can trigger a manual refresh on the result of CanExecute.
         /// </summary>

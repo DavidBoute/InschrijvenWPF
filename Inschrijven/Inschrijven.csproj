@@ -69,8 +69,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Behaviors\ValidationBehavior.cs" />
     <Compile Include="DAL\InschrijvingContext.cs" />
     <Compile Include="DAL\InschrijvingInitializer.cs" />
+    <Compile Include="Extensions\IEnumerableExtension.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Migrations\201801221546540_initial.cs" />
     <Compile Include="Migrations\201801221546540_initial.Designer.cs">
@@ -82,6 +84,9 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\OnderwijsSoort.cs" />
+    <Compile Include="Services\Abstract\IGegevensService.cs" />
+    <Compile Include="Services\GegevensFromDatabaseService.cs" />
+    <Compile Include="Services\ValidationService.cs" />
     <Compile Include="ViewModels\Abstract\BaseViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />

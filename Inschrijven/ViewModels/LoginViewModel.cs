@@ -1,6 +1,8 @@
 ﻿using Inschrijven.DAL;
+using Inschrijven.Extensions;
 using Inschrijven.Helpers;
 using Inschrijven.Model;
+using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels.Abstract;
 using Inschrijven.Views;
 using System;
@@ -36,19 +38,6 @@ namespace Inschrijven.ViewModels
         // Commands
         #region Commands
 
-
-        public ICommand SelectedItemChangedCommand
-        {
-            get
-            {
-                return new RelayCommand(
-                   (object obj) =>
-                   {
-
-                   });
-            }
-        }
-
         public ICommand LoginCommand
         {
             get
@@ -56,7 +45,7 @@ namespace Inschrijven.ViewModels
                 return new RelayCommand(
                    (object obj) =>
                    {
-                       frame.Content = new StartInschrijvingView(db, frame, HuidigeLeerkracht);
+                       frame.Content = new StartInschrijvingView(_dataService, frame, HuidigeLeerkracht);
                    },
                    canExecute => HuidigeLeerkracht != null);
             }
@@ -67,10 +56,10 @@ namespace Inschrijven.ViewModels
         // Constructors
         #region Constructors
 
-        public LoginViewModel(InschrijvingContext db, Frame frame, Page page)
-            : base(db, frame, page)
+        public LoginViewModel(IGegevensService dataService, Frame frame, Page page)
+            : base(dataService, frame, page)
         {
-            LeerkrachtenLijst = new ObservableCollection<Leerkracht>(db.Leerkrachten);
+            LeerkrachtenLijst = _dataService.GetAlleLeerkrachten().ToObservableCollection();
         }
 
         #endregion

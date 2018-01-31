@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Inschrijven.DAL;
+using Inschrijven.Services.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +25,8 @@ namespace Inschrijven.Views
         {
             InitializeComponent();
 
-            this.frmFormulier.Content = new LoginPage(new DAL.InschrijvingContext(), frmFormulier);
+            IGegevensService dataService = new GegevensFromDatabaseService(new InschrijvingContext());
+            this.frmFormulier.Content = new LoginPage(dataService, frmFormulier);
         }
     }
 }

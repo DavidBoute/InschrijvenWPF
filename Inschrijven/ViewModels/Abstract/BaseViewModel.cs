@@ -1,4 +1,6 @@
 ﻿using Inschrijven.DAL;
+using Inschrijven.Services;
+using Inschrijven.Services.Abstract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,16 +16,23 @@ namespace Inschrijven.ViewModels.Abstract
 {
     public abstract class BaseViewModel : INotifyPropertyChanged
     {
-        internal InschrijvingContext db;
+        internal IGegevensService _dataService;
         internal Page page;
         internal Frame frame;
 
+        private ValidationService _validationService;
+        public ValidationService ValidationService
+        {
+            get { return _validationService; }
+            set { _validationService = value; OnPropertyChanged(); }
+        }
+
         // Constructors
         #region Constructors
- 
-        public BaseViewModel(InschrijvingContext db, Frame frame, Page page)
+
+        public BaseViewModel(IGegevensService dataService, Frame frame, Page page)
         {
-            this.db = db;
+            this._dataService = dataService;
             this.frame = frame;
             this.page = page;
         }
