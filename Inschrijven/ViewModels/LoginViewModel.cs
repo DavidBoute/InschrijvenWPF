@@ -7,6 +7,7 @@ using Inschrijven.ViewModels.Abstract;
 using Inschrijven.Views;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,14 +24,14 @@ namespace Inschrijven.ViewModels
         public ObservableCollection<Leerkracht> LeerkrachtenLijst
         {
             get { return _leerkrachtenLijst; }
-            private set { _leerkrachtenLijst = value; OnPropertyChanged(); }
+            private set { _leerkrachtenLijst = value; }
         }
 
-        private Leerkracht _huidigeLeerkracht;
+        [Required(ErrorMessage = "Selecteer een inschrijver")]
         public Leerkracht HuidigeLeerkracht
         {
-            get { return _huidigeLeerkracht; }
-            set { _huidigeLeerkracht = value; OnPropertyChanged(); }
+            get { return GetValue(() => HuidigeLeerkracht); }
+            set { SetValue(() => HuidigeLeerkracht, value); }
         }
 
         #endregion
@@ -46,8 +47,7 @@ namespace Inschrijven.ViewModels
                    (object obj) =>
                    {
                        frame.Content = new StartInschrijvingView(_dataService, frame, HuidigeLeerkracht);
-                   },
-                   canExecute => HuidigeLeerkracht != null);
+                   });
             }
         }
 

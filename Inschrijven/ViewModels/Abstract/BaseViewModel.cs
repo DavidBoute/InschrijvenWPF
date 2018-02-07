@@ -14,18 +14,11 @@ using System.Windows.Controls;
 
 namespace Inschrijven.ViewModels.Abstract
 {
-    public abstract class BaseViewModel : INotifyPropertyChanged
+    public abstract class BaseViewModel : PropertyChangedNotification
     {
         internal IGegevensService _dataService;
         internal Page page;
         internal Frame frame;
-
-        private ValidationService _validationService;
-        public ValidationService ValidationService
-        {
-            get { return _validationService; }
-            set { _validationService = value; OnPropertyChanged(); }
-        }
 
         // Constructors
         #region Constructors
@@ -35,17 +28,6 @@ namespace Inschrijven.ViewModels.Abstract
             this._dataService = dataService;
             this.frame = frame;
             this.page = page;
-        }
-
-        #endregion
-
-        // INotifyPropertyChanged Implementation
-        #region INotifyPropertyChanged
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion

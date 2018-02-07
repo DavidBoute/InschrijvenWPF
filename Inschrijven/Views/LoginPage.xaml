@@ -13,21 +13,14 @@
         <Label Content="Selecteer je naam:"
                VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <ComboBox ItemsSource="{Binding LeerkrachtenLijst}"
-                  SelectedItem="{Binding HuidigeLeerkracht}"
+                  SelectedItem="{Binding HuidigeLeerkracht, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
-                  DisplayMemberPath="VolledigeNaam">
-            <!--<i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>-->
+                  DisplayMemberPath="VolledigeNaam"
+                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Width="150">
         </ComboBox>
-        <Button Content="Log in">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <i:InvokeCommandAction Command="{Binding LoginCommand}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
+
+        <Button Content="Log in" Command="{Binding LoginCommand}"
+                IsEnabled="{Binding IsValid, Mode=OneWay}"/>
     </StackPanel>
 </Page>
