@@ -46,31 +46,6 @@ namespace Inschrijven.Migrations
                     new AttestSoort { AttestNaam = "Andere" }
                 });
 
-            // AvondstudieSoort
-            var avondstudieSoorten = context.AvondstudieSoorten;
-
-            avondstudieSoorten.AddOrUpdate(x => x.AvondstudieSoortNaam,
-                new AvondstudieSoort[]
-                {
-                    new AvondstudieSoort { AvondstudieSoortNaam = "tot 17 u.", IsVoorzienOpVrijdag = true },
-                    new AvondstudieSoort { AvondstudieSoortNaam = "tot 17.30 u.", IsVoorzienOpVrijdag = false },
-                    new AvondstudieSoort { AvondstudieSoortNaam = "tot 18 u.", IsVoorzienOpVrijdag = false }
-                });
-
-
-            // BeperkingSoort
-            var beperkingSoorten = context.BeperkingSoorten;
-
-            beperkingSoorten.AddOrUpdate(x => x.BeperkingSoortNaam,
-                new BeperkingSoort[]
-                {
-                    new BeperkingSoort{BeperkingSoortNaam = "Dyslexie", IsVerslagNodig = false, IsVerwittigDirectie = false},
-                    new BeperkingSoort{BeperkingSoortNaam = "Dyscalculie", IsVerslagNodig = false, IsVerwittigDirectie = false},
-                    new BeperkingSoort{BeperkingSoortNaam = "ADHD", IsVerslagNodig = false, IsVerwittigDirectie = false},
-                    new BeperkingSoort{BeperkingSoortNaam = "ASS", IsVerslagNodig = true, IsVerwittigDirectie = true},
-                    // TODO: lijstje uitbreiden
-                });
-
             // Geslacht
             var geslachten = context.Geslachten;
 
@@ -199,7 +174,7 @@ namespace Inschrijven.Migrations
             // TelefoonSoort
             var telefoonSoorten = context.TelefoonSoorten;
 
-            telefoonSoorten.AddOrUpdate(x=> x.TelefoonSoortNaam,
+            telefoonSoorten.AddOrUpdate(x => x.TelefoonSoortNaam,
                 new TelefoonSoort[]
                 {
                     new TelefoonSoort{TelefoonSoortNaam="gsm"},

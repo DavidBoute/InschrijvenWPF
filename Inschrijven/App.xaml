@@ -4,6 +4,53 @@
              xmlns:local="clr-namespace:Inschrijven"
              StartupUri="Views/Window/MainWindow.xaml">
     <Application.Resources>
-         
+
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <Grid x:Name="container">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <AdornedElementPlaceholder Name="customAdorner"
+				                           Grid.Column="0"
+				                           VerticalAlignment="Center" />
+                <Border x:Name="ValidationErrorElement"
+				        BorderBrush="#FFDB000C"
+				        BorderThickness="1.2"
+				        CornerRadius="1"
+				        ToolTip="{Binding ElementName=customAdorner,
+				                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                </Border>
+                <Border Grid.Column="1"
+				        Width="15"
+				        Height="15"
+				        Margin="3 0 3 0"
+				        HorizontalAlignment="Right"
+				        VerticalAlignment="Center"
+				        Background="Red"
+				        CornerRadius="10"
+				        ToolTip="{Binding ElementName=customAdorner,
+				                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}">
+                    <TextBlock HorizontalAlignment="center"
+					           VerticalAlignment="center"
+					           FontWeight="Bold"
+					           Foreground="white"
+					           Text="!" />
+                </Border>
+                <!--<Border Grid.Column="1"
+				        Height="Auto"
+				        Margin="5,0,0,0"
+				        Background="#DC000C"
+				        CornerRadius="3"
+				        DockPanel.Dock="right">
+                    <TextBlock Margin="5"
+					           Foreground="White"
+					           Text="{Binding ElementName=customAdorner,
+					                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
+                </Border>-->
+            </Grid>
+        </ControlTemplate>
+
+
     </Application.Resources>
 </Application>

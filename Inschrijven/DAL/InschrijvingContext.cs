@@ -1,11 +1,6 @@
 ﻿using Inschrijven.Model;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Inschrijven.DAL
 {
@@ -19,10 +14,6 @@ namespace Inschrijven.DAL
         public DbSet<AanschrijvingSoort> AanschrijvingSoorten { get; set; }
         public DbSet<Adres> Adressen { get; set; }
         public DbSet<AttestSoort> Attesten { get; set; }
-        public DbSet<Avondstudie> Avondstudie { get; set; }
-        public DbSet<AvondstudieSoort> AvondstudieSoorten { get; set; }
-        public DbSet<Beperking> Beperkingen { get; set; }
-        public DbSet<BeperkingSoort> BeperkingSoorten { get; set; }
         public DbSet<BijkomendeInfo> BijkomendeInfo { get; set; }
         public DbSet<Contact> Contacten { get; set; }
         public DbSet<Email> Emails { get; set; }
@@ -92,63 +83,6 @@ namespace Inschrijven.DAL
 
             attestSoort.Property(x => x.AttestNaam).IsRequired();
 
-            // Avondstudie
-            var avondstudie = modelBuilder.Entity<Avondstudie>();
-
-            avondstudie.HasKey(x => x.AvondstudieId);
-            avondstudie.Property(x => x.AvondstudieId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
-            avondstudie.HasOptional(x => x.MaandagAvondstudieSoort)
-                .WithOptionalPrincipal();
-            avondstudie.HasOptional(x => x.DinsdagAvondstudieSoort)
-                .WithOptionalPrincipal();
-            avondstudie.HasOptional(x => x.DonderdagAvondstudieSoort)
-                .WithOptionalPrincipal();
-            avondstudie.HasOptional(x => x.VrijdagAvondstudieSoort)
-                .WithOptionalPrincipal();
-
-            // AvondstudieSoort
-            var avondstudieSoort = modelBuilder.Entity<AvondstudieSoort>();
-
-            avondstudieSoort.HasKey(x => x.AvondstudieSoortId);
-            avondstudieSoort.Property(x => x.AvondstudieSoortId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-            avondstudieSoort.Property(x => x.AvondstudieSoortNaam).IsRequired();
-            avondstudieSoort.Property(x => x.IsVoorzienOpVrijdag).IsRequired();
-
-            // Beperking
-            var beperking = modelBuilder.Entity<Beperking>();
-
-            beperking.HasKey(x => x.BeperkingId);
-            beperking.Property(x => x.BeperkingId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
-            beperking.Property(x => x.NaamAlternatief).IsOptional();
-            beperking.Property(x => x.HeeftAttest).IsRequired();
-            beperking.Property(x => x.IsAttestIngediend).IsOptional();
-            beperking.Property(x => x.IsVerslagIngediend).IsOptional();
-            beperking.Property(x => x.IsMDecreet).IsOptional();
-            beperking.Property(x => x.MDecreetMaatregelen).IsOptional();
-
-            //beperking.HasRequired(x => x.Leerling)
-            //    .WithMany(x => x.Beperkingen)
-            //    .HasForeignKey(x=> x.LeerlingId);
-            beperking.HasRequired(x => x.BeperkingSoort)
-                .WithMany();
-
-            // BeperkingSoort
-            var beperkingSoort = modelBuilder.Entity<BeperkingSoort>();
-
-            beperkingSoort.HasKey(x => x.BeperkingSoortId);
-            beperkingSoort.Property(x => x.BeperkingSoortId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-
-            beperkingSoort.Property(x => x.BeperkingSoortNaam).IsRequired();
-            beperkingSoort.Property(x => x.IsVerslagNodig).IsRequired();
-            beperkingSoort.Property(x => x.IsVerwittigDirectie).IsRequired();
-
             // BijkomendeInfo
             var bijkomendeInfo = modelBuilder.Entity<BijkomendeInfo>();
 
@@ -157,12 +91,7 @@ namespace Inschrijven.DAL
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             bijkomendeInfo.Property(x => x.MedischeProblemen).IsOptional();
-            bijkomendeInfo.Property(x => x.FamilialeSituatie).IsOptional();
-
-            bijkomendeInfo.HasRequired(x => x.TaalMoeder)
-                .WithMany();
-            bijkomendeInfo.HasMany(x => x.BeperkingLijst)
-                .WithMany();
+            bijkomendeInfo.Property(x => x.Taalproblemen).IsOptional();
 
             // Contact
             var contact = modelBuilder.Entity<Contact>();
@@ -209,6 +138,7 @@ namespace Inschrijven.DAL
 
             inschrijving.Property(x => x.StartTijd).IsRequired();
             inschrijving.Property(x => x.IsHerinschrijving).IsRequired();
+            inschrijving.Property(x => x.IsAvondstudie).IsRequired();
 
             inschrijving.HasRequired(x => x.Leerling)
                 .WithRequiredDependent();
@@ -221,8 +151,6 @@ namespace Inschrijven.DAL
             inschrijving.HasRequired(x => x.Schooljaar)
                 .WithOptional();
             inschrijving.HasRequired(x => x.Maaltijden)
-                .WithRequiredDependent();
-            inschrijving.HasRequired(x => x.Avondstudie)
                 .WithRequiredDependent();
             inschrijving.HasRequired(x => x.InschrijvingStatus)
                 .WithOptional();
@@ -275,16 +203,15 @@ namespace Inschrijven.DAL
             leerling.HasRequired(x => x.Geslacht)
                 .WithOptional();
             leerling.HasRequired(x => x.Email)
-                .WithRequiredPrincipal();
+                .WithRequiredDependent();
             leerling.HasMany(x => x.Contacten)
                 .WithMany(x => x.Leerlingen);
             leerling.HasMany(x => x.Adressen)
                 .WithMany(x => x.Leerlingen);
             leerling.HasMany(x => x.TelefoonNummers)
                 .WithMany();
-            leerling.HasMany(x => x.Beperkingen)
-                .WithRequired(x => x.Leerling)
-                .HasForeignKey(x => x.LeerlingId);
+            leerling.HasRequired(x => x.BijkomendeInfo)
+                .WithRequiredDependent();
 
             // LerenKennenManier
             var lerenKennenManier = modelBuilder.Entity<LerenKennenManier>();
@@ -347,7 +274,7 @@ namespace Inschrijven.DAL
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             onderwijsSoort.Property(x => x.OnderwijsSoortNaam).IsRequired();
-            
+
             // Optie
             var optie = modelBuilder.Entity<Optie>();
 

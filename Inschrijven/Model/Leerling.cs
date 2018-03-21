@@ -19,16 +19,17 @@ namespace Inschrijven.Model
         public int GeslachtId { get; set; }
         public Guid EmailId { get; set; }
         public Guid InschrijvingId { get; set; }
+        public Guid BijkomendeInfoId { get; set; }
 
         // Navigation Properties
         public virtual Geslacht Geslacht { get; set; }
         public virtual Email Email { get; set; }
         public virtual Inschrijving Inschrijving { get; set; }
+        public virtual BijkomendeInfo BijkomendeInfo { get; set; }
 
         public virtual ICollection<Contact> Contacten { get; set; }
         public virtual ICollection<Adres> Adressen { get; set; }
         public virtual ICollection<Telefoon> TelefoonNummers { get; set; }
-        public virtual ICollection<Beperking> Beperkingen { get; set; }
 
     }
 }

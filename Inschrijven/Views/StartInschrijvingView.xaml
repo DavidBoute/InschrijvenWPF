@@ -4,7 +4,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-      xmlns:beh="clr-namespace:Inschrijven.Behaviors"
       xmlns:local="clr-namespace:Inschrijven.Views"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
@@ -12,25 +11,28 @@
 
     <StackPanel>
         <ComboBox ItemsSource="{Binding SchooljarenLijst}"
-                  SelectedItem="{Binding Schooljaar}"
+                  SelectedItem="{Binding Schooljaar, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
-                  DisplayMemberPath="SchooljaarNaam"/>
-        
+                  DisplayMemberPath="SchooljaarNaam"
+                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Width="150"/>
+
         <ComboBox ItemsSource="{Binding Jaren}"
-                  SelectedItem="{Binding Jaar}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                  SelectedItem="{Binding Jaar, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                  VerticalAlignment="Center" HorizontalAlignment="Center"
+                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Width="150"/>
 
         <ComboBox ItemsSource="{Binding RichtingenGefilterd}"
-                  SelectedItem="{Binding Richting}"
+                  SelectedItem="{Binding Richting, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
-                  DisplayMemberPath="Naam">
-            <i:Interaction.Behaviors>
-                <beh:ValidationBehavior ValidationCondition="123"/>
-            </i:Interaction.Behaviors>
-        </ComboBox>
+                  DisplayMemberPath="Naam"
+                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Width="150"/>
 
         <Button Content="Start inschrijving"
-                Command="{Binding StartInschrijvingCommand}"/>
+                Command="{Binding StartInschrijvingCommand}"
+                IsEnabled="{Binding IsValid, Mode=OneWay}"/>
 
     </StackPanel>
 </Page>

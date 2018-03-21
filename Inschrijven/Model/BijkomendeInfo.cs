@@ -10,15 +10,7 @@ namespace Inschrijven.Model
     {
         public Guid BijkomendeInfoId { get; set; }
         public string MedischeProblemen { get; set; }
-        public string FamilialeSituatie { get; set; }
-        
-        // Foreign Keys
-        public int TaalMoederTaalSoortId { get; set; }
-
-        // Navigation Properties
-        public TaalSoort TaalMoeder { get; set; }
-
-        public ICollection<Beperking> BeperkingLijst { get; set; }
+        public string Taalproblemen { get; set; }
 
     }
 }

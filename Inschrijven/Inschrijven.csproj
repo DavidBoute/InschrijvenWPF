@@ -69,24 +69,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Behaviors\ValidationBehavior.cs" />
     <Compile Include="DAL\InschrijvingContext.cs" />
     <Compile Include="DAL\InschrijvingInitializer.cs" />
     <Compile Include="Extensions\IEnumerableExtension.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
-    <Compile Include="Migrations\201801221546540_initial.cs" />
-    <Compile Include="Migrations\201801221546540_initial.Designer.cs">
-      <DependentUpon>201801221546540_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801221603118_initial2.cs" />
-    <Compile Include="Migrations\201801221603118_initial2.Designer.cs">
-      <DependentUpon>201801221603118_initial2.cs</DependentUpon>
+    <Compile Include="Migrations\201803210837248_initial.cs" />
+    <Compile Include="Migrations\201803210837248_initial.Designer.cs">
+      <DependentUpon>201803210837248_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ViewModels\Abstract\PropertyChangedNotification.cs" />
     <Compile Include="Model\OnderwijsSoort.cs" />
     <Compile Include="Services\Abstract\IGegevensService.cs" />
     <Compile Include="Services\GegevensFromDatabaseService.cs" />
-    <Compile Include="Services\ValidationService.cs" />
     <Compile Include="ViewModels\Abstract\BaseViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
@@ -121,10 +116,6 @@
     <Compile Include="Model\AanschrijvingSoort.cs" />
     <Compile Include="Model\Adres.cs" />
     <Compile Include="Model\AttestSoort.cs" />
-    <Compile Include="Model\Avondstudie.cs" />
-    <Compile Include="Model\AvondstudieSoort.cs" />
-    <Compile Include="Model\Beperking.cs" />
-    <Compile Include="Model\BeperkingSoort.cs" />
     <Compile Include="Model\BijkomendeInfo.cs" />
     <Compile Include="Model\Contact.cs" />
     <Compile Include="Model\Email.cs" />
@@ -160,11 +151,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201801221546540_initial.resx">
-      <DependentUpon>201801221546540_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801221603118_initial2.resx">
-      <DependentUpon>201801221603118_initial2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803210837248_initial.resx">
+      <DependentUpon>201803210837248_initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -179,8 +167,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Abstract\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

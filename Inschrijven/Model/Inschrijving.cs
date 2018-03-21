@@ -11,6 +11,8 @@ namespace Inschrijven.Model
         public Guid InschrijvingId { get; set; }
         public DateTime StartTijd { get; set; }
         public bool IsHerinschrijving { get; set; }
+        public bool IsAvondstudie { get; set; }
+
 
         // Foreign Keys
         public Guid LeerlingId { get; set; }
@@ -32,7 +34,6 @@ namespace Inschrijven.Model
         public virtual Optie Optie { get; set; }
         public virtual Schooljaar Schooljaar {get; set;}
         public virtual Maaltijden Maaltijden { get; set; }
-        public virtual Avondstudie Avondstudie { get; set; }
         public virtual InschrijvingStatus InschrijvingStatus { get; set; }
         public virtual Marketing Marketing { get; set; }
         
