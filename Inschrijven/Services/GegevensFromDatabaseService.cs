@@ -66,7 +66,29 @@ namespace Inschrijven.Services.Abstract
             return db.Opties.ToList();
         }
 
+        public List<InschrijvingStatus> GetAlleInschrijvingStatussen()
+        {
+            return db.InschrijvingStatussen.ToList();
+        }
 
+        public async Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving)
+        {
+
+            var record = db.Inschrijvingen.Find(inschrijving.InschrijvingId);
+
+            if (db.Inschrijvingen.Find(inschrijving.InschrijvingId) == null)
+            {
+                db.Inschrijvingen.Add(inschrijving);
+            }
+            else
+            {
+                record = inschrijving;
+            }
+
+            await db.SaveChangesAsync();
+
+            return inschrijving;
+        }
 
         // Constructor
         public GegevensFromDatabaseService(InschrijvingContext db)

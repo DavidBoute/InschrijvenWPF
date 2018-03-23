@@ -13,20 +13,6 @@ namespace Inschrijven.Model
         public bool IsHerinschrijving { get; set; }
         public bool IsAvondstudie { get; set; }
 
-
-        // Foreign Keys
-        public Guid LeerlingId { get; set; }
-        public Guid LeerkrachtId { get; set; }
-        public int RichtingId { get; set; }
-        public int OptieId { get; set; }
-        public int SchooljaarId { get; set; }
-        public Guid MaaltijdenId { get; set; }
-        public Guid AvonstudieId { get; set; }
-        public int InschrijvingStatusId { get; set; }
-        public Guid ToestemmingId { get; set; }
-        public Guid MarketingId { get; set; }
-
-
         // Navigation Properties
         public virtual Leerling Leerling { get; set; }
         public virtual Leerkracht Leerkracht { get; set; }

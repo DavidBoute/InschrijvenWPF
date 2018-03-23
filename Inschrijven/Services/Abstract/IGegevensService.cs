@@ -15,5 +15,8 @@ namespace Inschrijven.Services.Abstract
         List<Leerkracht> GetAlleLeerkrachten();
         List<Richting> GetAlleRichtingen();
         List<Optie> GetAlleOpties();
+        List<InschrijvingStatus> GetAlleInschrijvingStatussen();
+
+        Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving);
     }
 }

@@ -67,6 +67,7 @@ namespace Inschrijven.Migrations
                     new InschrijvingStatus{InschrijvingStatusNaam = "gerealiseerd"},
                     new InschrijvingStatus{InschrijvingStatusNaam = "onder voorbehoud"},
                     new InschrijvingStatus{InschrijvingStatusNaam = "niet gerealiseerd"},
+                    new InschrijvingStatus{InschrijvingStatusNaam = "aan het inschrijven"},
                 });
 
             // Leerkracht
@@ -105,8 +106,16 @@ namespace Inschrijven.Migrations
                 });
 
             // Optie
+            var opties = context.Opties;
 
-            //TODO: systeem uitdenken, wss na commit pas linken
+            opties.AddOrUpdate(x => x.Naam,
+                new Optie[]
+                {
+                    new Optie { Naam = "Project Ondernemen" },
+                    new Optie { Naam = "Project Toerisme" },
+                    new Optie { Naam = "Project IT" },
+                });
+            //toevoegen aan richtingen gebeurt bij de richtingen
 
             // OnderwijsSoort
             var onderwijsSoorten = context.OnderwijsSoorten;
@@ -139,13 +148,19 @@ namespace Inschrijven.Migrations
                 new Richting[]
                 {
                     new Richting{Jaar = 1 , Naam = "Handel"},
-                    new Richting{Jaar = 2 , Naam = "Handel"},
+                    new Richting{Jaar = 2 , Naam = "Handel", Opties = new List<Optie>()},
                     new Richting{Jaar = 3 , Naam = "Ondernemen en IT"},
                     new Richting{Jaar = 3 , Naam = "Ondernemen en Communicatie"},
                     new Richting{Jaar = 3 , Naam = "Office"},
                     new Richting{Jaar = 3 , Naam = "Toerisme"},
                     // TODO: lijstje uitbreiden
                 });
+
+            context.SaveChanges();
+
+            richtingen.FirstOrDefault(x => x.Jaar == 2).Opties.Add(opties.FirstOrDefault(x => x.Naam == "Project Ondernemen"));
+            richtingen.FirstOrDefault(x => x.Jaar == 2).Opties.Add(opties.FirstOrDefault(x => x.Naam == "Project Toerisme"));
+            richtingen.FirstOrDefault(x => x.Jaar == 2).Opties.Add(opties.FirstOrDefault(x => x.Naam == "Project IT"));
 
             // Schooljaar
             var schooljaren = context.Schooljaren;

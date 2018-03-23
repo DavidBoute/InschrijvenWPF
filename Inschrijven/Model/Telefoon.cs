@@ -12,9 +12,6 @@ namespace Inschrijven.Model
         public string Nummer { get; set; }
         public string Opmerking { get; set; }
 
-        // Foreign Keys
-        public int TelefoonSoortId { get; set; }
-
         // Navigation Properties
         public TelefoonSoort TelefoonSoort { get; set; }
     }

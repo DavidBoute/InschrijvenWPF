@@ -17,9 +17,6 @@ namespace Inschrijven.Model
         public string Gemeente { get; set; }
         public bool IsBuitenGewoon { get; set; }
         public bool IsKarelDeGoede { get; set; }
-
-        // Foreign Keys
-        public int OnderwijsSoortId { get; set; }
         
         // Navigation Properties
         public virtual OnderwijsSoort OnderwijsSoort { get; set; }

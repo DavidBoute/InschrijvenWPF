@@ -17,6 +17,6 @@ namespace Inschrijven.Model
         public bool HeeftOpties { get { return Opties.Count != 0; } }
 
         // Navigation Properties
-        public ICollection<Optie> Opties { get; set; }
+        public virtual ICollection<Optie> Opties { get; set; }
     }
 }

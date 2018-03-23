@@ -11,8 +11,5 @@ namespace Inschrijven.Model
         public int ToestemmingId { get; set; }
         public string ToestemmingOmschrijving { get; set; }
         public bool IsAkkoord { get; set; }
-
-        // Foreign Keys
-        public Guid LeerlingId { get; set; }
     }
 }

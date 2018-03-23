@@ -19,9 +19,6 @@ namespace Inschrijven.Model
         public bool IsAanschrijf { get; set; }
         public bool IsInternaat { get; set; }
 
-        // Foreign Keys
-        public int AansprekingSoortId { get; set; }
-
         // Navigation Properties
         public virtual AanschrijvingSoort Aanschrijving { get; set; }
 

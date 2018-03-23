@@ -14,11 +14,6 @@ namespace Inschrijven.Model
         public string Opmerking { get; set; }
         public bool IsOverleden { get; set; }
 
-        // Foreign Keys
-        public Guid AdresId { get; set; }
-        public int RelatieId { get; set; }
-        public Guid EmailId { get; set; }
-
         // Navigation Properties
         public virtual Adres Adres { get; set; }
         public virtual RelatieSoort Relatie { get; set; }

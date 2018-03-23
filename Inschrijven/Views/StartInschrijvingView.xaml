@@ -30,9 +30,16 @@
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150"/>
 
+        <ComboBox ItemsSource="{Binding OptiesGefilterd}"
+                  SelectedItem="{Binding Optie, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                  Visibility="{Binding IsOptieZichtbaar}"
+                  VerticalAlignment="Center" HorizontalAlignment="Center"
+                  DisplayMemberPath="Naam"
+                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Width="150"/>
+
         <Button Content="Start inschrijving"
                 Command="{Binding StartInschrijvingCommand}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"/>
-
     </StackPanel>
 </Page>

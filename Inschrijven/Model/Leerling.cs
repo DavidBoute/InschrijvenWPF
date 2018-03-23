@@ -15,12 +15,6 @@ namespace Inschrijven.Model
         public string RijksregisterNummer { get; set; }
         public byte[] Foto { get; set; }
 
-        // Foreign Keys
-        public int GeslachtId { get; set; }
-        public Guid EmailId { get; set; }
-        public Guid InschrijvingId { get; set; }
-        public Guid BijkomendeInfoId { get; set; }
-
         // Navigation Properties
         public virtual Geslacht Geslacht { get; set; }
         public virtual Email Email { get; set; }

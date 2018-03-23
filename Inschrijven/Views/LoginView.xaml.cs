@@ -19,11 +19,11 @@ using System.Windows.Shapes;
 namespace Inschrijven.Views
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class LoginView : Page
     {
-        public LoginPage(IGegevensService dataService, Frame frame)
+        public LoginView(IGegevensService dataService, Frame frame)
         {
             DataContext = new LoginViewModel(dataService, frame, this);
 

@@ -13,14 +13,6 @@ namespace Inschrijven.Model
         public bool HeeftMoneySafeAccount { get; set; }
         public bool HeeftMoneySafeKaart { get; set; }
 
-        // Foreign Keys
-        public Guid InschrijvingId { get; set; }
-        public int MaandagMaaltijdSoortId { get; set; }
-        public int DinsdagMaaltijdSoortId { get; set; }
-        public int WoensdagMaaltijdSoortId { get; set; }
-        public int DonderdagMaaltijdSoortId { get; set; }
-        public int VrijdagMaaltijdSoortId { get; set; }
-
         // Navigation Properties
         public Inschrijving Inschrijving { get; set; }
         public MaaltijdSoort MaandagMaaltijdSoort { get; set; }

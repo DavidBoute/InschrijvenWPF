@@ -66,13 +66,9 @@ namespace Inschrijven.DAL
             adres.Property(x => x.IsAanschrijf).IsRequired();
             adres.Property(x => x.IsInternaat).IsRequired();
 
-            //adres.HasMany(x => x.Leerlingen)
-            //    .WithMany(x => x.Adressen);
-            //adres.HasMany(x => x.Contacten)
-            //    .WithOptional(x => x.Adres);
+
             adres.HasRequired(x => x.Aanschrijving)
-                .WithMany(x => x.Adressen)
-                .HasForeignKey(x => x.AansprekingSoortId);
+                .WithMany(x => x.Adressen);
 
             // AttestSoort
             var attestSoort = modelBuilder.Entity<AttestSoort>();
@@ -106,16 +102,11 @@ namespace Inschrijven.DAL
             contact.Property(x => x.IsOverleden).IsOptional();
 
             contact.HasRequired(x => x.Adres)
-                .WithMany(x => x.Contacten)
-                .HasForeignKey(x => x.AdresId);
+                .WithMany(x => x.Contacten);
             contact.HasRequired(x => x.Relatie)
-                .WithMany()
-                .HasForeignKey(x => x.RelatieId);
+                .WithMany();
             contact.HasRequired(x => x.Email)
-                .WithMany()
-                .HasForeignKey(x => x.EmailId);
-            //contact.HasMany(x => x.Leerlingen)
-            //    .WithMany(x => x.Contacten);
+                .WithMany();    
             contact.HasMany(x => x.TelefoonNummers)
                 .WithMany();
 
@@ -140,24 +131,24 @@ namespace Inschrijven.DAL
             inschrijving.Property(x => x.IsHerinschrijving).IsRequired();
             inschrijving.Property(x => x.IsAvondstudie).IsRequired();
 
-            inschrijving.HasRequired(x => x.Leerling)
-                .WithRequiredDependent();
+            inschrijving.HasOptional(x => x.Leerling)
+                .WithOptionalDependent(x=> x.Inschrijving);
             inschrijving.HasRequired(x => x.Leerkracht)
-                .WithRequiredDependent();
+                .WithMany();
             inschrijving.HasRequired(x => x.Richting)
-                .WithOptional();
+                .WithMany();
             inschrijving.HasOptional(x => x.Optie)
-                .WithOptionalDependent();
+                .WithMany();
             inschrijving.HasRequired(x => x.Schooljaar)
-                .WithOptional();
-            inschrijving.HasRequired(x => x.Maaltijden)
-                .WithRequiredDependent();
+                .WithMany();
+            inschrijving.HasOptional(x => x.Maaltijden)
+                .WithOptionalDependent();
             inschrijving.HasRequired(x => x.InschrijvingStatus)
-                .WithOptional();
-            inschrijving.HasRequired(x => x.Toestemmingen)
-                .WithOptional();
-            inschrijving.HasRequired(x => x.Marketing)
-                .WithOptional();
+                .WithMany();
+            inschrijving.HasOptional(x => x.Toestemmingen)
+                .WithOptionalDependent();
+            inschrijving.HasOptional(x => x.Marketing)
+                .WithOptionalDependent();
 
             inschrijving.HasMany(x => x.VoorgaandeInschrijvingen)
                 .WithOptional();

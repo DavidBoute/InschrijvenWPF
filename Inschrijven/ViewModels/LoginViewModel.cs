@@ -1,15 +1,12 @@
-﻿using Inschrijven.DAL;
-using Inschrijven.Extensions;
+﻿using Inschrijven.Extensions;
 using Inschrijven.Helpers;
 using Inschrijven.Model;
 using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels.Abstract;
 using Inschrijven.Views;
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Windows;
+using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Input;
 

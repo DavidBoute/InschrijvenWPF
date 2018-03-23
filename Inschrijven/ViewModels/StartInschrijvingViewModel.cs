@@ -1,18 +1,14 @@
-﻿using Inschrijven.DAL;
-using Inschrijven.Extensions;
+﻿using Inschrijven.Extensions;
 using Inschrijven.Helpers;
 using Inschrijven.Model;
-using Inschrijven.Services;
 using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels.Abstract;
+using Inschrijven.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -24,7 +20,7 @@ namespace Inschrijven.ViewModels
         // Properties
         #region Properties
 
-        public static int Errors { get; set; }
+        //public static int Errors { get; set; }
 
         private Inschrijving _inschrijving;
         private List<Richting> _alleRichtingen;
@@ -51,7 +47,13 @@ namespace Inschrijven.ViewModels
         public ObservableCollection<Optie> OptiesGefilterd
         {
             get { return GetValue(() => OptiesGefilterd); }
-            set { SetValue(() => OptiesGefilterd, value); }
+            set
+            {
+                SetValue(() => OptiesGefilterd, value);
+                IsOptieZichtbaar = (OptiesGefilterd != null && OptiesGefilterd.Count() != 0) ?
+                    Visibility.Visible : Visibility.Hidden;
+                Optie = null;
+            }
         }
 
         [Required(ErrorMessage = "Selecteer een schooljaar.")]
@@ -85,6 +87,13 @@ namespace Inschrijven.ViewModels
             }
         }
 
+        public Visibility IsOptieZichtbaar
+        {
+            get { return GetValue(() => IsOptieZichtbaar); }
+            set { SetValue(() => IsOptieZichtbaar, value); }
+        }
+
+        [IsOptieRequired(ErrorMessage = "Bij de geselecteerde richting moet een optie gekozen worden")]
         public Optie Optie
         {
             get { return GetValue(() => Optie); }
@@ -101,16 +110,51 @@ namespace Inschrijven.ViewModels
             get
             {
                 return new RelayCommand(
-                   (object obj) =>
+                   async (object obj) =>
                    {
-                       //ValidationService.ValidateAll();
+                       _inschrijving.Schooljaar = this.Schooljaar;
+                       _inschrijving.Richting = this.Richting;
+                       _inschrijving.Optie = this.Optie;
 
-                       //frame.Content = new StartInschrijvingView(_dataService, frame, HuidigeLeerkracht);
+                       _inschrijving.InschrijvingStatus = _dataService.GetAlleInschrijvingStatussen()
+                                                            .FirstOrDefault(x=> x.InschrijvingStatusNaam == "niet gerealiseerd");
+
+                       _inschrijving.StartTijd = DateTime.Now;
+                       _inschrijving.IsHerinschrijving = false;
+                       _inschrijving.IsAvondstudie = false;
+
+                       await _dataService.SaveChangesAsync(_inschrijving);
+
+                       frame.Content = new LeerlingGegevensView(_dataService, frame, page, _inschrijving);
                    });
             }
         }
 
         #endregion
+
+        // Custom Validation Rules
+        // https://stackoverflow.com/questions/16100300/asp-net-mvc-custom-validation-by-dataannotation
+        public class IsOptieRequiredAttribute : ValidationAttribute
+        {
+            protected override System.ComponentModel.DataAnnotations.ValidationResult
+                IsValid(object value, ValidationContext validationContext)
+            {
+                var viewModel = validationContext.ObjectInstance as StartInschrijvingViewModel;
+
+                int aantalOpties = 0;
+                if (viewModel.OptiesGefilterd != null)
+                {
+                    aantalOpties = viewModel.OptiesGefilterd.Count();
+                }
+
+                if (aantalOpties != 0 && value == null)
+                {
+                    return new System.ComponentModel.DataAnnotations.ValidationResult
+                        (this.FormatErrorMessage(validationContext.DisplayName));
+                }
+                return null;
+            }
+        }
 
         // Constructors
         #region Constructors
@@ -136,6 +180,7 @@ namespace Inschrijven.ViewModels
             Jaren = new int[] { 1, 2, 3, 4, 5, 6, 7 }.ToObservableCollection();
             _alleRichtingen = dataService.GetAlleRichtingen();
             _alleOpties = dataService.GetAlleOpties();
+            IsOptieZichtbaar = Visibility.Hidden;
         }
 
         #endregion
