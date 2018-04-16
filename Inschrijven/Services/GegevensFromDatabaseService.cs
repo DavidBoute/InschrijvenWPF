@@ -71,6 +71,17 @@ namespace Inschrijven.Services.Abstract
             return db.InschrijvingStatussen.ToList();
         }
 
+        public List<Geslacht> GetAlleGeslachten()
+        {
+            return db.Geslachten.ToList();
+        }
+
+        public List<AanschrijvingSoort> GetAlleAanschrijvingen()
+        {
+            return db.AanschrijvingSoorten.ToList();
+        }
+
+
         public async Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving)
         {
 
@@ -89,6 +100,12 @@ namespace Inschrijven.Services.Abstract
 
             return inschrijving;
         }
+
+        public Inschrijving GetInschrijving(Guid inschrijvingId)
+        {
+            return db.Inschrijvingen.FirstOrDefault(x => x.InschrijvingId == inschrijvingId);
+        }
+
 
         // Constructor
         public GegevensFromDatabaseService(InschrijvingContext db)

@@ -22,5 +22,7 @@
 
         <Button Content="Log in" Command="{Binding LoginCommand}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"/>
+        
+        <Button Content="Shortcut" Command="{Binding ShortcutCommand}"/>
     </StackPanel>
 </Page>

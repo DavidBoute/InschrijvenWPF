@@ -102,11 +102,13 @@ namespace Inschrijven.DAL
             contact.Property(x => x.IsOverleden).IsOptional();
 
             contact.HasRequired(x => x.Adres)
-                .WithMany(x => x.Contacten);
+                .WithMany(x => x.Contacten)
+                .WillCascadeOnDelete(false);
             contact.HasRequired(x => x.Relatie)
                 .WithMany();
             contact.HasRequired(x => x.Email)
-                .WithMany();    
+                .WithMany()
+                .WillCascadeOnDelete(false);   
             contact.HasMany(x => x.TelefoonNummers)
                 .WithMany();
 
@@ -191,18 +193,16 @@ namespace Inschrijven.DAL
             leerling.Property(x => x.RijksregisterNummer).IsOptional();
             leerling.Property(x => x.Foto).IsOptional();
 
-            leerling.HasRequired(x => x.Geslacht)
-                .WithOptional();
-            leerling.HasRequired(x => x.Email)
-                .WithRequiredDependent();
+            leerling.HasRequired(x => x.Geslacht);
+            leerling.HasRequired(x => x.Email);
             leerling.HasMany(x => x.Contacten)
-                .WithMany(x => x.Leerlingen);
+                .WithMany();
             leerling.HasMany(x => x.Adressen)
-                .WithMany(x => x.Leerlingen);
+                .WithMany();
             leerling.HasMany(x => x.TelefoonNummers)
                 .WithMany();
-            leerling.HasRequired(x => x.BijkomendeInfo)
-                .WithRequiredDependent();
+            leerling.HasOptional(x => x.BijkomendeInfo)
+                .WithRequired();
 
             // LerenKennenManier
             var lerenKennenManier = modelBuilder.Entity<LerenKennenManier>();

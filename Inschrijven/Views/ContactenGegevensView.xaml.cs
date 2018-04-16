@@ -1,4 +1,4 @@
-﻿using Inschrijven.DAL;
+﻿using Inschrijven.Model;
 using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels;
 using System;
@@ -19,13 +19,13 @@ using System.Windows.Shapes;
 namespace Inschrijven.Views
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for ContactenGegevensView.xaml
     /// </summary>
-    public partial class LoginView : Page
+    public partial class ContactenGegevensView : Page
     {
-        public LoginView(IGegevensService dataService, Frame frame)
+        public ContactenGegevensView(IGegevensService dataService, Frame frame, Inschrijving inschrijving)
         {
-            DataContext = new LoginViewModel(dataService, frame);
+            DataContext = new ContactenGegevensViewModel(dataService, frame, inschrijving);
 
             InitializeComponent();
         }

@@ -20,8 +20,6 @@ namespace Inschrijven.ViewModels
         // Properties
         #region Properties
 
-        //public static int Errors { get; set; }
-
         private Inschrijving _inschrijving;
         private List<Richting> _alleRichtingen;
         private List<Optie> _alleOpties;
@@ -125,7 +123,7 @@ namespace Inschrijven.ViewModels
 
                        await _dataService.SaveChangesAsync(_inschrijving);
 
-                       frame.Content = new LeerlingGegevensView(_dataService, frame, page, _inschrijving);
+                       frame.Content = new LeerlingGegevensView(_dataService, frame, _inschrijving);
                    });
             }
         }
@@ -159,28 +157,32 @@ namespace Inschrijven.ViewModels
         // Constructors
         #region Constructors
 
-        public StartInschrijvingViewModel(IGegevensService dataService, Frame frame, Page page, Leerkracht inschrijvendeLeerkracht, Inschrijving inschrijving = null)
-            : base(dataService, frame, page)
+        public StartInschrijvingViewModel(IGegevensService dataService, Frame frame, Leerkracht inschrijvendeLeerkracht, Inschrijving inschrijving = null)
+            : base(dataService, frame)
         {
-            if (inschrijving != null)
-            {
-                Schooljaar = inschrijving.Schooljaar;
-                _inschrijving = inschrijving;
-            }
-            else
-            {
-                //Schooljaar = dataService.GetStandaardSchooljaar();
-                _inschrijving = new Inschrijving()
-                {
-                    Leerkracht = inschrijvendeLeerkracht
-                };
-            }
-
             SchooljarenLijst = dataService.GetAlleSchooljaren().ToObservableCollection();
             Jaren = new int[] { 1, 2, 3, 4, 5, 6, 7 }.ToObservableCollection();
             _alleRichtingen = dataService.GetAlleRichtingen();
             _alleOpties = dataService.GetAlleOpties();
             IsOptieZichtbaar = Visibility.Hidden;
+
+            if (inschrijving != null)
+            { 
+                _inschrijving = inschrijving;
+                Schooljaar = inschrijving.Schooljaar;
+                Jaar = inschrijving.Richting.Jaar;
+                Richting = inschrijving.Richting;
+                Optie = inschrijving.Optie;
+            }
+            else
+            {
+                _inschrijving = new Inschrijving()
+                {
+                    InschrijvingId = Guid.NewGuid(),
+                    Leerkracht = inschrijvendeLeerkracht
+                };
+            }
+
         }
 
         #endregion

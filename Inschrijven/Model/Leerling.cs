@@ -24,6 +24,5 @@ namespace Inschrijven.Model
         public virtual ICollection<Contact> Contacten { get; set; }
         public virtual ICollection<Adres> Adressen { get; set; }
         public virtual ICollection<Telefoon> TelefoonNummers { get; set; }
-
     }
 }

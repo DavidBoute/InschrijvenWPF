@@ -16,7 +16,12 @@ namespace Inschrijven.Services.Abstract
         List<Richting> GetAlleRichtingen();
         List<Optie> GetAlleOpties();
         List<InschrijvingStatus> GetAlleInschrijvingStatussen();
+        List<Geslacht> GetAlleGeslachten();
+        List<AanschrijvingSoort> GetAlleAanschrijvingen();
 
         Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving);
+
+        Inschrijving GetInschrijving(Guid inschrijvingId);
+
     }
 }

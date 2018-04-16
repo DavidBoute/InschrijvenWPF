@@ -4,6 +4,7 @@ using Inschrijven.Model;
 using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels.Abstract;
 using Inschrijven.Views;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
@@ -48,13 +49,30 @@ namespace Inschrijven.ViewModels
             }
         }
 
+        public ICommand ShortcutCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                   (object obj) =>
+                   {
+                       Guid guid = Guid.Parse("dc2b6e44-eb04-4bb5-9de7-f2df87276227");
+                       Inschrijving inschrijving = _dataService.GetInschrijving(guid);
+
+                       frame.Content = new StartInschrijvingView(_dataService, frame, HuidigeLeerkracht, inschrijving);
+                       frame.Content = new LeerlingGegevensView(_dataService, frame, inschrijving);
+                       frame.Content = new ContactenGegevensView(_dataService, frame,  inschrijving);
+                   });
+            }
+        }
+
         #endregion
 
         // Constructors
         #region Constructors
 
-        public LoginViewModel(IGegevensService dataService, Frame frame, Page page)
-            : base(dataService, frame, page)
+        public LoginViewModel(IGegevensService dataService, Frame frame)
+            : base(dataService, frame)
         {
             LeerkrachtenLijst = _dataService.GetAlleLeerkrachten().ToObservableCollection();
         }

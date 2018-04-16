@@ -49,8 +49,8 @@ namespace Inschrijven.Migrations
                         Relatie_RelatieId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ContactId)
-                .ForeignKey("dbo.Adres", t => t.Adres_AdresId, cascadeDelete: true)
-                .ForeignKey("dbo.Emails", t => t.Email_EmailId, cascadeDelete: true)
+                .ForeignKey("dbo.Adres", t => t.Adres_AdresId)
+                .ForeignKey("dbo.Emails", t => t.Email_EmailId)
                 .ForeignKey("dbo.RelatieSoorts", t => t.Relatie_RelatieId, cascadeDelete: true)
                 .Index(t => t.Adres_AdresId)
                 .Index(t => t.Email_EmailId)
@@ -77,14 +77,20 @@ namespace Inschrijven.Migrations
                         Nationaliteit = c.String(nullable: false),
                         RijksregisterNummer = c.String(),
                         Foto = c.Binary(),
+                        Email_EmailId = c.Guid(nullable: false),
                         Geslacht_GeslachtId = c.Int(nullable: false),
+                        Contact_ContactId = c.Guid(),
+                        Adres_AdresId = c.Guid(),
                     })
                 .PrimaryKey(t => t.LeerlingId)
-                .ForeignKey("dbo.BijkomendeInfoes", t => t.LeerlingId)
-                .ForeignKey("dbo.Emails", t => t.LeerlingId)
-                .ForeignKey("dbo.Geslachts", t => t.Geslacht_GeslachtId)
-                .Index(t => t.LeerlingId)
-                .Index(t => t.Geslacht_GeslachtId);
+                .ForeignKey("dbo.Emails", t => t.Email_EmailId, cascadeDelete: true)
+                .ForeignKey("dbo.Geslachts", t => t.Geslacht_GeslachtId, cascadeDelete: true)
+                .ForeignKey("dbo.Contacts", t => t.Contact_ContactId)
+                .ForeignKey("dbo.Adres", t => t.Adres_AdresId)
+                .Index(t => t.Email_EmailId)
+                .Index(t => t.Geslacht_GeslachtId)
+                .Index(t => t.Contact_ContactId)
+                .Index(t => t.Adres_AdresId);
             
             CreateTable(
                 "dbo.BijkomendeInfoes",
@@ -94,7 +100,9 @@ namespace Inschrijven.Migrations
                         MedischeProblemen = c.String(),
                         Taalproblemen = c.String(),
                     })
-                .PrimaryKey(t => t.BijkomendeInfoId);
+                .PrimaryKey(t => t.BijkomendeInfoId)
+                .ForeignKey("dbo.Leerlings", t => t.BijkomendeInfoId)
+                .Index(t => t.BijkomendeInfoId);
             
             CreateTable(
                 "dbo.Geslachts",
@@ -457,9 +465,11 @@ namespace Inschrijven.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.Leerlings", "Adres_AdresId", "dbo.Adres");
             DropForeignKey("dbo.ContactTelefoons", "Telefoon_TelefoonId", "dbo.Telefoons");
             DropForeignKey("dbo.ContactTelefoons", "Contact_ContactId", "dbo.Contacts");
             DropForeignKey("dbo.Contacts", "Relatie_RelatieId", "dbo.RelatieSoorts");
+            DropForeignKey("dbo.Leerlings", "Contact_ContactId", "dbo.Contacts");
             DropForeignKey("dbo.LeerlingTelefoons", "Telefoon_TelefoonId", "dbo.Telefoons");
             DropForeignKey("dbo.LeerlingTelefoons", "Leerling_LeerlingId", "dbo.Leerlings");
             DropForeignKey("dbo.Telefoons", "TelefoonSoort_TelefoonSoortId", "dbo.TelefoonSoorts");
@@ -490,10 +500,10 @@ namespace Inschrijven.Migrations
             DropForeignKey("dbo.Inschrijvings", "Leerkracht_LeerkrachtId", "dbo.Leerkrachts");
             DropForeignKey("dbo.Inschrijvings", "InschrijvingStatus_InschrijvingStatusId", "dbo.InschrijvingStatus");
             DropForeignKey("dbo.Leerlings", "Geslacht_GeslachtId", "dbo.Geslachts");
-            DropForeignKey("dbo.Leerlings", "LeerlingId", "dbo.Emails");
+            DropForeignKey("dbo.Leerlings", "Email_EmailId", "dbo.Emails");
             DropForeignKey("dbo.LeerlingContacts", "Contact_ContactId", "dbo.Contacts");
             DropForeignKey("dbo.LeerlingContacts", "Leerling_LeerlingId", "dbo.Leerlings");
-            DropForeignKey("dbo.Leerlings", "LeerlingId", "dbo.BijkomendeInfoes");
+            DropForeignKey("dbo.BijkomendeInfoes", "BijkomendeInfoId", "dbo.Leerlings");
             DropForeignKey("dbo.LeerlingAdres", "Adres_AdresId", "dbo.Adres");
             DropForeignKey("dbo.LeerlingAdres", "Leerling_LeerlingId", "dbo.Leerlings");
             DropForeignKey("dbo.Contacts", "Email_EmailId", "dbo.Emails");
@@ -534,8 +544,11 @@ namespace Inschrijven.Migrations
             DropIndex("dbo.Inschrijvings", new[] { "Leerling_LeerlingId" });
             DropIndex("dbo.Inschrijvings", new[] { "Leerkracht_LeerkrachtId" });
             DropIndex("dbo.Inschrijvings", new[] { "InschrijvingStatus_InschrijvingStatusId" });
+            DropIndex("dbo.BijkomendeInfoes", new[] { "BijkomendeInfoId" });
+            DropIndex("dbo.Leerlings", new[] { "Adres_AdresId" });
+            DropIndex("dbo.Leerlings", new[] { "Contact_ContactId" });
             DropIndex("dbo.Leerlings", new[] { "Geslacht_GeslachtId" });
-            DropIndex("dbo.Leerlings", new[] { "LeerlingId" });
+            DropIndex("dbo.Leerlings", new[] { "Email_EmailId" });
             DropIndex("dbo.Contacts", new[] { "Relatie_RelatieId" });
             DropIndex("dbo.Contacts", new[] { "Email_EmailId" });
             DropIndex("dbo.Contacts", new[] { "Adres_AdresId" });

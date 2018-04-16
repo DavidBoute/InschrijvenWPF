@@ -23,9 +23,9 @@ namespace Inschrijven.Views
     /// </summary>
     public partial class LeerlingGegevensView : Page
     {
-        public LeerlingGegevensView(IGegevensService dataService, Frame frame, Page page, Inschrijving inschrijving)
+        public LeerlingGegevensView(IGegevensService dataService, Frame frame, Inschrijving inschrijving)
         {
-            DataContext = new LeerlingGegevensViewModel(dataService, frame, page, inschrijving);
+            DataContext = new LeerlingGegevensViewModel(dataService, frame, inschrijving);
 
             InitializeComponent();
         }

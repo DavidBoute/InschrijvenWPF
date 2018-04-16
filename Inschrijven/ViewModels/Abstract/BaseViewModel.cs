@@ -17,17 +17,15 @@ namespace Inschrijven.ViewModels.Abstract
     public abstract class BaseViewModel : PropertyChangedNotification
     {
         internal IGegevensService _dataService;
-        internal Page page;
         internal Frame frame;
 
         // Constructors
         #region Constructors
 
-        public BaseViewModel(IGegevensService dataService, Frame frame, Page page)
+        public BaseViewModel(IGegevensService dataService, Frame frame)
         {
             this._dataService = dataService;
             this.frame = frame;
-            this.page = page;
         }
 
         #endregion
