@@ -81,6 +81,16 @@ namespace Inschrijven.Services.Abstract
             return db.AanschrijvingSoorten.ToList();
         }
 
+        public List<RelatieSoort> GetAlleRelatieSoorten()
+        {
+            return db.RelatieSoorten.ToList();
+        }
+
+        public List<TelefoonSoort> GetAlleTelefoonSoorten()
+        {
+            return db.TelefoonSoorten.ToList();
+        }
+
 
         public async Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving)
         {

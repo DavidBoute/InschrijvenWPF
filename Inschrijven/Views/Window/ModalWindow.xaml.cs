@@ -1,6 +1,4 @@
-﻿using Inschrijven.DAL;
-using Inschrijven.Services.Abstract;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,19 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Inschrijven.Views
+namespace Inschrijven.Views.Window
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ModalWindow.xaml
     /// </summary>
-    public partial class MainWindow : System.Windows.Window
+    public partial class ModalWindow : System.Windows.Window
     {
-        public MainWindow()
+        public Frame Frame { get { return (Frame)this.FindName("frame"); } }
+
+        public ModalWindow()
         {
             InitializeComponent();
-
-            IGegevensService dataService = new GegevensFromDatabaseService(new InschrijvingContext());
-            this.frmFormulier.Content = new LoginView(dataService, frmFormulier);
         }
     }
 }

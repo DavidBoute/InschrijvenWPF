@@ -18,6 +18,9 @@ namespace Inschrijven.Services.Abstract
         List<InschrijvingStatus> GetAlleInschrijvingStatussen();
         List<Geslacht> GetAlleGeslachten();
         List<AanschrijvingSoort> GetAlleAanschrijvingen();
+        List<RelatieSoort> GetAlleRelatieSoorten();
+        List<TelefoonSoort> GetAlleTelefoonSoorten();
+
 
         Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving);
 

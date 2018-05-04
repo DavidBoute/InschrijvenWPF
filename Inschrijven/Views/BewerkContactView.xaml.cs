@@ -1,5 +1,6 @@
-﻿using Inschrijven.DAL;
+﻿using Inschrijven.Model;
 using Inschrijven.Services.Abstract;
+using Inschrijven.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,21 +13,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Inschrijven.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BewerkContactView.xaml
     /// </summary>
-    public partial class MainWindow : System.Windows.Window
+    public partial class BewerkContactView : Page
     {
-        public MainWindow()
+        public BewerkContactView(Contact contact, IGegevensService dataService, Frame frame,  Inschrijving inschrijving)
         {
-            InitializeComponent();
+            DataContext = new BewerkContactViewModel(contact, dataService, frame, inschrijving);
 
-            IGegevensService dataService = new GegevensFromDatabaseService(new InschrijvingContext());
-            this.frmFormulier.Content = new LoginView(dataService, frmFormulier);
+            InitializeComponent();   
         }
     }
 }

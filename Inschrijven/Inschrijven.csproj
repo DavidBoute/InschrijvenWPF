@@ -83,11 +83,16 @@
     <Compile Include="Services\Abstract\IGegevensService.cs" />
     <Compile Include="Services\GegevensFromDatabaseService.cs" />
     <Compile Include="ViewModels\Abstract\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BewerkTelefoonViewModel.cs" />
     <Compile Include="ViewModels\ContactenGegevensViewModel.cs" />
     <Compile Include="ViewModels\LeerlingGegevensViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\BewerkContactViewModel.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
     <Compile Include="ViewModels\StartInschrijvingViewModel.cs" />
+    <Compile Include="Views\BewerkTelefoonView.xaml.cs">
+      <DependentUpon>BewerkTelefoonView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ContactenGegevensView.xaml.cs">
       <DependentUpon>ContactenGegevensView.xaml</DependentUpon>
     </Compile>
@@ -96,6 +101,9 @@
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BewerkContactView.xaml.cs">
+      <DependentUpon>BewerkContactView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -107,6 +115,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Window\ModalWindow.xaml.cs">
+      <DependentUpon>ModalWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\BewerkTelefoonView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ContactenGegevensView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,11 +134,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BewerkContactView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Window\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StartInschrijvingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Window\ModalWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
