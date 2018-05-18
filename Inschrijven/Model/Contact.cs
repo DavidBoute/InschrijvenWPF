@@ -14,6 +14,9 @@ namespace Inschrijven.Model
         public string Opmerking { get; set; }
         public bool IsOverleden { get; set; }
 
+        // Calculated
+        public string VolledigeNaam { get { return Voornaam + " " + Familienaam; } }
+
         // Navigation Properties
         public virtual Adres Adres { get; set; }
         public virtual RelatieSoort Relatie { get; set; }

@@ -9,6 +9,7 @@
       Title="MaakContactView">
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConv" />
+
     </Page.Resources>
 
     <Grid>

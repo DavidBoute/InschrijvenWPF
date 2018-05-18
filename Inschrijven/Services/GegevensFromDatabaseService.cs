@@ -91,6 +91,37 @@ namespace Inschrijven.Services.Abstract
             return db.TelefoonSoorten.ToList();
         }
 
+        public List<MaaltijdSoort> GetAlleMaaltijdSoorten()
+        {
+            return db.MaaltijdSoorten.ToList();
+        }
+
+        public List<MaaltijdSoort> GetAlleMaaltijdSoorten(int jaar, string postcode)
+        {
+            List<MaaltijdSoort> beschikbareMaaltijdSoorten = db.MaaltijdSoorten.Where(x => x.MaaltijdSoortNaam == "warme maaltijd"
+                                                                                        || x.MaaltijdSoortNaam == "broodmaaltijd")
+                                                                                        .ToList();
+
+            if (jaar >= 5)
+            {
+                beschikbareMaaltijdSoorten.Add(db.MaaltijdSoorten.First(x => x.MaaltijdSoortNaam == "in de stad"));
+            }
+
+            string[] postcodesThuis = new string[] { "8000", "8200", "8300" };
+            if (postcodesThuis.Contains(postcode))
+            {
+                beschikbareMaaltijdSoorten.Add(db.MaaltijdSoorten.First(x => x.MaaltijdSoortNaam == "thuis"));
+            }
+
+            return beschikbareMaaltijdSoorten;
+        }
+
+        public List<Contact> GetInternaatContacten()
+        {
+            return db.Contacten
+                        .Where(x => x.Relatie == db.RelatieSoorten.FirstOrDefault(y => y.RelatieNaam == "Internaat"))
+                        .ToList();
+        }
 
         public async Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving)
         {

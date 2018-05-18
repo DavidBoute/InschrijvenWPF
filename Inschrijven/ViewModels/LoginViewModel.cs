@@ -62,6 +62,7 @@ namespace Inschrijven.ViewModels
                        frame.Content = new StartInschrijvingView(_dataService, frame, HuidigeLeerkracht, inschrijving);
                        frame.Content = new LeerlingGegevensView(_dataService, frame, inschrijving);
                        frame.Content = new ContactenGegevensView(_dataService, frame,  inschrijving);
+                       frame.Content = new MaaltijdenView(_dataService, frame, inschrijving);
                    });
             }
         }

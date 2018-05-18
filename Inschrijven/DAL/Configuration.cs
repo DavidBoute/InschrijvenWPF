@@ -5,6 +5,8 @@ namespace Inschrijven.Migrations
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Data.Entity.Validation;
+    using System.Diagnostics;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Inschrijven.DAL.InschrijvingContext>
@@ -30,8 +32,8 @@ namespace Inschrijven.Migrations
                     new AanschrijvingSoort { Aanspreking = "Aan de heer en mevrouw" },
                     new AanschrijvingSoort { Aanspreking = "Aan de heer" },
                     new AanschrijvingSoort { Aanspreking = "Aan mevrouw" }
-                });
-
+                });          
+            
             // AttestSoort
             var attestSoorten = context.Attesten;
 
@@ -56,7 +58,6 @@ namespace Inschrijven.Migrations
                     new Geslacht{GeslachtNaam = "Vrouwelijk", GeslachtAfkorting = "V"},
                     new Geslacht{GeslachtNaam = "Andere", GeslachtAfkorting = "A"}, // TODO: checken officiële gegevens
                 });
-
 
             // InschrijvingStatus
             var inschrijvingStatussen = context.InschrijvingStatussen;
@@ -139,6 +140,7 @@ namespace Inschrijven.Migrations
                     new RelatieSoort{RelatieNaam = "moeder"},
                     new RelatieSoort{RelatieNaam = "voogd"},
                     new RelatieSoort{RelatieNaam = "begeleider"},
+                    new RelatieSoort{RelatieNaam = "internaat"},
                 });
 
             // Richting
@@ -196,6 +198,63 @@ namespace Inschrijven.Migrations
                     new TelefoonSoort{TelefoonSoortNaam="thuistelefoon"},
                     new TelefoonSoort{TelefoonSoortNaam="werk"},
                 });
+
+            // Internaten
+            var contacten = context.Contacten;
+
+            contacten.AddOrUpdate(x => x.ContactId,
+                new Contact[]
+                {
+                    new Contact
+                    {
+                        ContactId = Guid.Parse("{A5E163E3-8CAF-4050-BE47-B3270E20F8A5}"),
+                        Voornaam = "Internaat",
+                        Familienaam = "Zilverstraat",
+                        Adres = context.Adressen.FirstOrDefault(x=>x.AdresId.ToString() == "{20BC59A4-FD27-441B-9043-75FD49F555DB}") ??
+                                new Adres
+                                {
+                                    AdresId = Guid.Parse("{20BC59A4-FD27-441B-9043-75FD49F555DB}"),
+                                    IsInternaat = true,
+                                    Aanschrijving = aanschrijvingSoorten.First(x=>x.Aanspreking == "Aan mevrouw"),
+                                    Straat = "Zilverstraat",
+                                    Huisnummer = "26",
+                                    Postcode = "8000",
+                                    Gemeente = "Brugge"
+                                },
+                        Relatie = context.RelatieSoorten.First(x=> x.RelatieNaam == "Internaat"),
+                        Email = context.Emails.FirstOrDefault(x=> x.EmailId.ToString() == "{E5BA15DE-9C40-4A80-B89D-A2B0CC53003D}") ??
+                                new Email
+                                {
+                                    EmailId = Guid.Parse("{E5BA15DE-9C40-4A80-B89D-A2B0CC53003D}"),
+                                    EmailAdres = "internaatsbeheerder@sintjozefbrugge.be"
+                                }
+                    },
+                    new Contact
+                    {
+                        ContactId = Guid.Parse("{90EB5065-63BC-40E7-87AA-8E8B6B245AE8}"),
+                        Voornaam = "Internaat",
+                        Familienaam = "Palaestra",
+                        Adres = context.Adressen.FirstOrDefault(x=>x.AdresId.ToString() =="{AA8661CE-57D9-4E7A-9EEF-8F159EC8E592}") ??
+                                new Adres
+                                {
+                                    AdresId = Guid.Parse("{A101AADD-1547-4167-82F7-7CB4218B47C7}"),
+                                    IsInternaat = true,
+                                    Aanschrijving = aanschrijvingSoorten.First(x=>x.Aanspreking == "Aan de heer"),
+                                    Straat = "Hauwerstraat",
+                                    Huisnummer = "23",
+                                    Postcode = "8000",
+                                    Gemeente = "Brugge"
+                                },
+                        Relatie = context.RelatieSoorten.First(x=> x.RelatieNaam == "Internaat"),
+                        Email = context.Emails.FirstOrDefault(x=> x.EmailId.ToString() == "{A51AF7FC-D488-4361-A17F-FB96BD4B5986}") ??
+                                new Email
+                                {
+                                    EmailId = Guid.Parse("{A51AF7FC-D488-4361-A17F-FB96BD4B5986}"),
+                                    EmailAdres = "info@internaat-palaestra.be"
+                                }
+                    }
+                });
+
 
             // Commit to database
             try

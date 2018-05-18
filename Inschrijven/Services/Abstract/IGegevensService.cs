@@ -20,6 +20,9 @@ namespace Inschrijven.Services.Abstract
         List<AanschrijvingSoort> GetAlleAanschrijvingen();
         List<RelatieSoort> GetAlleRelatieSoorten();
         List<TelefoonSoort> GetAlleTelefoonSoorten();
+        List<MaaltijdSoort> GetAlleMaaltijdSoorten();
+        List<MaaltijdSoort> GetAlleMaaltijdSoorten(int jaar, string postcode);
+        List<Contact> GetInternaatContacten();
 
 
         Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving);

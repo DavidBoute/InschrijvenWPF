@@ -52,6 +52,8 @@ namespace Inschrijven.ViewModels
                    async (object obj) =>
                    {
                        await _dataService.SaveChangesAsync(_inschrijving);
+
+                       frame.Content = new MaaltijdenView(_dataService, frame, _inschrijving);
                    });
             }
         }
