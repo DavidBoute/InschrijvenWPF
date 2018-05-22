@@ -16,6 +16,7 @@ namespace Inschrijven.Model
 
         // Calculated
         public string VolledigeNaam { get { return Voornaam + " " + Familienaam; } }
+        public bool IsInternaat { get { return Relatie.RelatieNaam == "internaat"; } }
 
         // Navigation Properties
         public virtual Adres Adres { get; set; }

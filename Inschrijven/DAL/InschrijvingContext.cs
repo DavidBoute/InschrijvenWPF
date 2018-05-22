@@ -87,7 +87,12 @@ namespace Inschrijven.DAL
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             bijkomendeInfo.Property(x => x.MedischeProblemen).IsOptional();
-            bijkomendeInfo.Property(x => x.Taalproblemen).IsOptional();
+            bijkomendeInfo.Property(x => x.TaalProblemen).IsOptional();
+            bijkomendeInfo.Property(x => x.LeerProblemen).IsOptional();
+            bijkomendeInfo.Property(x => x.VerhoogdeZorgVraag).IsOptional();
+            bijkomendeInfo.Property(x => x.VerslagBuitengewoonOnderwijs).IsOptional();
+            bijkomendeInfo.Property(x => x.GemotiveerdVerslag).IsOptional();
+            bijkomendeInfo.Property(x => x.OndersteuningsUur).IsOptional();
 
             // Contact
             var contact = modelBuilder.Entity<Contact>();

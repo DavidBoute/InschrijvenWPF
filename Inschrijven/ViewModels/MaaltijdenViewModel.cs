@@ -47,7 +47,7 @@ namespace Inschrijven.ViewModels
             }
         }
 
-        [Required(ErrorMessage ="Kies een optie.")]
+        [Required(ErrorMessage = "Kies een optie.")]
         public MaaltijdSoort MaandagMaaltijdSoort
         {
             get { return GetValue(() => MaandagMaaltijdSoort); }
@@ -82,6 +82,12 @@ namespace Inschrijven.ViewModels
             set { SetValue(() => VrijdagMaaltijdSoort, value); }
         }
 
+        public bool VolgtAvondstudie
+        {
+            get { return GetValue(() => VolgtAvondstudie); }
+            set { SetValue(() => VolgtAvondstudie, value); }
+        }
+
         public List<MaaltijdSoort> Maaltijdsoorten { get; private set; }
         public List<MaaltijdSoort> MaaltijdsoortenWoensdag { get; private set; }
         public List<Contact> Internaten { get; private set; }
@@ -98,6 +104,40 @@ namespace Inschrijven.ViewModels
                 return new RelayCommand(
                    async (object obj) =>
                    {
+                       _inschrijving.Maaltijden.MaandagMaaltijdSoort = MaandagMaaltijdSoort;
+                       _inschrijving.Maaltijden.DinsdagMaaltijdSoort = DinsdagMaaltijdSoort;
+                       _inschrijving.Maaltijden.WoensdagMaaltijdSoort = WoensdagMaaltijdSoort;
+                       _inschrijving.Maaltijden.DonderdagMaaltijdSoort = DonderdagMaaltijdSoort;
+                       _inschrijving.Maaltijden.VrijdagMaaltijdSoort = VrijdagMaaltijdSoort;
+
+                       if (IsIntern)
+                       {
+                           // Verwijderen van oud Internaat Contact indien een aanpassing is gebeurd
+                           if (_inschrijving.Leerling.Contacten.Any(x => x.IsInternaat && x.ContactId != InternaatContact.ContactId))
+                           {
+                               _inschrijving.Leerling.Contacten.Remove(
+                                        _inschrijving.Leerling.Contacten.First(x => x.IsInternaat));
+                           }
+
+                           // Toevoegen van internaat indien nog geen contact is
+                           if (!_inschrijving.Leerling.Contacten.Any(x => x.ContactId == InternaatContact.ContactId))
+                           {
+                               _inschrijving.Leerling.Contacten.Add(InternaatContact);
+                           }
+                       }
+                       else
+                       {
+                           // Verwijderen van Internaat Contact indien geen intern
+                           // en al ingesteld tijdens een vorige sessie
+                           if (_inschrijving.Leerling.Contacten.Any(x => x.IsInternaat))
+                           {
+                               _inschrijving.Leerling.Contacten.Remove(
+                                   _inschrijving.Leerling.Contacten.First(x => x.IsInternaat));
+                           }
+                       }
+
+                       _inschrijving.IsAvondstudie = VolgtAvondstudie;
+
                        await _dataService.SaveChangesAsync(_inschrijving);
                    });
             }
@@ -120,7 +160,7 @@ namespace Inschrijven.ViewModels
                 if (isIntern && internaatContact == null)
                 {
                     return new System.ComponentModel.DataAnnotations.ValidationResult
-                        (this.FormatErrorMessage(validationContext.DisplayName));
+                            (this.FormatErrorMessage(validationContext.DisplayName));
                 }
                 return null;
             }
@@ -143,8 +183,26 @@ namespace Inschrijven.ViewModels
             MaaltijdsoortenWoensdag = dataService.GetAlleMaaltijdSoorten(jaar, "8000");  // 8000 - Zodat thuis altijd een optie is.
 
             Internaten = dataService.GetInternaatContacten();
+            IsIntern = inschrijving.Leerling.Contacten.Any(x => x.IsInternaat);
+            InternaatContact = inschrijving.Leerling.Contacten.FirstOrDefault(x => x.IsInternaat);
 
+            if (inschrijving.Maaltijden == null)
+            {
+                inschrijving.Maaltijden = new Maaltijden() { MaaltijdenId = Guid.NewGuid() };
+                inschrijving.Maaltijden.MaandagMaaltijdSoort = new MaaltijdSoort();
+                inschrijving.Maaltijden.DinsdagMaaltijdSoort = new MaaltijdSoort();
+                inschrijving.Maaltijden.WoensdagMaaltijdSoort = new MaaltijdSoort();
+                inschrijving.Maaltijden.DonderdagMaaltijdSoort = new MaaltijdSoort();
+                inschrijving.Maaltijden.VrijdagMaaltijdSoort = new MaaltijdSoort();
+            }
 
+            MaandagMaaltijdSoort = inschrijving.Maaltijden.MaandagMaaltijdSoort;
+            DinsdagMaaltijdSoort = inschrijving.Maaltijden.DinsdagMaaltijdSoort;
+            WoensdagMaaltijdSoort = inschrijving.Maaltijden.WoensdagMaaltijdSoort;
+            DonderdagMaaltijdSoort = inschrijving.Maaltijden.DonderdagMaaltijdSoort;
+            VrijdagMaaltijdSoort = inschrijving.Maaltijden.VrijdagMaaltijdSoort;
+
+            VolgtAvondstudie = inschrijving.IsAvondstudie;
         }
 
         #endregion

@@ -10,7 +10,12 @@ namespace Inschrijven.Model
     {
         public Guid BijkomendeInfoId { get; set; }
         public string MedischeProblemen { get; set; }
-        public string Taalproblemen { get; set; }
+        public string TaalProblemen { get; set; }
+        public string LeerProblemen { get; set; }
 
+        public bool VerhoogdeZorgVraag { get; set; }
+        public bool VerslagBuitengewoonOnderwijs { get; set; }
+        public bool GemotiveerdVerslag { get; set; }
+        public bool OndersteuningsUur { get; set; }
     }
 }

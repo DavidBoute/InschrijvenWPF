@@ -78,6 +78,10 @@
     <Compile Include="Migrations\201804161412484_Initial.Designer.cs">
       <DependentUpon>201804161412484_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.cs" />
+    <Compile Include="Migrations\201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.Designer.cs">
+      <DependentUpon>201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Abstract\PropertyChangedNotification.cs" />
     <Compile Include="Model\OnderwijsSoort.cs" />
     <Compile Include="Services\Abstract\IGegevensService.cs" />
@@ -90,6 +94,7 @@
     <Compile Include="ViewModels\BewerkContactViewModel.cs" />
     <Compile Include="ViewModels\MaaltijdenViewModel.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
+    <Compile Include="ViewModels\OpmerkingenViewModel.cs" />
     <Compile Include="ViewModels\StartInschrijvingViewModel.cs" />
     <Compile Include="Views\BewerkTelefoonView.xaml.cs">
       <DependentUpon>BewerkTelefoonView.xaml</DependentUpon>
@@ -200,6 +205,9 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201804161412484_Initial.resx">
       <DependentUpon>201804161412484_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.resx">
+      <DependentUpon>201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

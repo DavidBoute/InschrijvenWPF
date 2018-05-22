@@ -7,7 +7,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="MaaltijdenView">
-
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConv" />
+    </Page.Resources>
+    
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -33,7 +37,8 @@
                   Grid.Row="1" Grid.Column="1"/>
         <ComboBox ItemsSource="{Binding Internaten, Mode=OneTime}"
                   DisplayMemberPath="VolledigeNaam"
-                  SelectedItem="{Binding InternaatContact}" 
+                  SelectedItem="{Binding InternaatContact}"
+                  Visibility="{Binding IsIntern, Converter={StaticResource BoolToVisConv}, Mode=OneWay}"
                   Grid.Row="1" Grid.Column="2">
         </ComboBox>
         
@@ -81,6 +86,12 @@
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Grid.Row="4" Grid.Column="4">
         </ComboBox>
+
+        <Label Content="Volgt avondstudie"
+               Grid.Row="5" Grid.Column="0"/>
+        <CheckBox IsChecked="{Binding VolgtAvondstudie, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
+                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Grid.Row="5" Grid.Column="1"/>
 
         <Button Command="{Binding VolgendeCommand}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"
