@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -112,6 +113,11 @@ namespace Inschrijven.ViewModels
                        _inschrijving.Leerling.BijkomendeInfo.VerslagBuitengewoonOnderwijs = VerslagBuitengewoonOnderwijs;
                        _inschrijving.Leerling.BijkomendeInfo.GemotiveerdVerslag = GemotiveerdVerslag;
                        _inschrijving.Leerling.BijkomendeInfo.OndersteuningsUur = OndersteuningsUur;
+
+                       if (VerhoogdeZorgVraag)
+                       {
+                           MessageBox.Show("Breng de directie op de hoogte dat een leerling met verhoogde zorg wenst in te schrijven.");
+                       }
 
                        await _dataService.SaveChangesAsync(_inschrijving);
                    });
