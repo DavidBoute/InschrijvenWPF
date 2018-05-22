@@ -42,7 +42,16 @@ namespace Inschrijven.ViewModels
         public bool VerhoogdeZorgVraag
         {
             get { return GetValue(() => VerhoogdeZorgVraag); }
-            set { SetValue(() => VerhoogdeZorgVraag, value); }
+            set
+            {
+                SetValue(() => VerhoogdeZorgVraag, value);
+                if (!value)
+                {
+                    VerslagBuitengewoonOnderwijs = false;
+                    GemotiveerdVerslag = false;
+                    OndersteuningsUur = false;
+                }
+            }
         }
 
         public bool VerslagBuitengewoonOnderwijs
@@ -96,7 +105,13 @@ namespace Inschrijven.ViewModels
                 return new RelayCommand(
                    async (object obj) =>
                    {
-                      
+                       _inschrijving.Leerling.BijkomendeInfo.MedischeProblemen = MedischeOpmerkingen;
+                       _inschrijving.Leerling.BijkomendeInfo.TaalProblemen = TaalOpmerkingen;
+                       _inschrijving.Leerling.BijkomendeInfo.LeerProblemen = LeerOpmerkingen;
+                       _inschrijving.Leerling.BijkomendeInfo.VerhoogdeZorgVraag = VerhoogdeZorgVraag;
+                       _inschrijving.Leerling.BijkomendeInfo.VerslagBuitengewoonOnderwijs = VerslagBuitengewoonOnderwijs;
+                       _inschrijving.Leerling.BijkomendeInfo.GemotiveerdVerslag = GemotiveerdVerslag;
+                       _inschrijving.Leerling.BijkomendeInfo.OndersteuningsUur = OndersteuningsUur;
 
                        await _dataService.SaveChangesAsync(_inschrijving);
                    });

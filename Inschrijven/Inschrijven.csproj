@@ -114,6 +114,9 @@
     <Compile Include="Views\MaaltijdenView.xaml.cs">
       <DependentUpon>MaaltijdenView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\OpmerkingenView.xaml.cs">
+      <DependentUpon>OpmerkingenView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -148,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MaaltijdenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OpmerkingenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
