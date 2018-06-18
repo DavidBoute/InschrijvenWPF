@@ -9,7 +9,7 @@ namespace Inschrijven.Model
     public class Toestemming
     {
         public int ToestemmingId { get; set; }
-        public string ToestemmingOmschrijving { get; set; }
+        public ToestemmingSoort ToestemmingSoort { get; set; }
         public bool IsAkkoord { get; set; }
     }
 }

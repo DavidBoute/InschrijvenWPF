@@ -11,7 +11,7 @@ namespace Inschrijven.Model
         public int SchoolId { get; set; }
         public string OfficieleNaam { get; set; }
         public string Bijnaam { get; set; }
-        public string Naam { get { return OfficieleNaam + (Bijnaam != String.Empty ? " - " + Bijnaam : ""); } } 
+        public string Naam { get { return OfficieleNaam + (Bijnaam != String.Empty ? " (" + Bijnaam +")": ""); } } 
         public string Adres { get; set; }
         public string Postcode { get; set; }
         public string Gemeente { get; set; }

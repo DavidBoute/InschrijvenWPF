@@ -5,7 +5,10 @@
              StartupUri="Views/Window/MainWindow.xaml">
     <Application.Resources>
 
-        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <BooleanToVisibilityConverter x:Key="BoolToVisConv" />
+
+
+            <ControlTemplate x:Key="ValidationErrorTemplate">
             <Grid x:Name="container">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -37,17 +40,6 @@
 					           Foreground="white"
 					           Text="!" />
                 </Border>
-                <!--<Border Grid.Column="1"
-				        Height="Auto"
-				        Margin="5,0,0,0"
-				        Background="#DC000C"
-				        CornerRadius="3"
-				        DockPanel.Dock="right">
-                    <TextBlock Margin="5"
-					           Foreground="White"
-					           Text="{Binding ElementName=customAdorner,
-					                          Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" />
-                </Border>-->
             </Grid>
         </ControlTemplate>
 

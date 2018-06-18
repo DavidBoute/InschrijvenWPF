@@ -82,12 +82,31 @@
     <Compile Include="Migrations\201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.Designer.cs">
       <DependentUpon>201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805291234471_scholen.cs" />
+    <Compile Include="Migrations\201805291234471_scholen.Designer.cs">
+      <DependentUpon>201805291234471_scholen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806151444140_Clausulering.cs" />
+    <Compile Include="Migrations\201806151444140_Clausulering.Designer.cs">
+      <DependentUpon>201806151444140_Clausulering.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806181344241_ToestemmingSoort.cs" />
+    <Compile Include="Migrations\201806181344241_ToestemmingSoort.Designer.cs">
+      <DependentUpon>201806181344241_ToestemmingSoort.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806181406138_Schoolreglement.cs" />
+    <Compile Include="Migrations\201806181406138_Schoolreglement.Designer.cs">
+      <DependentUpon>201806181406138_Schoolreglement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ToestemmingSoort.cs" />
     <Compile Include="ViewModels\Abstract\PropertyChangedNotification.cs" />
     <Compile Include="Model\OnderwijsSoort.cs" />
     <Compile Include="Services\Abstract\IGegevensService.cs" />
     <Compile Include="Services\GegevensFromDatabaseService.cs" />
     <Compile Include="ViewModels\Abstract\BaseViewModel.cs" />
+    <Compile Include="ViewModels\AkkoordToestemmingenViewModel.cs" />
     <Compile Include="ViewModels\BewerkTelefoonViewModel.cs" />
+    <Compile Include="ViewModels\BewerkVoorgaandeInschrijvingViewModel.cs" />
     <Compile Include="ViewModels\ContactenGegevensViewModel.cs" />
     <Compile Include="ViewModels\LeerlingGegevensViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -96,6 +115,14 @@
     <Compile Include="ViewModels\MainWindowModel.cs" />
     <Compile Include="ViewModels\OpmerkingenViewModel.cs" />
     <Compile Include="ViewModels\StartInschrijvingViewModel.cs" />
+    <Compile Include="ViewModels\VoorgaandeInschrijvingViewModel.cs" />
+    <Compile Include="ViewModels\ZoekSchoolViewModel.cs" />
+    <Compile Include="Views\AkkoordToestemmingenView.xaml.cs">
+      <DependentUpon>AkkoordToestemmingenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BewerkVoorgaandeInschrijvingView.xaml.cs">
+      <DependentUpon>BewerkVoorgaandeInschrijvingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BewerkTelefoonView.xaml.cs">
       <DependentUpon>BewerkTelefoonView.xaml</DependentUpon>
     </Compile>
@@ -117,6 +144,9 @@
     <Compile Include="Views\OpmerkingenView.xaml.cs">
       <DependentUpon>OpmerkingenView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\VoorgaandeInschrijvingView.xaml.cs">
+      <DependentUpon>VoorgaandeInschrijvingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Window\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -130,6 +160,17 @@
     <Compile Include="Views\Window\ModalWindow.xaml.cs">
       <DependentUpon>ModalWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ZoekSchoolView.xaml.cs">
+      <DependentUpon>ZoekSchoolView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\AkkoordToestemmingenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BewerkVoorgaandeInschrijvingView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\BewerkTelefoonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -158,6 +199,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\VoorgaandeInschrijvingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Window\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -167,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Window\ModalWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ZoekSchoolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,6 +264,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.resx">
       <DependentUpon>201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805291234471_scholen.resx">
+      <DependentUpon>201805291234471_scholen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806151444140_Clausulering.resx">
+      <DependentUpon>201806151444140_Clausulering.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806181344241_ToestemmingSoort.resx">
+      <DependentUpon>201806181344241_ToestemmingSoort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806181406138_Schoolreglement.resx">
+      <DependentUpon>201806181406138_Schoolreglement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

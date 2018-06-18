@@ -10,6 +10,7 @@ namespace Inschrijven.Services.Abstract
     public interface IGegevensService
     {
         Schooljaar GetStandaardSchooljaar();
+        Schooljaar GetStandaardSchooljaar(int aanpassing);
         List<Schooljaar> GetAlleSchooljaren();
 
         List<Leerkracht> GetAlleLeerkrachten();
@@ -23,6 +24,11 @@ namespace Inschrijven.Services.Abstract
         List<MaaltijdSoort> GetAlleMaaltijdSoorten();
         List<MaaltijdSoort> GetAlleMaaltijdSoorten(int jaar, string postcode);
         List<Contact> GetInternaatContacten();
+        List<School> GetAlleScholen();
+        List<AttestSoort> GetAlleAttestSoorten();
+        List<int> GetAlleJaren();
+        List<ToestemmingSoort> GetAlleToestemmingSoorten();
+        List<ToestemmingSoort> GetAlleToestemmingSoorten(int jaar);
 
 
         Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving);

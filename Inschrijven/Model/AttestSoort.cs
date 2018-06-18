@@ -10,5 +10,6 @@ namespace Inschrijven.Model
     {
         public int AttestSoortId { get; set; }
         public string AttestNaam { get; set; }
+        public bool IsClausuleringVereist { get; set; }
     }
 }

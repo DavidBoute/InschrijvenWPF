@@ -14,9 +14,13 @@ namespace Inschrijven.Services.Abstract
 
         public Schooljaar GetStandaardSchooljaar()
         {
+            return GetStandaardSchooljaar(0);
+        }
+
+        public Schooljaar GetStandaardSchooljaar(int jaarAanpassing)
+        {
             DateTime vandaag = DateTime.Today;
 
-            int jaarAanpassing = 0;
             if (vandaag.Month <= 3) jaarAanpassing = -1;
 
             // Indien schooljaar nog niet bestaat, aanvullen
@@ -116,11 +120,45 @@ namespace Inschrijven.Services.Abstract
             return beschikbareMaaltijdSoorten;
         }
 
+        public List<School> GetAlleScholen()
+        {
+            return db.Scholen.Include("OnderwijsSoort").ToList();
+        }
+
         public List<Contact> GetInternaatContacten()
         {
             return db.Contacten
                         .Where(x => x.Relatie == db.RelatieSoorten.FirstOrDefault(y => y.RelatieNaam == "Internaat"))
                         .ToList();
+        }
+
+        public List<AttestSoort> GetAlleAttestSoorten()
+        {
+            return db.AttestSoorten.ToList();
+        }
+
+        public List<int> GetAlleJaren()
+        {
+            return new List<int> { 1, 2, 3, 4, 5, 6, 7 };
+        }
+
+        public List<ToestemmingSoort> GetAlleToestemmingSoorten()
+        {
+            return db.ToestemmingSoorten.ToList();
+        }
+
+        public List<ToestemmingSoort> GetAlleToestemmingSoorten(int jaar)
+        {
+            if ((new int[] { 1, 2 }).Contains(jaar))
+            {
+                return GetAlleToestemmingSoorten();
+            }
+            else
+            {
+                return GetAlleToestemmingSoorten()
+                    .Where(x => !x.IsEnkelVoorEersteGraad).ToList();
+            }
+
         }
 
         public async Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving)

@@ -2,6 +2,7 @@
 using Inschrijven.Model;
 using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels.Abstract;
+using Inschrijven.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -120,6 +121,8 @@ namespace Inschrijven.ViewModels
                        }
 
                        await _dataService.SaveChangesAsync(_inschrijving);
+
+                       frame.Content = new VoorgaandeInschrijvingView(_dataService, frame, _inschrijving);
                    });
             }
         }

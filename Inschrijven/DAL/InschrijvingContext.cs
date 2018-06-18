@@ -13,7 +13,7 @@ namespace Inschrijven.DAL
         // Oplijsten DBSets
         public DbSet<AanschrijvingSoort> AanschrijvingSoorten { get; set; }
         public DbSet<Adres> Adressen { get; set; }
-        public DbSet<AttestSoort> Attesten { get; set; }
+        public DbSet<AttestSoort> AttestSoorten { get; set; }
         public DbSet<BijkomendeInfo> BijkomendeInfo { get; set; }
         public DbSet<Contact> Contacten { get; set; }
         public DbSet<Email> Emails { get; set; }
@@ -36,6 +36,7 @@ namespace Inschrijven.DAL
         public DbSet<Telefoon> Telefoons { get; set; }
         public DbSet<TelefoonSoort> TelefoonSoorten { get; set; }
         public DbSet<Toestemming> Toestemmingen { get; set; }
+        public DbSet<ToestemmingSoort> ToestemmingSoorten { get; set; }
         public DbSet<VoorgaandeInschrijving> VoorgaandeInschrijvingen { get; set; }
 
 
@@ -78,6 +79,7 @@ namespace Inschrijven.DAL
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             attestSoort.Property(x => x.AttestNaam).IsRequired();
+            attestSoort.Property(x => x.IsClausuleringVereist).IsRequired();
 
             // BijkomendeInfo
             var bijkomendeInfo = modelBuilder.Entity<BijkomendeInfo>();
@@ -137,6 +139,7 @@ namespace Inschrijven.DAL
             inschrijving.Property(x => x.StartTijd).IsRequired();
             inschrijving.Property(x => x.IsHerinschrijving).IsRequired();
             inschrijving.Property(x => x.IsAvondstudie).IsRequired();
+            inschrijving.Property(x => x.IsAkkoordSchoolreglement).IsRequired();
 
             inschrijving.HasOptional(x => x.Leerling)
                 .WithOptionalDependent(x=> x.Inschrijving);
@@ -323,7 +326,7 @@ namespace Inschrijven.DAL
             school.Property(x => x.IsKarelDeGoede).IsRequired();
 
             school.HasRequired(x => x.OnderwijsSoort)
-                .WithOptional();
+                .WithMany();
 
             // Schooljaar
             var schooljaar = modelBuilder.Entity<Schooljaar>();
@@ -373,8 +376,18 @@ namespace Inschrijven.DAL
             toestemming.Property(x => x.ToestemmingId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            toestemming.Property(x => x.ToestemmingOmschrijving).IsRequired();
             toestemming.Property(x => x.IsAkkoord).IsRequired();
+
+            toestemming.HasRequired(x => x.ToestemmingSoort)
+                .WithOptional();
+
+            // ToestemmingSoort
+            var toestemmingSoort = modelBuilder.Entity<ToestemmingSoort>();
+
+            toestemmingSoort.HasKey(x => x.ToestemmingSoortId);
+            toestemmingSoort.Property(x => x.Omschrijving).IsRequired();
+            toestemmingSoort.Property(x => x.IsEnkelVoorEersteGraad).IsRequired();
+
 
             // VoorgaandeInschrijving
             var voorgaandeInschrijving = modelBuilder.Entity<VoorgaandeInschrijving>();
@@ -385,7 +398,7 @@ namespace Inschrijven.DAL
 
             voorgaandeInschrijving.Property(x => x.Jaar).IsRequired();
             voorgaandeInschrijving.Property(x => x.Richting).IsRequired();
-            voorgaandeInschrijving.Property(x => x.Clausulering).IsRequired();
+            voorgaandeInschrijving.Property(x => x.Clausulering).IsOptional();
             voorgaandeInschrijving.Property(x => x.IsAttestGezien).IsRequired();
             voorgaandeInschrijving.Property(x => x.IsBaSoAfgegeven).IsOptional();
 

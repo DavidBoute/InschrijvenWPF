@@ -2,6 +2,7 @@
 using Inschrijven.Model;
 using Inschrijven.Services.Abstract;
 using Inschrijven.ViewModels.Abstract;
+using Inschrijven.Views;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -139,6 +140,8 @@ namespace Inschrijven.ViewModels
                        _inschrijving.IsAvondstudie = VolgtAvondstudie;
 
                        await _dataService.SaveChangesAsync(_inschrijving);
+
+                       frame.Content = new OpmerkingenView(_dataService, frame, _inschrijving);
                    });
             }
         }

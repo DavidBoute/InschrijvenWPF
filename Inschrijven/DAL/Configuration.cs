@@ -32,16 +32,16 @@ namespace Inschrijven.Migrations
                     new AanschrijvingSoort { Aanspreking = "Aan de heer en mevrouw" },
                     new AanschrijvingSoort { Aanspreking = "Aan de heer" },
                     new AanschrijvingSoort { Aanspreking = "Aan mevrouw" }
-                });          
-            
+                });
+
             // AttestSoort
-            var attestSoorten = context.Attesten;
+            var attestSoorten = context.AttestSoorten;
 
             attestSoorten.AddOrUpdate(x => x.AttestNaam,
                 new AttestSoort[]
                 {
                     new AttestSoort { AttestNaam = "A" },
-                    new AttestSoort { AttestNaam = "B" },
+                    new AttestSoort { AttestNaam = "B", IsClausuleringVereist = true },
                     new AttestSoort { AttestNaam = "C" },
                     new AttestSoort { AttestNaam = "Diploma" },
                     new AttestSoort { AttestNaam = "Studiegetuigschrift" },
@@ -164,6 +164,44 @@ namespace Inschrijven.Migrations
             richtingen.FirstOrDefault(x => x.Jaar == 2).Opties.Add(opties.FirstOrDefault(x => x.Naam == "Project Toerisme"));
             richtingen.FirstOrDefault(x => x.Jaar == 2).Opties.Add(opties.FirstOrDefault(x => x.Naam == "Project IT"));
 
+            // School
+            var scholen = context.Scholen;
+
+            scholen.AddOrUpdate(x => x.OfficieleNaam,
+                new School[]
+                {
+                    new School{
+                        OfficieleNaam ="Sint-Jozefsinstituut",
+                        Adres = "Zilverstraat 26",
+                        Postcode ="8000",
+                        Gemeente ="Brugge",
+                        Bijnaam ="Jozefienen",
+                        IsBuitenGewoon = false,
+                        IsKarelDeGoede = true,
+                        OnderwijsSoort = context.OnderwijsSoorten.FirstOrDefault(x => x.OnderwijsSoortNaam == "secundair onderwijs")
+                    },
+                    new School{
+                        OfficieleNaam ="Sint-Jozefsinstituut - ASO",
+                        Adres = "Noordzandstraat 76",
+                        Postcode ="8000",
+                        Gemeente ="Brugge",
+                        Bijnaam ="Humaniora",
+                        IsBuitenGewoon = false,
+                        IsKarelDeGoede = true,
+                        OnderwijsSoort = context.OnderwijsSoorten.FirstOrDefault(x => x.OnderwijsSoortNaam == "secundair onderwijs")
+                    },
+                    new School{
+                        OfficieleNaam ="Technisch Instituut Heilige Familie",
+                        Adres = "Oude Zak 38",
+                        Postcode ="8000",
+                        Gemeente ="Brugge",
+                        Bijnaam ="Maricolen",
+                        IsBuitenGewoon = false,
+                        IsKarelDeGoede = true,
+                        OnderwijsSoort = context.OnderwijsSoorten.FirstOrDefault(x => x.OnderwijsSoortNaam == "secundair onderwijs")
+                    },
+                });
+
             // Schooljaar
             var schooljaren = context.Schooljaren;
 
@@ -197,6 +235,45 @@ namespace Inschrijven.Migrations
                     new TelefoonSoort{TelefoonSoortNaam="gsm"},
                     new TelefoonSoort{TelefoonSoortNaam="thuistelefoon"},
                     new TelefoonSoort{TelefoonSoortNaam="werk"},
+                });
+
+            //ToestemmingSoorten
+            var toestemmingSoorten = context.ToestemmingSoorten;
+
+            toestemmingSoorten.AddOrUpdate(x => x.Omschrijving,
+                new Model.ToestemmingSoort[]
+                {
+                    new Model.ToestemmingSoort
+                    {
+                        Omschrijving = "De ouder(s) / verantwoordelijke(n) gaan er mee akkoord dat de zorgteams " +
+                                       "van de basisschool en de secundaire school eventuele verdere informatie over de leerling uitwisselen.",
+                        IsEnkelVoorEersteGraad = true
+                    },
+                    new Model.ToestemmingSoort
+                    {
+                        Omschrijving = "De ouder(s) / verantwoordelijke(n) gaan er mee akkoord dat de school " +
+                                       "een aantal schoolresultaten terugkoppelt naar de basisschool met het oog op kwaliteitsverbetering.",
+                        IsEnkelVoorEersteGraad = true
+                    },
+                    new Model.ToestemmingSoort
+                    {
+                        Omschrijving = "Foto's van de leerling die tijdens klas- en schoolactiviteiten genomen worden " +
+                                       "mogen gepubliceerd op / gebruik worden voor de sociale media van de school.",
+                        IsEnkelVoorEersteGraad = false
+                    },
+                    new Model.ToestemmingSoort
+                    {
+                        Omschrijving = "Foto's van de leerling die tijdens klas- en schoolactiviteiten genomen worden " +
+                                       "mogen gepubliceerd op / gebruik worden voor de schoolwebsite.",
+                        IsEnkelVoorEersteGraad = false
+                    },
+                    new Model.ToestemmingSoort
+                    {
+                        Omschrijving = "Foto's van de leerling die tijdens klas- en schoolactiviteiten genomen worden " +
+                                       "mogen gepubliceerd op / gebruik worden voor de schoolbrochure.",
+                        IsEnkelVoorEersteGraad = false
+                    },
+
                 });
 
             // Internaten

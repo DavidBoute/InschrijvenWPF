@@ -12,6 +12,7 @@ namespace Inschrijven.Model
         public DateTime StartTijd { get; set; }
         public bool IsHerinschrijving { get; set; }
         public bool IsAvondstudie { get; set; }
+        public bool IsAkkoordSchoolreglement { get; set; }
 
         // Navigation Properties
         public virtual Leerling Leerling { get; set; }
