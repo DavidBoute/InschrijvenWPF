@@ -245,6 +245,13 @@ namespace Inschrijven.Migrations
                 {
                     new Model.ToestemmingSoort
                     {
+                        Omschrijving = "De ouder(s) / verantwoordelijke(n) gaan akkoord met " +
+                                       "het pedagogisch project en het schoolreglement zoals na de te lezen op de schoolwebsite.",
+                        IsEnkelVoorEersteGraad = false
+                    },
+
+                    new Model.ToestemmingSoort
+                    {
                         Omschrijving = "De ouder(s) / verantwoordelijke(n) gaan er mee akkoord dat de zorgteams " +
                                        "van de basisschool en de secundaire school eventuele verdere informatie over de leerling uitwisselen.",
                         IsEnkelVoorEersteGraad = true

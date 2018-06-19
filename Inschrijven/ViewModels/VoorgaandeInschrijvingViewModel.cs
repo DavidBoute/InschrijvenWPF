@@ -132,6 +132,7 @@ namespace Inschrijven.ViewModels
                    {
                        await _dataService.SaveChangesAsync(_inschrijving);
 
+                       frame.Content = new AkkoordToestemmingenView(_dataService, frame, _inschrijving);
 
                    });
             }

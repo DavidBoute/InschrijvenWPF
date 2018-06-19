@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Inschrijven.Model;
+using Inschrijven.Services.Abstract;
+using Inschrijven.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +23,10 @@ namespace Inschrijven.Views
     /// </summary>
     public partial class AkkoordToestemmingenView : Page
     {
-        public AkkoordToestemmingenView()
+        public AkkoordToestemmingenView(IGegevensService dataService, Frame frame, Inschrijving inschrijving)
         {
+            DataContext = new AkkoordToestemmingenViewModel(dataService, frame, inschrijving);
+
             InitializeComponent();
         }
     }

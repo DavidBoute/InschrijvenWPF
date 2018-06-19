@@ -69,7 +69,8 @@ namespace Inschrijven.ViewModels
         public AkkoordToestemmingenViewModel(IGegevensService dataService, Frame frame, Inschrijving inschrijving)
             : base(dataService, frame)
         {
-            if (inschrijving.Toestemmingen is null)
+            if (inschrijving.Toestemmingen is null
+                || inschrijving.Toestemmingen.Count == 0)
             {
                 inschrijving.Toestemmingen = new List<Toestemming>();
 

@@ -21,14 +21,44 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="De ouder(s) / verantwoordelijke(n) gaan akkoord met het pedagogisch project en het schoolreglement zoals na de te lezen op de schoolwebsite:"
-               VerticalAlignment="Center" HorizontalAlignment="Right"
-               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
-               TextWrapping="WrapWithOverflow"/>
-        <CheckBox IsChecked="{Binding IsAkkoordSchoolreglement, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="0" Grid.Column="2"/>
+        <ListView ItemsSource="{Binding LijstToestemmingen}"
+                  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  >
+            <ListView.View>
+                <GridView AllowsColumnReorder="False">
+                    <GridViewColumn Width="445">
+                        <GridViewColumnHeader IsEnabled="False"/>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ToestemmingSoort.Omschrijving}" TextWrapping="Wrap" Margin="0,5"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="Auto">
+                        <GridViewColumnHeader IsEnabled="False" Content="Akkoord"/>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsAkkoord}" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+
+        <Button Command="{Binding VolgendeCommand}"
+                IsEnabled="{Binding IsValid, Mode=OneWay}"
+                Grid.Row="3" Grid.Column="1"
+                Margin="0,10">
+            <TextBlock Text="Volgende" TextWrapping="Wrap" TextAlignment="Center"/>
+        </Button>
+
 
 
 
