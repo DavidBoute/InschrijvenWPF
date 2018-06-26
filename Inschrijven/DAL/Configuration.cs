@@ -82,15 +82,15 @@ namespace Inschrijven.Migrations
             });
 
             // LerenKennenManier
-            var lerenKennenManieren = context.LerenKennenManieren;
+            var lerenKennenSoorten = context.LerenKennenSoorten;
 
-            lerenKennenManieren.AddOrUpdate(x => x.LerenKennenManierOmschrijving,
-                new LerenKennenManier[]
+            lerenKennenSoorten.AddOrUpdate(x => x.LerenKennenSoortOmschrijving,
+                new LerenKennenSoort[]
                 {
-                    new LerenKennenManier{LerenKennenManierOmschrijving = "website"},
-                    new LerenKennenManier{LerenKennenManierOmschrijving = "mond aan mond"},
-                    new LerenKennenManier{LerenKennenManierOmschrijving = "flyers"},
-                    new LerenKennenManier{LerenKennenManierOmschrijving = "CLB"},
+                    new LerenKennenSoort{LerenKennenSoortOmschrijving = "website"},
+                    new LerenKennenSoort{LerenKennenSoortOmschrijving = "mond aan mond"},
+                    new LerenKennenSoort{LerenKennenSoortOmschrijving = "flyers"},
+                    new LerenKennenSoort{LerenKennenSoortOmschrijving = "CLB"},
                     // TODO: lijstje uitbreiden
                 });
 
@@ -247,38 +247,44 @@ namespace Inschrijven.Migrations
                     {
                         Omschrijving = "De ouder(s) / verantwoordelijke(n) gaan akkoord met " +
                                        "het pedagogisch project en het schoolreglement zoals na de te lezen op de schoolwebsite.",
-                        IsEnkelVoorEersteGraad = false
+                        IsEnkelVoorEersteGraad = false,
+                        Code = "Schoolreglement"
                     },
 
                     new Model.ToestemmingSoort
                     {
                         Omschrijving = "De ouder(s) / verantwoordelijke(n) gaan er mee akkoord dat de zorgteams " +
                                        "van de basisschool en de secundaire school eventuele verdere informatie over de leerling uitwisselen.",
-                        IsEnkelVoorEersteGraad = true
+                        IsEnkelVoorEersteGraad = true,
+                        Code = "Zorgteams"
                     },
                     new Model.ToestemmingSoort
                     {
                         Omschrijving = "De ouder(s) / verantwoordelijke(n) gaan er mee akkoord dat de school " +
                                        "een aantal schoolresultaten terugkoppelt naar de basisschool met het oog op kwaliteitsverbetering.",
-                        IsEnkelVoorEersteGraad = true
+                        IsEnkelVoorEersteGraad = true,
+                        Code = "Schoolresultaten"
                     },
                     new Model.ToestemmingSoort
                     {
                         Omschrijving = "Foto's van de leerling die tijdens klas- en schoolactiviteiten genomen worden " +
                                        "mogen gepubliceerd op / gebruik worden voor de sociale media van de school.",
-                        IsEnkelVoorEersteGraad = false
+                        IsEnkelVoorEersteGraad = false,
+                        Code = "FotoSocMed"
                     },
                     new Model.ToestemmingSoort
                     {
                         Omschrijving = "Foto's van de leerling die tijdens klas- en schoolactiviteiten genomen worden " +
                                        "mogen gepubliceerd op / gebruik worden voor de schoolwebsite.",
-                        IsEnkelVoorEersteGraad = false
+                        IsEnkelVoorEersteGraad = false,
+                        Code = "FotoSite"
                     },
                     new Model.ToestemmingSoort
                     {
                         Omschrijving = "Foto's van de leerling die tijdens klas- en schoolactiviteiten genomen worden " +
                                        "mogen gepubliceerd op / gebruik worden voor de schoolbrochure.",
-                        IsEnkelVoorEersteGraad = false
+                        IsEnkelVoorEersteGraad = false,
+                        Code = "FotoBrochure"
                     },
 
                 });

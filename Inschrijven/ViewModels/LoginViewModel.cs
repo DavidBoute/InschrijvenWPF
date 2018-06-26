@@ -56,7 +56,7 @@ namespace Inschrijven.ViewModels
                 return new RelayCommand(
                    (object obj) =>
                    {
-                       Guid guid = Guid.Parse("dc2b6e44-eb04-4bb5-9de7-f2df87276227");
+                       Guid guid = Guid.Parse("3fc434b6-48e4-419d-acc1-f73a51df9ac2");
                        Inschrijving inschrijving = _dataService.GetInschrijving(guid);
 
                        frame.Content = new StartInschrijvingView(_dataService, frame, HuidigeLeerkracht, inschrijving);

@@ -3,7 +3,7 @@ namespace Inschrijven.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -98,7 +98,12 @@ namespace Inschrijven.Migrations
                     {
                         BijkomendeInfoId = c.Guid(nullable: false),
                         MedischeProblemen = c.String(),
-                        Taalproblemen = c.String(),
+                        TaalProblemen = c.String(),
+                        LeerProblemen = c.String(),
+                        VerhoogdeZorgVraag = c.Boolean(),
+                        VerslagBuitengewoonOnderwijs = c.Boolean(),
+                        GemotiveerdVerslag = c.Boolean(),
+                        OndersteuningsUur = c.Boolean(),
                     })
                 .PrimaryKey(t => t.BijkomendeInfoId)
                 .ForeignKey("dbo.Leerlings", t => t.BijkomendeInfoId)
@@ -122,6 +127,7 @@ namespace Inschrijven.Migrations
                         StartTijd = c.DateTime(nullable: false),
                         IsHerinschrijving = c.Boolean(nullable: false),
                         IsAvondstudie = c.Boolean(nullable: false),
+                        IsAkkoordSchoolreglement = c.Boolean(nullable: false),
                         InschrijvingStatus_InschrijvingStatusId = c.Int(nullable: false),
                         Leerkracht_LeerkrachtId = c.Guid(nullable: false),
                         Leerling_LeerlingId = c.Guid(),
@@ -213,18 +219,18 @@ namespace Inschrijven.Migrations
                     {
                         MarketingId = c.Guid(nullable: false),
                         LerenKennenSchoolVaria = c.String(),
-                        LerenKennenKarelDeGoedeVaria = c.String(),
+                        WaaromGekozenSchool = c.String(),
                     })
                 .PrimaryKey(t => t.MarketingId);
             
             CreateTable(
-                "dbo.LerenKennenManiers",
+                "dbo.LerenKennenSoorts",
                 c => new
                     {
-                        LerenKennenManierId = c.Int(nullable: false, identity: true),
-                        LerenKennenManierOmschrijving = c.String(nullable: false),
+                        LerenKennenSoortId = c.Int(nullable: false, identity: true),
+                        LerenKennenSoortOmschrijving = c.String(nullable: false),
                     })
-                .PrimaryKey(t => t.LerenKennenManierId);
+                .PrimaryKey(t => t.LerenKennenSoortId);
             
             CreateTable(
                 "dbo.Opties",
@@ -262,13 +268,25 @@ namespace Inschrijven.Migrations
                 c => new
                     {
                         ToestemmingId = c.Int(nullable: false, identity: true),
-                        ToestemmingOmschrijving = c.String(nullable: false),
                         IsAkkoord = c.Boolean(nullable: false),
                         Inschrijving_InschrijvingId = c.Guid(),
                     })
                 .PrimaryKey(t => t.ToestemmingId)
+                .ForeignKey("dbo.ToestemmingSoorts", t => t.ToestemmingId)
                 .ForeignKey("dbo.Inschrijvings", t => t.Inschrijving_InschrijvingId)
+                .Index(t => t.ToestemmingId)
                 .Index(t => t.Inschrijving_InschrijvingId);
+            
+            CreateTable(
+                "dbo.ToestemmingSoorts",
+                c => new
+                    {
+                        ToestemmingSoortId = c.Int(nullable: false, identity: true),
+                        Omschrijving = c.String(nullable: false),
+                        IsEnkelVoorEersteGraad = c.Boolean(nullable: false),
+                        Code = c.String(),
+                    })
+                .PrimaryKey(t => t.ToestemmingSoortId);
             
             CreateTable(
                 "dbo.VoorgaandeInschrijvings",
@@ -277,7 +295,7 @@ namespace Inschrijven.Migrations
                         VoorgaandeInschrijvingId = c.Guid(nullable: false),
                         Jaar = c.Int(nullable: false),
                         Richting = c.String(nullable: false),
-                        Clausulering = c.String(nullable: false),
+                        Clausulering = c.String(),
                         IsAttestGezien = c.Boolean(nullable: false),
                         IsBaSoAfgegeven = c.Boolean(),
                         BehaaldAttest_AttestSoortId = c.Int(nullable: false),
@@ -301,6 +319,7 @@ namespace Inschrijven.Migrations
                     {
                         AttestSoortId = c.Int(nullable: false, identity: true),
                         AttestNaam = c.String(nullable: false),
+                        IsClausuleringVereist = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.AttestSoortId);
             
@@ -316,10 +335,11 @@ namespace Inschrijven.Migrations
                         Gemeente = c.String(nullable: false),
                         IsBuitenGewoon = c.Boolean(nullable: false),
                         IsKarelDeGoede = c.Boolean(nullable: false),
+                        OnderwijsSoort_OnderwijsSoortId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.SchoolId)
-                .ForeignKey("dbo.OnderwijsSoorts", t => t.SchoolId)
-                .Index(t => t.SchoolId);
+                .ForeignKey("dbo.OnderwijsSoorts", t => t.OnderwijsSoort_OnderwijsSoortId, cascadeDelete: true)
+                .Index(t => t.OnderwijsSoort_OnderwijsSoortId);
             
             CreateTable(
                 "dbo.OnderwijsSoorts",
@@ -362,6 +382,17 @@ namespace Inschrijven.Migrations
                 .PrimaryKey(t => t.RelatieId);
             
             CreateTable(
+                "dbo.LerenKennens",
+                c => new
+                    {
+                        LerenKennenId = c.Int(nullable: false, identity: true),
+                        IsReden = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.LerenKennenId)
+                .ForeignKey("dbo.LerenKennenSoorts", t => t.LerenKennenId)
+                .Index(t => t.LerenKennenId);
+            
+            CreateTable(
                 "dbo.TaalSoorts",
                 c => new
                     {
@@ -397,30 +428,17 @@ namespace Inschrijven.Migrations
                 .Index(t => t.Contact_ContactId);
             
             CreateTable(
-                "dbo.MarketingLerenKennenManiers",
+                "dbo.MarketingLerenKennenSoorts",
                 c => new
                     {
                         Marketing_MarketingId = c.Guid(nullable: false),
-                        LerenKennenManier_LerenKennenManierId = c.Int(nullable: false),
+                        LerenKennenSoort_LerenKennenSoortId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Marketing_MarketingId, t.LerenKennenManier_LerenKennenManierId })
+                .PrimaryKey(t => new { t.Marketing_MarketingId, t.LerenKennenSoort_LerenKennenSoortId })
                 .ForeignKey("dbo.Marketings", t => t.Marketing_MarketingId, cascadeDelete: true)
-                .ForeignKey("dbo.LerenKennenManiers", t => t.LerenKennenManier_LerenKennenManierId, cascadeDelete: true)
+                .ForeignKey("dbo.LerenKennenSoorts", t => t.LerenKennenSoort_LerenKennenSoortId, cascadeDelete: true)
                 .Index(t => t.Marketing_MarketingId)
-                .Index(t => t.LerenKennenManier_LerenKennenManierId);
-            
-            CreateTable(
-                "dbo.MarketingLerenKennenManier1",
-                c => new
-                    {
-                        Marketing_MarketingId = c.Guid(nullable: false),
-                        LerenKennenManier_LerenKennenManierId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Marketing_MarketingId, t.LerenKennenManier_LerenKennenManierId })
-                .ForeignKey("dbo.Marketings", t => t.Marketing_MarketingId, cascadeDelete: true)
-                .ForeignKey("dbo.LerenKennenManiers", t => t.LerenKennenManier_LerenKennenManierId, cascadeDelete: true)
-                .Index(t => t.Marketing_MarketingId)
-                .Index(t => t.LerenKennenManier_LerenKennenManierId);
+                .Index(t => t.LerenKennenSoort_LerenKennenSoortId);
             
             CreateTable(
                 "dbo.RichtingOpties",
@@ -465,6 +483,7 @@ namespace Inschrijven.Migrations
         
         public override void Down()
         {
+            DropForeignKey("dbo.LerenKennens", "LerenKennenId", "dbo.LerenKennenSoorts");
             DropForeignKey("dbo.Leerlings", "Adres_AdresId", "dbo.Adres");
             DropForeignKey("dbo.ContactTelefoons", "Telefoon_TelefoonId", "dbo.Telefoons");
             DropForeignKey("dbo.ContactTelefoons", "Contact_ContactId", "dbo.Contacts");
@@ -476,19 +495,18 @@ namespace Inschrijven.Migrations
             DropForeignKey("dbo.VoorgaandeInschrijvings", "Inschrijving_InschrijvingId", "dbo.Inschrijvings");
             DropForeignKey("dbo.VoorgaandeInschrijvings", "Schooljaar_SchooljaarId", "dbo.Schooljaars");
             DropForeignKey("dbo.VoorgaandeInschrijvings", "School_SchoolId", "dbo.Schools");
-            DropForeignKey("dbo.Schools", "SchoolId", "dbo.OnderwijsSoorts");
+            DropForeignKey("dbo.Schools", "OnderwijsSoort_OnderwijsSoortId", "dbo.OnderwijsSoorts");
             DropForeignKey("dbo.VoorgaandeInschrijvings", "BehaaldAttest_AttestSoortId", "dbo.AttestSoorts");
             DropForeignKey("dbo.Toestemmings", "Inschrijving_InschrijvingId", "dbo.Inschrijvings");
+            DropForeignKey("dbo.Toestemmings", "ToestemmingId", "dbo.ToestemmingSoorts");
             DropForeignKey("dbo.Inschrijvings", "Schooljaar_SchooljaarId", "dbo.Schooljaars");
             DropForeignKey("dbo.Inschrijvings", "Richting_RichtingId", "dbo.Richtings");
             DropForeignKey("dbo.Inschrijvings", "Optie_OptieId", "dbo.Opties");
             DropForeignKey("dbo.RichtingOpties", "Optie_OptieId", "dbo.Opties");
             DropForeignKey("dbo.RichtingOpties", "Richting_RichtingId", "dbo.Richtings");
             DropForeignKey("dbo.Inschrijvings", "Marketing_MarketingId", "dbo.Marketings");
-            DropForeignKey("dbo.MarketingLerenKennenManier1", "LerenKennenManier_LerenKennenManierId", "dbo.LerenKennenManiers");
-            DropForeignKey("dbo.MarketingLerenKennenManier1", "Marketing_MarketingId", "dbo.Marketings");
-            DropForeignKey("dbo.MarketingLerenKennenManiers", "LerenKennenManier_LerenKennenManierId", "dbo.LerenKennenManiers");
-            DropForeignKey("dbo.MarketingLerenKennenManiers", "Marketing_MarketingId", "dbo.Marketings");
+            DropForeignKey("dbo.MarketingLerenKennenSoorts", "LerenKennenSoort_LerenKennenSoortId", "dbo.LerenKennenSoorts");
+            DropForeignKey("dbo.MarketingLerenKennenSoorts", "Marketing_MarketingId", "dbo.Marketings");
             DropForeignKey("dbo.Inschrijvings", "Maaltijden_MaaltijdenId", "dbo.Maaltijdens");
             DropForeignKey("dbo.Maaltijdens", "WoensdagMaaltijdSoort_MaaltijdSoortId", "dbo.MaaltijdSoorts");
             DropForeignKey("dbo.Maaltijdens", "VrijdagMaaltijdSoort_MaaltijdSoortId", "dbo.MaaltijdSoorts");
@@ -515,21 +533,21 @@ namespace Inschrijven.Migrations
             DropIndex("dbo.LeerlingTelefoons", new[] { "Leerling_LeerlingId" });
             DropIndex("dbo.RichtingOpties", new[] { "Optie_OptieId" });
             DropIndex("dbo.RichtingOpties", new[] { "Richting_RichtingId" });
-            DropIndex("dbo.MarketingLerenKennenManier1", new[] { "LerenKennenManier_LerenKennenManierId" });
-            DropIndex("dbo.MarketingLerenKennenManier1", new[] { "Marketing_MarketingId" });
-            DropIndex("dbo.MarketingLerenKennenManiers", new[] { "LerenKennenManier_LerenKennenManierId" });
-            DropIndex("dbo.MarketingLerenKennenManiers", new[] { "Marketing_MarketingId" });
+            DropIndex("dbo.MarketingLerenKennenSoorts", new[] { "LerenKennenSoort_LerenKennenSoortId" });
+            DropIndex("dbo.MarketingLerenKennenSoorts", new[] { "Marketing_MarketingId" });
             DropIndex("dbo.LeerlingContacts", new[] { "Contact_ContactId" });
             DropIndex("dbo.LeerlingContacts", new[] { "Leerling_LeerlingId" });
             DropIndex("dbo.LeerlingAdres", new[] { "Adres_AdresId" });
             DropIndex("dbo.LeerlingAdres", new[] { "Leerling_LeerlingId" });
+            DropIndex("dbo.LerenKennens", new[] { "LerenKennenId" });
             DropIndex("dbo.Telefoons", new[] { "TelefoonSoort_TelefoonSoortId" });
-            DropIndex("dbo.Schools", new[] { "SchoolId" });
+            DropIndex("dbo.Schools", new[] { "OnderwijsSoort_OnderwijsSoortId" });
             DropIndex("dbo.VoorgaandeInschrijvings", new[] { "Inschrijving_InschrijvingId" });
             DropIndex("dbo.VoorgaandeInschrijvings", new[] { "Schooljaar_SchooljaarId" });
             DropIndex("dbo.VoorgaandeInschrijvings", new[] { "School_SchoolId" });
             DropIndex("dbo.VoorgaandeInschrijvings", new[] { "BehaaldAttest_AttestSoortId" });
             DropIndex("dbo.Toestemmings", new[] { "Inschrijving_InschrijvingId" });
+            DropIndex("dbo.Toestemmings", new[] { "ToestemmingId" });
             DropIndex("dbo.Maaltijdens", new[] { "WoensdagMaaltijdSoort_MaaltijdSoortId" });
             DropIndex("dbo.Maaltijdens", new[] { "VrijdagMaaltijdSoort_MaaltijdSoortId" });
             DropIndex("dbo.Maaltijdens", new[] { "MaandagMaaltijdSoort_MaaltijdSoortId" });
@@ -556,11 +574,11 @@ namespace Inschrijven.Migrations
             DropTable("dbo.ContactTelefoons");
             DropTable("dbo.LeerlingTelefoons");
             DropTable("dbo.RichtingOpties");
-            DropTable("dbo.MarketingLerenKennenManier1");
-            DropTable("dbo.MarketingLerenKennenManiers");
+            DropTable("dbo.MarketingLerenKennenSoorts");
             DropTable("dbo.LeerlingContacts");
             DropTable("dbo.LeerlingAdres");
             DropTable("dbo.TaalSoorts");
+            DropTable("dbo.LerenKennens");
             DropTable("dbo.RelatieSoorts");
             DropTable("dbo.TelefoonSoorts");
             DropTable("dbo.Telefoons");
@@ -568,11 +586,12 @@ namespace Inschrijven.Migrations
             DropTable("dbo.Schools");
             DropTable("dbo.AttestSoorts");
             DropTable("dbo.VoorgaandeInschrijvings");
+            DropTable("dbo.ToestemmingSoorts");
             DropTable("dbo.Toestemmings");
             DropTable("dbo.Schooljaars");
             DropTable("dbo.Richtings");
             DropTable("dbo.Opties");
-            DropTable("dbo.LerenKennenManiers");
+            DropTable("dbo.LerenKennenSoorts");
             DropTable("dbo.Marketings");
             DropTable("dbo.MaaltijdSoorts");
             DropTable("dbo.Maaltijdens");

@@ -22,7 +22,8 @@ namespace Inschrijven.DAL
         public DbSet<InschrijvingStatus> InschrijvingStatussen { get; set; }
         public DbSet<Leerkracht> Leerkrachten { get; set; }
         public DbSet<Leerling> Leerlingen { get; set; }
-        public DbSet<LerenKennenManier> LerenKennenManieren { get; set; }
+        public DbSet<LerenKennen> LerenKennen { get; set; }
+        public DbSet<LerenKennenSoort> LerenKennenSoorten{ get; set; }
         public DbSet<Maaltijden> Maaltijden { get; set; }
         public DbSet<MaaltijdSoort> MaaltijdSoorten { get; set; }
         public DbSet<Marketing> Marketing { get; set; }
@@ -212,14 +213,27 @@ namespace Inschrijven.DAL
             leerling.HasOptional(x => x.BijkomendeInfo)
                 .WithRequired();
 
-            // LerenKennenManier
-            var lerenKennenManier = modelBuilder.Entity<LerenKennenManier>();
+            // LerenKennen
+            var lerenKennen= modelBuilder.Entity<LerenKennen>();
 
-            lerenKennenManier.HasKey(x => x.LerenKennenManierId);
-            lerenKennenManier.Property(x => x.LerenKennenManierId)
+            lerenKennen.HasKey(x => x.LerenKennenId);
+            lerenKennen.Property(x => x.LerenKennenId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            lerenKennenManier.Property(x => x.LerenKennenManierOmschrijving).IsRequired();
+            lerenKennen.Property(x => x.IsReden).IsRequired();
+
+            lerenKennen.HasRequired(x => x.LerenKennenSoort)
+                .WithOptional();
+
+
+            // LerenKennenSoort
+            var lerenKennenSoort = modelBuilder.Entity<LerenKennenSoort>();
+
+            lerenKennenSoort.HasKey(x => x.LerenKennenSoortId);
+            lerenKennenSoort.Property(x => x.LerenKennenSoortId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            lerenKennenSoort.Property(x => x.LerenKennenSoortOmschrijving).IsRequired();
 
             // Maaltijden
             var maaltijden = modelBuilder.Entity<Maaltijden>();
@@ -258,11 +272,9 @@ namespace Inschrijven.DAL
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             marketing.Property(x => x.LerenKennenSchoolVaria).IsOptional();
-            marketing.Property(x => x.LerenKennenKarelDeGoedeVaria).IsOptional();
+            marketing.Property(x => x.WaaromGekozenSchool).IsOptional();
 
             marketing.HasMany(x => x.LerenKennenSchool)
-                .WithMany();
-            marketing.HasMany(x => x.LerenKennenKarelDeGoede)
                 .WithMany();
 
             // OnderwijsSoort

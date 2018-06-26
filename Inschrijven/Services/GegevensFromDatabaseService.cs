@@ -158,7 +158,11 @@ namespace Inschrijven.Services.Abstract
                 return GetAlleToestemmingSoorten()
                     .Where(x => !x.IsEnkelVoorEersteGraad).ToList();
             }
+        }
 
+        public List<LerenKennenSoort> GetAlleLerenKennenSoorten()
+        {
+            return db.LerenKennenSoorten.ToList();
         }
 
         public async Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving)

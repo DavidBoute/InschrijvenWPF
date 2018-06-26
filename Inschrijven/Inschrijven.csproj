@@ -69,35 +69,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="DAL\InschrijvingContext.cs" />
     <Compile Include="DAL\InschrijvingInitializer.cs" />
     <Compile Include="Extensions\IEnumerableExtension.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="DAL\Configuration.cs" />
-    <Compile Include="Migrations\201804161412484_Initial.cs" />
-    <Compile Include="Migrations\201804161412484_Initial.Designer.cs">
-      <DependentUpon>201804161412484_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201806261204199_initial.cs" />
+    <Compile Include="Migrations\201806261204199_initial.Designer.cs">
+      <DependentUpon>201806261204199_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.cs" />
-    <Compile Include="Migrations\201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.Designer.cs">
-      <DependentUpon>201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805291234471_scholen.cs" />
-    <Compile Include="Migrations\201805291234471_scholen.Designer.cs">
-      <DependentUpon>201805291234471_scholen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806151444140_Clausulering.cs" />
-    <Compile Include="Migrations\201806151444140_Clausulering.Designer.cs">
-      <DependentUpon>201806151444140_Clausulering.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806181344241_ToestemmingSoort.cs" />
-    <Compile Include="Migrations\201806181344241_ToestemmingSoort.Designer.cs">
-      <DependentUpon>201806181344241_ToestemmingSoort.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806181406138_Schoolreglement.cs" />
-    <Compile Include="Migrations\201806181406138_Schoolreglement.Designer.cs">
-      <DependentUpon>201806181406138_Schoolreglement.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Model\LerenKennen.cs" />
     <Compile Include="Model\ToestemmingSoort.cs" />
     <Compile Include="ViewModels\Abstract\PropertyChangedNotification.cs" />
     <Compile Include="Model\OnderwijsSoort.cs" />
@@ -113,9 +95,11 @@
     <Compile Include="ViewModels\BewerkContactViewModel.cs" />
     <Compile Include="ViewModels\MaaltijdenViewModel.cs" />
     <Compile Include="ViewModels\MainWindowModel.cs" />
+    <Compile Include="ViewModels\MarketingViewModel.cs" />
     <Compile Include="ViewModels\OpmerkingenViewModel.cs" />
     <Compile Include="ViewModels\StartInschrijvingViewModel.cs" />
     <Compile Include="ViewModels\VoorgaandeInschrijvingViewModel.cs" />
+    <Compile Include="ViewModels\ZoekLerenKennenViewModel.cs" />
     <Compile Include="ViewModels\ZoekSchoolViewModel.cs" />
     <Compile Include="Views\AkkoordToestemmingenView.xaml.cs">
       <DependentUpon>AkkoordToestemmingenView.xaml</DependentUpon>
@@ -141,6 +125,9 @@
     <Compile Include="Views\MaaltijdenView.xaml.cs">
       <DependentUpon>MaaltijdenView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MarketingView.xaml.cs">
+      <DependentUpon>MarketingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OpmerkingenView.xaml.cs">
       <DependentUpon>OpmerkingenView.xaml</DependentUpon>
     </Compile>
@@ -159,6 +146,9 @@
     </Compile>
     <Compile Include="Views\Window\ModalWindow.xaml.cs">
       <DependentUpon>ModalWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZoekLerenKennenView.xaml.cs">
+      <DependentUpon>ZoekLerenKennenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ZoekSchoolView.xaml.cs">
       <DependentUpon>ZoekSchoolView.xaml</DependentUpon>
@@ -195,6 +185,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MarketingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\OpmerkingenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -215,6 +209,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ZoekLerenKennenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ZoekSchoolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -232,7 +230,7 @@
     <Compile Include="Model\InschrijvingStatus.cs" />
     <Compile Include="Model\Leerkracht.cs" />
     <Compile Include="Model\Leerling.cs" />
-    <Compile Include="Model\LerenKennenManier.cs" />
+    <Compile Include="Model\LerenKennenSoort.cs" />
     <Compile Include="Model\Maaltijden.cs" />
     <Compile Include="Model\MaaltijdSoort.cs" />
     <Compile Include="Model\Marketing.cs" />
@@ -259,23 +257,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201804161412484_Initial.resx">
-      <DependentUpon>201804161412484_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.resx">
-      <DependentUpon>201805221234520_BijkomendeInfo_VerhoogdeZorgVraag.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805291234471_scholen.resx">
-      <DependentUpon>201805291234471_scholen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806151444140_Clausulering.resx">
-      <DependentUpon>201806151444140_Clausulering.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806181344241_ToestemmingSoort.resx">
-      <DependentUpon>201806181344241_ToestemmingSoort.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806181406138_Schoolreglement.resx">
-      <DependentUpon>201806181406138_Schoolreglement.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806261204199_initial.resx">
+      <DependentUpon>201806261204199_initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -156,11 +156,14 @@ namespace Inschrijven.ViewModels
         public ContactenGegevensViewModel(IGegevensService dataService, Frame frame, Inschrijving inschrijving)
             : base(dataService, frame)
         {
-            _inschrijving = inschrijving;
+            if (inschrijving.Leerling.Contacten == null)
+            {
+                inschrijving.Leerling.Contacten = new List<Contact>();
+            }
 
             LijstContacten =  new ObservableCollection<Contact>(inschrijving.Leerling.Contacten);
 
-
+            _inschrijving = inschrijving;
         }
 
         #endregion

@@ -29,6 +29,7 @@ namespace Inschrijven.Services.Abstract
         List<int> GetAlleJaren();
         List<ToestemmingSoort> GetAlleToestemmingSoorten();
         List<ToestemmingSoort> GetAlleToestemmingSoorten(int jaar);
+        List<LerenKennenSoort> GetAlleLerenKennenSoorten();
 
 
         Task<Inschrijving> SaveChangesAsync(Inschrijving inschrijving);

@@ -11,5 +11,6 @@ namespace Inschrijven.Model
         public int ToestemmingSoortId { get; set; }
         public string Omschrijving { get; set; }
         public bool IsEnkelVoorEersteGraad { get; set; }
+        public string Code { get; set; }
     }
 }

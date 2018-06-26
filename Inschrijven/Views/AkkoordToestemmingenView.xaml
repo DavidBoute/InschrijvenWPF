@@ -8,6 +8,7 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="AkkoordToestemmingenView">
 
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -22,9 +23,8 @@
         </Grid.ColumnDefinitions>
 
         <ListView ItemsSource="{Binding LijstToestemmingen}"
-                  Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  >
+                  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView AllowsColumnReorder="False">
                     <GridViewColumn Width="445">
@@ -53,10 +53,19 @@
         </ListView>
 
         <Button Command="{Binding VolgendeCommand}"
+                Visibility="{Binding IsNietOverrideKnopZichtbaar, Mode=OneWay, Converter={StaticResource BoolToVisConv}}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"
-                Grid.Row="3" Grid.Column="1"
+                Grid.Row="2" Grid.Column="1"
                 Margin="0,10">
             <TextBlock Text="Volgende" TextWrapping="Wrap" TextAlignment="Center"/>
+        </Button>
+
+        <Button Command="{Binding OverrideCommand}"
+                Visibility="{Binding IsOverrideKnopZichtbaar, Mode=OneWay, Converter={StaticResource BoolToVisConv}, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                Grid.Row="2" Grid.Column="1"
+                Margin="0,10">
+            <TextBlock Text="Geen akkoord schoolreglement" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
 
 

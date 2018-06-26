@@ -11,10 +11,9 @@ namespace Inschrijven.Model
         public Guid MarketingId { get; set; }
         
         public string LerenKennenSchoolVaria { get; set; }
-        public string LerenKennenKarelDeGoedeVaria { get; set; }
+        public string WaaromGekozenSchool { get; set; }
 
         // Navigation Properties
-        public ICollection<LerenKennenManier> LerenKennenSchool { get; set; }
-        public ICollection<LerenKennenManier> LerenKennenKarelDeGoede { get; set; }
+        public ICollection<LerenKennenSoort> LerenKennenSchool { get; set; }
     }
 }

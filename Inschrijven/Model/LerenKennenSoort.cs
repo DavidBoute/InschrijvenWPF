@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Inschrijven.Model
 {
-    public class LerenKennenManier
+    public class LerenKennenSoort
     {
-        public int LerenKennenManierId { get; set; }
-        public string LerenKennenManierOmschrijving { get; set; }
+        public int LerenKennenSoortId { get; set; }
+        public string LerenKennenSoortOmschrijving { get; set; }
     }
 }
