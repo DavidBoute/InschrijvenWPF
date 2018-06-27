@@ -15,6 +15,7 @@ namespace Inschrijven.Model
         public bool Register { get { return Capaciteit != 0; } }
         public int AantalEigenLeerlingenIngeschreven { get; set; }
         public bool HeeftOpties { get { return Opties.Count != 0; } }
+        public string VolledigeNaam { get { return Jaar + " " + Naam; } }
 
         // Navigation Properties
         public virtual ICollection<Optie> Opties { get; set; }

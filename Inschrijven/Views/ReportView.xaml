@@ -1,0 +1,100 @@
+﻿<Page x:Class="Inschrijven.Views.ReportView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Inschrijven.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="ReportView">
+    <Page.Resources>
+        <Style x:Key="Titel" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Padding" Value="5,0"/>
+        </Style>
+
+        <Style x:Key="SubTitel" TargetType="TextBlock" BasedOn="{StaticResource Titel}">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="Background" Value="DarkSlateBlue"/>
+        </Style>
+
+        <Style x:Key="Info" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+    </Page.Resources>
+
+    <StackPanel Name="ReportStackPanel">
+        <StackPanel>
+            <TextBlock Text="INSCHRIJVINGSFORMULIER" Style="{StaticResource Titel}"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Inschrijvende leerkracht:"/>
+                <TextBlock Text="{Binding Leerkracht.VolledigeNaam}" Style="{StaticResource Info}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Ingeschreven voor:"/>
+                <TextBlock Text="{Binding Richting.VolledigeNaam}" Style="{StaticResource Info}"/>
+                <TextBlock Text="{Binding Optie.Naam}" Style="{StaticResource Info}"
+                           Visibility="{Binding Richting.HeeftOpties, Converter={StaticResource BoolToVisConv}}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Schooljaar:"/>
+                <TextBlock Text="{Binding Schooljaar.SchooljaarNaam}" Style="{StaticResource Info}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Tijdstip van inschrijving:"/>
+                <TextBlock Text="{Binding StartTijd}" Style="{StaticResource Info}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel>
+            <TextBlock Text="ADMINISTRATIEVE GEGEVENS VAN DE LEERLING" Style="{StaticResource Titel}"/>
+            <TextBlock Text="IDENTIFICATIE VAN DE LEERLING" Style="{StaticResource SubTitel}"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Naam:"/>
+                        <TextBlock Text="{Binding Leerling.Familienaam}" Style="{StaticResource Info}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Geboortedatum:"/>
+                        <TextBlock Text="{Binding Leerling.Geboortedatum}" Style="{StaticResource Info}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Voornaam:"/>
+                        <TextBlock Text="{Binding Leerling.Voornaam}" Style="{StaticResource Info}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Geboorteland:"/>
+                        <TextBlock Text="{Binding Leerling.Geboorteplaats}" Style="{StaticResource Info}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            
+            
+        </StackPanel>
+
+
+    </StackPanel>
+</Page>

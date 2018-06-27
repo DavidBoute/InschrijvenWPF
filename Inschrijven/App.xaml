@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Inschrijven"
              xmlns:converters="clr-namespace:Inschrijven.Converters"
              StartupUri="Views/Window/MainWindow.xaml">
+    
     <Application.Resources>
 
         <BooleanToVisibilityConverter x:Key="BoolToVisConv" />

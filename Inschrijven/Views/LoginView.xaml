@@ -24,5 +24,6 @@
                 IsEnabled="{Binding IsValid, Mode=OneWay}"/>
         
         <Button Content="Shortcut" Command="{Binding ShortcutCommand}"/>
+        <Button Content="Afdrukken" Command="{Binding AfdrukCommand}"/>
     </StackPanel>
 </Page>

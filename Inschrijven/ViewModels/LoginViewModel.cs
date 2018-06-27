@@ -70,6 +70,21 @@ namespace Inschrijven.ViewModels
             }
         }
 
+        public ICommand AfdrukCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                   (object obj) =>
+                   {
+                       Guid guid = Guid.Parse("3fc434b6-48e4-419d-acc1-f73a51df9ac2");
+                       Inschrijving inschrijving = _dataService.GetInschrijving(guid);
+
+                       frame.Content = new AfdrukView(_dataService, frame, inschrijving);
+                   });
+            }
+        }
+
         #endregion
 
         // Constructors
