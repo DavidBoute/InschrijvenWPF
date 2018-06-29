@@ -9,6 +9,7 @@ namespace Inschrijven.Model
     public class BijkomendeInfo
     {
         public Guid BijkomendeInfoId { get; set; }
+        public string Moedertaal { get; set; }
         public string MedischeProblemen { get; set; }
         public string TaalProblemen { get; set; }
         public string LeerProblemen { get; set; }

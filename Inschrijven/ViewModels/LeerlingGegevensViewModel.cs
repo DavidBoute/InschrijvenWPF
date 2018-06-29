@@ -50,6 +50,13 @@ namespace Inschrijven.ViewModels
             set { SetValue(() => Geboorteplaats, value); }
         }
 
+        [Required(ErrorMessage = "Typ het land van geboorte in")]
+        public string Geboorteland
+        {
+            get { return GetValue(() => Geboorteland); }
+            set { SetValue(() => Geboorteland, value); }
+        }
+
         [Required(ErrorMessage = "Typ de nationaliteit in")]
         public string Nationaliteit
         {
@@ -153,6 +160,7 @@ namespace Inschrijven.ViewModels
                        leerling.Familienaam = Familienaam;
                        leerling.Geboortedatum = GeboorteDatum;
                        leerling.Geboorteplaats = Geboorteplaats;
+                       leerling.Geboorteland = Geboorteland;
                        leerling.Nationaliteit = Nationaliteit;
                        leerling.RijksregisterNummer = Rijksregisternummer;
                        leerling.Geslacht = Geslacht;
@@ -238,6 +246,7 @@ namespace Inschrijven.ViewModels
                 Familienaam = leerling.Familienaam;
                 GeboorteDatum = leerling.Geboortedatum;
                 Geboorteplaats = leerling.Geboorteplaats;
+                Geboorteland = leerling.Geboorteland;
                 Nationaliteit = leerling.Nationaliteit;
                 Rijksregisternummer = leerling.RijksregisterNummer;
                 Geslacht = leerling.Geslacht;

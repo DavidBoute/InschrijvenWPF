@@ -36,8 +36,26 @@ namespace Inschrijven.ViewModels
                        StackPanel reportPanel = ExtractReportStackPanel(view);
                        ResourceDictionary resourceDictionary = ExtractReportResources(view);
 
-                       Report.PrintReport(reportPanel, _inschrijving,ReportOrientation.Portrait,
+                       Report.PrintReport(reportPanel, view.DataContext,ReportOrientation.Portrait,
                            resourceDictionary: resourceDictionary);
+
+                   });
+            }
+        }
+
+        public ICommand ToonCommand
+        {
+            get
+            {
+                return new RelayCommand(
+                   async (object obj) =>
+                   {
+                       ReportView view = new ReportView(_inschrijving);
+
+                       StackPanel reportPanel = ExtractReportStackPanel(view);
+                       ResourceDictionary resourceDictionary = ExtractReportResources(view);
+
+                       frame.Content = view;
 
                    });
             }

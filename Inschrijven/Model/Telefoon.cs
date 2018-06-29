@@ -13,6 +13,6 @@ namespace Inschrijven.Model
         public string Opmerking { get; set; }
 
         // Navigation Properties
-        public TelefoonSoort TelefoonSoort { get; set; }
+        public virtual TelefoonSoort TelefoonSoort { get; set; }
     }
 }

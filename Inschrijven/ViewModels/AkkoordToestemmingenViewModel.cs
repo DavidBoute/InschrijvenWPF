@@ -120,7 +120,7 @@ namespace Inschrijven.ViewModels
         // Commands
         #region Commands
 
-        public ICommand OpslaanCommand
+        public ICommand VolgendeCommand
         {
             get
             {

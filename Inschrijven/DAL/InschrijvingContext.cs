@@ -399,6 +399,7 @@ namespace Inschrijven.DAL
             toestemmingSoort.HasKey(x => x.ToestemmingSoortId);
             toestemmingSoort.Property(x => x.Omschrijving).IsRequired();
             toestemmingSoort.Property(x => x.IsEnkelVoorEersteGraad).IsRequired();
+            toestemmingSoort.Property(x => x.Code).IsRequired();
 
 
             // VoorgaandeInschrijving

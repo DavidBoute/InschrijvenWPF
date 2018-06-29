@@ -8,7 +8,8 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="AfdrukView">
 
-    <Grid>
+    <StackPanel>
         <Button Content="Maak rapport" Command="{Binding AfdrukCommand}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    </Grid>
+        <Button Content="Toon rapport" Command="{Binding ToonCommand}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </StackPanel>
 </Page>

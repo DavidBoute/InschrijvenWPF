@@ -12,7 +12,7 @@ namespace Inschrijven.Model
         private bool _isAkkoord;
 
         public int ToestemmingId { get; set; }
-        public ToestemmingSoort ToestemmingSoort { get; set; }
+        public virtual ToestemmingSoort ToestemmingSoort { get; set; }
         public bool IsAkkoord
         {
             get { return _isAkkoord; }

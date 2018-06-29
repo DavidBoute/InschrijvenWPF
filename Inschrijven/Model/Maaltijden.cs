@@ -15,11 +15,11 @@ namespace Inschrijven.Model
 
         // Navigation Properties
         public Inschrijving Inschrijving { get; set; }
-        public MaaltijdSoort MaandagMaaltijdSoort { get; set; }
-        public MaaltijdSoort DinsdagMaaltijdSoort { get; set; }
-        public MaaltijdSoort WoensdagMaaltijdSoort { get; set; }
-        public MaaltijdSoort DonderdagMaaltijdSoort { get; set; }
-        public MaaltijdSoort VrijdagMaaltijdSoort { get; set; }
+        public virtual MaaltijdSoort MaandagMaaltijdSoort { get; set; }
+        public virtual MaaltijdSoort DinsdagMaaltijdSoort { get; set; }
+        public virtual MaaltijdSoort WoensdagMaaltijdSoort { get; set; }
+        public virtual MaaltijdSoort DonderdagMaaltijdSoort { get; set; }
+        public virtual MaaltijdSoort VrijdagMaaltijdSoort { get; set; }
 
     }
 }

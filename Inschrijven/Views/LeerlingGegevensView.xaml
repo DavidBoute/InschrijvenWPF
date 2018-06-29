@@ -31,6 +31,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Label Content="Voornaam:"
@@ -69,51 +70,60 @@
                   Width="150"
                   Grid.Row="3" Grid.Column="1"/>
 
-        <Label Content="Nationaliteit:"
+        <Label Content="Geboorteland:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="4" Grid.Column="0"/>
-        <TextBox  Text="{Binding Nationaliteit, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+        <TextBox  Text="{Binding Geboorteplaats, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150"
                   Grid.Row="4" Grid.Column="1"/>
 
-        <Label Content="Rijksregisternummer:"
+        <Label Content="Nationaliteit:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="5" Grid.Column="0"/>
-        <TextBox  Text="{Binding Rijksregisternummer, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+        <TextBox  Text="{Binding Nationaliteit, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150"
                   Grid.Row="5" Grid.Column="1"/>
 
-        <Label Content="Geslacht:"
+        <Label Content="Rijksregisternummer:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="6" Grid.Column="0"/>
+        <TextBox  Text="{Binding Rijksregisternummer, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                  VerticalAlignment="Center" HorizontalAlignment="Center"
+                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Width="150"
+                  Grid.Row="6" Grid.Column="1"/>
+
+        <Label Content="Geslacht:"
+               VerticalAlignment="Center" HorizontalAlignment="Right"
+               Grid.Row="7" Grid.Column="0"/>
         <ComboBox SelectedValue="{Binding Geslacht, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   ItemsSource="{Binding LijstGeslachten, Mode=OneTime}"
                   DisplayMemberPath="GeslachtNaam"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150" Height="Auto"
-                  Grid.Row="6" Grid.Column="1"/>
+                  Grid.Row="7" Grid.Column="1"/>
 
         <Label Content="Email:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
-               Grid.Row="7" Grid.Column="0"/>
+               Grid.Row="8" Grid.Column="0"/>
         <TextBox  Text="{Binding Email.EmailAdres , ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150"
-                  Grid.Row="7" Grid.Column="1"/>
+                  Grid.Row="8" Grid.Column="1"/>
 
         <Label Content="Domicilie adres:"
                VerticalAlignment="Center" HorizontalAlignment="Left"
-               Grid.Row="8" Grid.Column="0"/>
+               Grid.Row="9" Grid.Column="0"/>
 
         <Label Content="Aanspreking:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
-               Grid.Row="9" Grid.Column="0"/>
+               Grid.Row="10" Grid.Column="0"/>
         <ComboBox SelectedValue="{Binding DomicilieAanspreking, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   SelectedValuePath="AanschrijvingSoortId"
                   ItemsSource="{Binding LijstAanschrijvingSoorten, Mode=OneTime}"
@@ -121,56 +131,56 @@
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150" Height="Auto"
-                  Grid.Row="9" Grid.Column="1"/>
+                  Grid.Row="10" Grid.Column="1"/>
 
         <Label Content="Straat:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
-               Grid.Row="10" Grid.Column="0"/>
-        <TextBox  Text="{Binding DomicilieStraat, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
-                  Grid.Row="10" Grid.Column="1"/>
-
-        <Label Content="Huisnummer:"
-               VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="11" Grid.Column="0"/>
-        <TextBox  Text="{Binding DomicilieHuisnummer, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+        <TextBox  Text="{Binding DomicilieStraat, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150"
                   Grid.Row="11" Grid.Column="1"/>
 
-        <Label Content="Postcode:"
+        <Label Content="Huisnummer:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="12" Grid.Column="0"/>
-        <TextBox  Text="{Binding DomiciliePostcode, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+        <TextBox  Text="{Binding DomicilieHuisnummer, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150"
                   Grid.Row="12" Grid.Column="1"/>
 
-        <Label Content="Gemeente:"
+        <Label Content="Postcode:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="13" Grid.Column="0"/>
-        <TextBox  Text="{Binding DomicilieGemeente, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+        <TextBox  Text="{Binding DomiciliePostcode, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150"
                   Grid.Row="13" Grid.Column="1"/>
 
-        <Label Content="Deelgemeente:"
+        <Label Content="Gemeente:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="14" Grid.Column="0"/>
-        <TextBox  Text="{Binding DomicilieDeelgemeente, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+        <TextBox  Text="{Binding DomicilieGemeente, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150"
                   Grid.Row="14" Grid.Column="1"/>
 
+        <Label Content="Deelgemeente:"
+               VerticalAlignment="Center" HorizontalAlignment="Right"
+               Grid.Row="15" Grid.Column="0"/>
+        <TextBox  Text="{Binding DomicilieDeelgemeente, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                  VerticalAlignment="Center" HorizontalAlignment="Center"
+                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Width="150"
+                  Grid.Row="15" Grid.Column="1"/>
+
         <Button Content="Volgende"
                 Command="{Binding VolgendeCommand}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"
-                Grid.Row="15" Grid.Column="0" Grid.ColumnSpan="2"/>
+                Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2"/>
     </Grid>
 </Page>

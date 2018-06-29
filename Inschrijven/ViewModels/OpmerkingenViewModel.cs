@@ -22,6 +22,12 @@ namespace Inschrijven.ViewModels
 
         private Inschrijving _inschrijving;
 
+        public string Moedertaal
+        {
+            get { return GetValue(() => Moedertaal); }
+            set { SetValue(() => Moedertaal, value); }
+        }
+
         public string TaalOpmerkingen
         {
             get { return GetValue(() => TaalOpmerkingen); }
@@ -107,6 +113,7 @@ namespace Inschrijven.ViewModels
                 return new RelayCommand(
                    async (object obj) =>
                    {
+                       _inschrijving.Leerling.BijkomendeInfo.Moedertaal = Moedertaal;
                        _inschrijving.Leerling.BijkomendeInfo.MedischeProblemen = MedischeOpmerkingen;
                        _inschrijving.Leerling.BijkomendeInfo.TaalProblemen = TaalOpmerkingen;
                        _inschrijving.Leerling.BijkomendeInfo.LeerProblemen = LeerOpmerkingen;
@@ -166,6 +173,7 @@ namespace Inschrijven.ViewModels
                 inschrijving.Leerling.BijkomendeInfo = new BijkomendeInfo() { BijkomendeInfoId = Guid.NewGuid()};
             }
 
+            Moedertaal = inschrijving.Leerling.BijkomendeInfo.Moedertaal;
             MedischeOpmerkingen = inschrijving.Leerling.BijkomendeInfo.MedischeProblemen;
             TaalOpmerkingen = inschrijving.Leerling.BijkomendeInfo.TaalProblemen;
             LeerOpmerkingen = inschrijving.Leerling.BijkomendeInfo.LeerProblemen;

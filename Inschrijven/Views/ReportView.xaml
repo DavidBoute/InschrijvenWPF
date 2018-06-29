@@ -5,7 +5,6 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Inschrijven.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
       Title="ReportView">
     <Page.Resources>
         <Style x:Key="Titel" TargetType="TextBlock">
@@ -24,6 +23,14 @@
             <Setter Property="Background" Value="DarkSlateBlue"/>
         </Style>
 
+        <Style x:Key="TussenTitel" TargetType="TextBlock" BasedOn="{StaticResource SubTitel}">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="Background" Value="Orange"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
         <Style x:Key="Info" TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
@@ -33,68 +40,292 @@
             <Setter Property="Margin" Value="5,0"/>
         </Style>
     </Page.Resources>
+    <ScrollViewer CanContentScroll="True">
+        <StackPanel Name="ReportStackPanel">
+            <StackPanel>
+                <TextBlock Text="INSCHRIJVINGSFORMULIER" Style="{StaticResource Titel}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Inschrijvende leerkracht:"/>
+                    <TextBlock Text="{Binding Leerkracht.VolledigeNaam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Ingeschreven voor:"/>
+                    <TextBlock Text="{Binding Richting.VolledigeNaam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                    <TextBlock Text="{Binding Optie.Naam, Mode=OneWay}" Style="{StaticResource Info}"
+                           Visibility="{Binding Richting.HeeftOpties, Converter={StaticResource BoolToVisConv}, Mode=OneWay}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Schooljaar:"/>
+                    <TextBlock Text="{Binding Schooljaar.SchooljaarNaam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Tijdstip van inschrijving:"/>
+                    <TextBlock Text="{Binding StartTijd, Mode=OneWay}" Style="{StaticResource Info}"/>
+                </StackPanel>
+            </StackPanel>
 
-    <StackPanel Name="ReportStackPanel">
-        <StackPanel>
-            <TextBlock Text="INSCHRIJVINGSFORMULIER" Style="{StaticResource Titel}"/>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Inschrijvende leerkracht:"/>
-                <TextBlock Text="{Binding Leerkracht.VolledigeNaam}" Style="{StaticResource Info}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Ingeschreven voor:"/>
-                <TextBlock Text="{Binding Richting.VolledigeNaam}" Style="{StaticResource Info}"/>
-                <TextBlock Text="{Binding Optie.Naam}" Style="{StaticResource Info}"
-                           Visibility="{Binding Richting.HeeftOpties, Converter={StaticResource BoolToVisConv}}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Schooljaar:"/>
-                <TextBlock Text="{Binding Schooljaar.SchooljaarNaam}" Style="{StaticResource Info}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Tijdstip van inschrijving:"/>
-                <TextBlock Text="{Binding StartTijd}" Style="{StaticResource Info}"/>
-            </StackPanel>
-        </StackPanel>
+            <StackPanel>
+                <TextBlock Text="ADMINISTRATIEVE GEGEVENS VAN DE LEERLING" Style="{StaticResource Titel}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
 
-        <StackPanel>
-            <TextBlock Text="ADMINISTRATIEVE GEGEVENS VAN DE LEERLING" Style="{StaticResource Titel}"/>
-            <TextBlock Text="IDENTIFICATIE VAN DE LEERLING" Style="{StaticResource SubTitel}"/>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                    <TextBlock Text="IDENTIFICATIE VAN DE LEERLING" Style="{StaticResource SubTitel}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                    <StackPanel Grid.Row="1" Grid.Column="0">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Naam:"/>
+                            <TextBlock Text="{Binding Leerling.Familienaam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Geboortedatum:"/>
+                            <TextBlock Text="{Binding Leerling.Geboortedatum, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Rijksregisternummer:"/>
+                            <TextBlock Text="{Binding Leerling.RijksregisterNummer, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Verblijftype:"/>
+                            <TextBlock Text="{Binding Verblijftype, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsIntern, Converter={StaticResource BoolToVisConv}, Mode=OneWay}">
+                            <Label Content="Internaat:"/>
+                            <TextBlock Text="{Binding InternaatNaam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsIntern, Converter={StaticResource BoolToVisConv}}">
+                            <Label Content="Eigen gsm:"/>
+                            <TextBlock Text="{Binding EigenGsm, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
 
-                <StackPanel Grid.Column="0">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Naam:"/>
-                        <TextBlock Text="{Binding Leerling.Familienaam}" Style="{StaticResource Info}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Geboortedatum:"/>
-                        <TextBlock Text="{Binding Leerling.Geboortedatum}" Style="{StaticResource Info}"/>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Voornaam:"/>
+                            <TextBlock Text="{Binding Leerling.Voornaam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Geboorteplaats:"/>
+                            <TextBlock Text="{Binding GeboorteplaatsVolledig, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Nationaliteit:"/>
+                            <TextBlock Text="{Binding Leerling.Nationaliteit, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Moedertaal:"/>
+                            <TextBlock Text="{Binding BijkomendeInfo.Moedertaal, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Geslacht:"/>
+                            <TextBlock Text="{Binding Leerling.Geslacht.GeslachtNaam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                        </StackPanel>
                     </StackPanel>
+                </Grid>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="PRAKTISCHE INFORMATIE" Style="{StaticResource SubTitel}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"/>
+                    <TextBlock Text="Maaltijden" Style="{StaticResource Info}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4"/>
+
+                    <Label Content="Maandag:"
+                       Grid.Row="2" Grid.Column="0"/>
+                    <TextBlock Text="{Binding Maaltijden.MaandagMaaltijdSoort.MaaltijdSoortNaam, Mode=OneWay}" Style="{StaticResource Info}"
+                           Grid.Row="3" Grid.Column="0"/>
+
+                    <Label Content="Dinsdag:"
+                       Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="{Binding Maaltijden.DinsdagMaaltijdSoort.MaaltijdSoortNaam, Mode=OneWay}" Style="{StaticResource Info}"
+                           Grid.Row="3" Grid.Column="1"/>
+
+                    <Label Content="Donderdag:"
+                       Grid.Row="2" Grid.Column="2"/>
+                    <TextBlock Text="{Binding Maaltijden.DonderdagMaaltijdSoort.MaaltijdSoortNaam, Mode=OneWay}" Style="{StaticResource Info}"
+                           Grid.Row="3" Grid.Column="2"/>
+
+                    <Label Content="Vrijdag:"
+                       Grid.Row="2" Grid.Column="3"/>
+                    <TextBlock Text="{Binding Maaltijden.VrijdagMaaltijdSoort.MaaltijdSoortNaam, Mode=OneWay}" Style="{StaticResource Info}"
+                           Grid.Row="3" Grid.Column="3"/>
+
+                    <TextBlock Text="Avondstudie" Style="{StaticResource Info}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="0">
+                        <Label Content="Avondstudie:"/>
+                        <CheckBox IsChecked="{Binding IsAvondstudie, Mode=OneWay}" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel>
+                    <TextBlock Text="ADRESGEGEVENS" Style="{StaticResource SubTitel}"/>
+                    <ListView ItemsSource="{Binding LijstAdressen}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Text="{Binding Header, Mode=OneWay}" Style="{StaticResource TussenTitel}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Bij "/>
+                                        <TextBlock Text="{Binding AdresContacten, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Aanschrijving.Aanspreking, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                    <TextBlock Text="{Binding StraatHuisnummer, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                    <TextBlock Text="{Binding PostcodeGemeente, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Voornaam:"/>
-                        <TextBlock Text="{Binding Leerling.Voornaam}" Style="{StaticResource Info}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Geboorteland:"/>
-                        <TextBlock Text="{Binding Leerling.Geboorteplaats}" Style="{StaticResource Info}"/>
-                    </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="GEGEVENS CONTACTEN" Style="{StaticResource SubTitel}"/>
+                    <ListView ItemsSource="{Binding LijstContacten, Mode=OneWay}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Text="{Binding Relatie.RelatieNaam, Mode=OneWay}" Style="{StaticResource TussenTitel}"/>
+                                    <TextBlock Text="{Binding VolledigeNaam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Email:"/>
+                                        <TextBlock Text="{Binding Email.EmailAdres , Mode=OneWay}" Style="{StaticResource Info}"/>
+                                    </StackPanel>
+                                    <ListView ItemsSource="{Binding TelefoonNummers, Mode=OneWay}">
+                                        <ListView.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel Orientation="Horizontal"/>
+                                            </ItemsPanelTemplate>
+                                        </ListView.ItemsPanel>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <Label Content="{Binding TelefoonSoort.TelefoonSoortNaam}"/>
+                                                    <TextBlock Text="{Binding Nummer , Mode=OneWay}" Style="{StaticResource Info}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                    <TextBlock Text="{Binding Opmerking, Mode=OneWay}" Style="{StaticResource Info}" FontStyle="Italic"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </StackPanel>
-            </Grid>
-            
-            
+
+                <StackPanel>
+                    <TextBlock Text="SCHOOLLOOPBAAN - GEGEVENS OVER DE VORIGE SCHOOL" Style="{StaticResource SubTitel}"/>
+                    <ListView ItemsSource="{Binding LijstInschrijvingen, Mode=OneWay}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Gegevens schooljaar" Style="{StaticResource TussenTitel}"/>
+                                        <TextBlock Text="{Binding Schooljaar.SchooljaarNaam, Mode=OneWay}" Style="{StaticResource TussenTitel}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Richting:"/>
+                                        <TextBlock Text="{Binding Jaar, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                        <TextBlock Text="{Binding Richting, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Attest:"/>
+                                        <TextBlock Text="{Binding BehaaldAttest.AttestNaam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                        <TextBlock Text="{Binding Clausulering, Mode=OneWay}"
+                                                   Visibility="{Binding BehaaldAttest.IsClausuleringVereist, Converter={StaticResource BoolToVisConv}}"
+                                                   Style="{StaticResource Info}"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Vorige school:"/>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding School.Naam, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                            <TextBlock Text="{Binding School.Adres, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding School.Postcode, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                                <TextBlock Text="{Binding School.Gemeente, Mode=OneWay}" Style="{StaticResource Info}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel>
+                <TextBlock Text="OPMERKINGEN" Style="{StaticResource SubTitel}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Medische problemen:"/>
+                    <TextBlock Text="{Binding BijkomendeInfo.MedischeProblemen}" Style="{StaticResource Info}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Taalproblemen:"/>
+                    <TextBlock Text="{Binding BijkomendeInfo.TaalProblemen}" Style="{StaticResource Info}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Leerproblemen:"/>
+                    <TextBlock Text="{Binding BijkomendeInfo.LeerProblemen}" Style="{StaticResource Info}"/>
+                </StackPanel>
+            </StackPanel>
+
+
+            <StackPanel Visibility="{Binding BijkomendeInfo.VerhoogdeZorgVraag, Converter={StaticResource BoolToVisConv}}">
+                <TextBlock Text="ONDERSTEUNING" Style="{StaticResource SubTitel}"/>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding BijkomdendeInfo.VerslagBuitengewoonOnderwijs, Converter={StaticResource BoolToVisConv}, Mode=OneWay}">
+                    <Label Content="Verslag buitengewoon onderwijs:"/>
+                    <CheckBox IsChecked="{Binding BijkomdendeInfo.VerslagBuitengewoonOnderwijs, Mode=OneWay}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding BijkomdendeInfo.GemotiveerdVerslag, Converter={StaticResource BoolToVisConv}, Mode=OneWay}">
+                    <Label Content="Gemotiveerd verslag:"/>
+                    <CheckBox IsChecked="{Binding BijkomdendeInfo.GemotiveerdVerslag, Mode=OneWay}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="{Binding BijkomdendeInfo.OndersteuningsUur, Converter={StaticResource BoolToVisConv}, Mode=OneWay}">
+                    <Label Content="Recht op ondersteuningsuren:"/>
+                    <CheckBox IsChecked="{Binding BijkomdendeInfo.OndersteuningsUur, Mode=OneWay}" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+
+
+            <StackPanel>
+                <TextBlock Text="AKKOORD EN PRIVACY" Style="{StaticResource SubTitel}"/>
+                <ListView ItemsSource="{Binding LijstToestemmingen, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ToestemmingSoort.Omschrijving , Mode=OneWay}" Style="{StaticResource Info}"/>
+                                    <CheckBox IsChecked="{Binding IsAkkoord, Mode=OneWay}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+
+
+            <TextBlock Text="--- einde ---" />
         </StackPanel>
-
-
-    </StackPanel>
+    </ScrollViewer>
 </Page>

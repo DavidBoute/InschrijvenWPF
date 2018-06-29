@@ -1,4 +1,5 @@
 ﻿using Inschrijven.Model;
+using Inschrijven.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace Inschrijven.Views
     {
         public ReportView(Inschrijving inschrijving)
         {
-            DataContext = inschrijving;
+            DataContext = new ReportViewModel(inschrijving);
 
             InitializeComponent();
         }

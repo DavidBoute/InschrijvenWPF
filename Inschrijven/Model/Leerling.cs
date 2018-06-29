@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Inschrijven.Model
 {
@@ -11,6 +12,7 @@ namespace Inschrijven.Model
         public string Volledigenaam { get { return Voornaam + " " + Familienaam; } }
         public DateTime Geboortedatum { get; set; }
         public string Geboorteplaats { get; set; } 
+        public string Geboorteland { get; set; }
         public string Nationaliteit { get; set; }
         public string RijksregisterNummer { get; set; }
         public byte[] Foto { get; set; }

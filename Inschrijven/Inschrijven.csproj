@@ -91,6 +91,18 @@
     <Compile Include="Migrations\201806261204199_initial.Designer.cs">
       <DependentUpon>201806261204199_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806280718234_Geboorteland.cs" />
+    <Compile Include="Migrations\201806280718234_Geboorteland.Designer.cs">
+      <DependentUpon>201806280718234_Geboorteland.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806280808279_Moedertaal.cs" />
+    <Compile Include="Migrations\201806280808279_Moedertaal.Designer.cs">
+      <DependentUpon>201806280808279_Moedertaal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806291452015_Toestemming_code.cs" />
+    <Compile Include="Migrations\201806291452015_Toestemming_code.Designer.cs">
+      <DependentUpon>201806291452015_Toestemming_code.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\LerenKennen.cs" />
     <Compile Include="Model\ToestemmingSoort.cs" />
     <Compile Include="ViewModels\Abstract\PropertyChangedNotification.cs" />
@@ -110,6 +122,7 @@
     <Compile Include="ViewModels\MainWindowModel.cs" />
     <Compile Include="ViewModels\MarketingViewModel.cs" />
     <Compile Include="ViewModels\OpmerkingenViewModel.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\StartInschrijvingViewModel.cs" />
     <Compile Include="ViewModels\VoorgaandeInschrijvingViewModel.cs" />
     <Compile Include="ViewModels\ZoekLerenKennenViewModel.cs" />
@@ -286,6 +299,15 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201806261204199_initial.resx">
       <DependentUpon>201806261204199_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806280718234_Geboorteland.resx">
+      <DependentUpon>201806280718234_Geboorteland.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806280808279_Moedertaal.resx">
+      <DependentUpon>201806280808279_Moedertaal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806291452015_Toestemming_code.resx">
+      <DependentUpon>201806291452015_Toestemming_code.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

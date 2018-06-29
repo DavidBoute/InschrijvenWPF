@@ -12,8 +12,8 @@ namespace Inschrijven.Model
         public bool IsBaSoAfgegeven { get; set; }
 
         // Navigation Properties
-        public Schooljaar Schooljaar { get; set; }
-        public School School { get; set; }
-        public AttestSoort BehaaldAttest { get; set; }
+        public virtual Schooljaar Schooljaar { get; set; }
+        public virtual School School { get; set; }
+        public virtual AttestSoort BehaaldAttest { get; set; }
     }
 }
