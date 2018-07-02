@@ -179,10 +179,12 @@ namespace Inschrijven.ViewModels
                 _inschrijving = new Inschrijving()
                 {
                     InschrijvingId = Guid.NewGuid(),
-                    Leerkracht = inschrijvendeLeerkracht
+                    Leerkracht = inschrijvendeLeerkracht,
+                    Schooljaar = _dataService.GetStandaardSchooljaar()
                 };
             }
 
+            Schooljaar = _inschrijving.Schooljaar;
         }
 
         #endregion

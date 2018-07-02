@@ -3,16 +3,16 @@ namespace Inschrijven.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Moedertaal : DbMigration
+    public partial class toestemmingsoort_code_opt : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.BijkomendeInfoes", "Moedertaal", c => c.String());
+            AlterColumn("dbo.ToestemmingSoorts", "Code", c => c.String());
         }
         
         public override void Down()
         {
-            DropColumn("dbo.BijkomendeInfoes", "Moedertaal");
+            AlterColumn("dbo.ToestemmingSoorts", "Code", c => c.String(nullable: false));
         }
     }
 }

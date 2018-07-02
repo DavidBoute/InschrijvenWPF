@@ -7,13 +7,13 @@ namespace Inschrijven.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Moedertaal : IMigrationMetadata
+    public sealed partial class toestemming : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Moedertaal));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(toestemming));
         
         string IMigrationMetadata.Id
         {
-            get { return "201806280808279_Moedertaal"; }
+            get { return "201807021413127_toestemming"; }
         }
         
         string IMigrationMetadata.Source
