@@ -59,13 +59,13 @@ namespace Inschrijven.ViewModels
                        Guid guid = Guid.Parse("3fc434b6-48e4-419d-acc1-f73a51df9ac2");
                        Inschrijving inschrijving = _dataService.GetInschrijving(guid);
 
-                       frame.Content = new StartInschrijvingView(_dataService, frame, HuidigeLeerkracht, inschrijving);
+                       //frame.Content = new StartInschrijvingView(_dataService, frame, HuidigeLeerkracht, inschrijving);
                        //frame.Content = new LeerlingGegevensView(_dataService, frame, inschrijving);
                        //frame.Content = new ContactenGegevensView(_dataService, frame,  inschrijving);
                        //frame.Content = new MaaltijdenView(_dataService, frame, inschrijving);
                        //frame.Content = new OpmerkingenView(_dataService, frame, inschrijving);
                        //frame.Content = new VoorgaandeInschrijvingView(_dataService, frame, inschrijving);
-                       //frame.Content = new AkkoordToestemmingenView(_dataService, frame, inschrijving);
+                       frame.Content = new AkkoordToestemmingenView(_dataService, frame, inschrijving);
                    });
             }
         }

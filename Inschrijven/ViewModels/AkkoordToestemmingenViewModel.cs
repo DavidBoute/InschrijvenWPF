@@ -203,7 +203,8 @@ namespace Inschrijven.ViewModels
 
             _inschrijving = inschrijving;
 
-            IsOverrideKnopZichtbaar = true;
+            IsOverrideKnopZichtbaar = !LijstToestemmingen
+                                        .Single(x=> x.ToestemmingSoort.Code == "Schoolreglement").IsAkkoord;
         }
 
         #endregion

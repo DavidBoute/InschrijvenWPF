@@ -74,6 +74,7 @@ namespace Inschrijven.Migrations
                         Familienaam = c.String(nullable: false),
                         Geboortedatum = c.DateTime(nullable: false),
                         Geboorteplaats = c.String(nullable: false),
+                        Geboorteland = c.String(),
                         Nationaliteit = c.String(nullable: false),
                         RijksregisterNummer = c.String(),
                         Foto = c.Binary(),
@@ -97,6 +98,7 @@ namespace Inschrijven.Migrations
                 c => new
                     {
                         BijkomendeInfoId = c.Guid(nullable: false),
+                        Moedertaal = c.String(),
                         MedischeProblemen = c.String(),
                         TaalProblemen = c.String(),
                         LeerProblemen = c.String(),
@@ -269,12 +271,13 @@ namespace Inschrijven.Migrations
                     {
                         ToestemmingId = c.Int(nullable: false, identity: true),
                         IsAkkoord = c.Boolean(nullable: false),
+                        ToestemmingSoort_id = c.Int(nullable: false),
                         Inschrijving_InschrijvingId = c.Guid(),
                     })
                 .PrimaryKey(t => t.ToestemmingId)
-                .ForeignKey("dbo.ToestemmingSoorts", t => t.ToestemmingId)
+                .ForeignKey("dbo.ToestemmingSoorts", t => t.ToestemmingSoort_id)
                 .ForeignKey("dbo.Inschrijvings", t => t.Inschrijving_InschrijvingId)
-                .Index(t => t.ToestemmingId)
+                .Index(t => t.ToestemmingSoort_id)
                 .Index(t => t.Inschrijving_InschrijvingId);
             
             CreateTable(
@@ -284,7 +287,7 @@ namespace Inschrijven.Migrations
                         ToestemmingSoortId = c.Int(nullable: false, identity: true),
                         Omschrijving = c.String(nullable: false),
                         IsEnkelVoorEersteGraad = c.Boolean(nullable: false),
-                        Code = c.String(),
+                        Code = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.ToestemmingSoortId);
             
@@ -498,7 +501,7 @@ namespace Inschrijven.Migrations
             DropForeignKey("dbo.Schools", "OnderwijsSoort_OnderwijsSoortId", "dbo.OnderwijsSoorts");
             DropForeignKey("dbo.VoorgaandeInschrijvings", "BehaaldAttest_AttestSoortId", "dbo.AttestSoorts");
             DropForeignKey("dbo.Toestemmings", "Inschrijving_InschrijvingId", "dbo.Inschrijvings");
-            DropForeignKey("dbo.Toestemmings", "ToestemmingId", "dbo.ToestemmingSoorts");
+            DropForeignKey("dbo.Toestemmings", "ToestemmingSoort_id", "dbo.ToestemmingSoorts");
             DropForeignKey("dbo.Inschrijvings", "Schooljaar_SchooljaarId", "dbo.Schooljaars");
             DropForeignKey("dbo.Inschrijvings", "Richting_RichtingId", "dbo.Richtings");
             DropForeignKey("dbo.Inschrijvings", "Optie_OptieId", "dbo.Opties");
@@ -547,7 +550,7 @@ namespace Inschrijven.Migrations
             DropIndex("dbo.VoorgaandeInschrijvings", new[] { "School_SchoolId" });
             DropIndex("dbo.VoorgaandeInschrijvings", new[] { "BehaaldAttest_AttestSoortId" });
             DropIndex("dbo.Toestemmings", new[] { "Inschrijving_InschrijvingId" });
-            DropIndex("dbo.Toestemmings", new[] { "ToestemmingId" });
+            DropIndex("dbo.Toestemmings", new[] { "ToestemmingSoort_id" });
             DropIndex("dbo.Maaltijdens", new[] { "WoensdagMaaltijdSoort_MaaltijdSoortId" });
             DropIndex("dbo.Maaltijdens", new[] { "VrijdagMaaltijdSoort_MaaltijdSoortId" });
             DropIndex("dbo.Maaltijdens", new[] { "MaandagMaaltijdSoort_MaaltijdSoortId" });
