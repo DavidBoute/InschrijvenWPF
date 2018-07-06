@@ -308,7 +308,6 @@
                 </StackPanel>
             </StackPanel>
 
-
             <StackPanel>
                 <TextBlock Text="AKKOORD EN PRIVACY" Style="{StaticResource SubTitel}"/>
                 <ListView ItemsSource="{Binding LijstToestemmingen, Mode=OneWay}">
@@ -320,6 +319,18 @@
                                     <CheckBox IsChecked="{Binding IsAkkoord, Mode=OneWay}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+
+            <StackPanel Visibility="{Binding IsPRZichtbaar, Converter={StaticResource BoolToVisConv}}">
+                <TextBlock Text="PR-BELEID" Style="{StaticResource SubTitel}"/>
+                <TextBlock Text="Hoe hebt u de school leren kennen?" Style="{StaticResource TussenTitel}"/>
+                <ListView ItemsSource="{Binding LijstLerenKennen, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding LerenKennenSoort.LerenKennenSoortOmschrijving , Mode=OneWay}" Style="{StaticResource Info}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

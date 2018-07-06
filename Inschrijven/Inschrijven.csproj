@@ -81,6 +81,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BooleanToColorConverter.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="DAL\InschrijvingContext.cs" />
     <Compile Include="DAL\InschrijvingInitializer.cs" />
@@ -90,6 +91,14 @@
     <Compile Include="Migrations\201807050927181_initial.cs" />
     <Compile Include="Migrations\201807050927181_initial.Designer.cs">
       <DependentUpon>201807050927181_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807061139277_LerenKennen.cs" />
+    <Compile Include="Migrations\201807061139277_LerenKennen.Designer.cs">
+      <DependentUpon>201807061139277_LerenKennen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807061330274_LerenKennen_fk.cs" />
+    <Compile Include="Migrations\201807061330274_LerenKennen_fk.Designer.cs">
+      <DependentUpon>201807061330274_LerenKennen_fk.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\LerenKennen.cs" />
     <Compile Include="Model\ToestemmingSoort.cs" />
@@ -113,7 +122,6 @@
     <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\StartInschrijvingViewModel.cs" />
     <Compile Include="ViewModels\VoorgaandeInschrijvingViewModel.cs" />
-    <Compile Include="ViewModels\ZoekLerenKennenViewModel.cs" />
     <Compile Include="ViewModels\ZoekSchoolViewModel.cs" />
     <Compile Include="Views\AfdrukView.xaml.cs">
       <DependentUpon>AfdrukView.xaml</DependentUpon>
@@ -166,9 +174,6 @@
     </Compile>
     <Compile Include="Views\Window\ModalWindow.xaml.cs">
       <DependentUpon>ModalWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ZoekLerenKennenView.xaml.cs">
-      <DependentUpon>ZoekLerenKennenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ZoekSchoolView.xaml.cs">
       <DependentUpon>ZoekSchoolView.xaml</DependentUpon>
@@ -237,10 +242,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ZoekLerenKennenView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ZoekSchoolView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -287,6 +288,12 @@
     </Compile>
     <EmbeddedResource Include="Migrations\201807050927181_initial.resx">
       <DependentUpon>201807050927181_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807061139277_LerenKennen.resx">
+      <DependentUpon>201807061139277_LerenKennen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807061330274_LerenKennen_fk.resx">
+      <DependentUpon>201807061330274_LerenKennen_fk.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

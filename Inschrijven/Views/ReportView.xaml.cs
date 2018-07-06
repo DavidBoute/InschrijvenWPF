@@ -27,6 +27,16 @@ namespace Inschrijven.Views
             DataContext = new ReportViewModel(inschrijving);
 
             InitializeComponent();
+        }
+
+        public ReportView(Inschrijving inschrijving, double heightInCM, double widthInCM)
+        {
+            DataContext = new ReportViewModel(inschrijving);
+
+            InitializeComponent();
+
+            this.Height = heightInCM;
+            this.Width = widthInCM;
 
             Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             Arrange(new Rect(0, 0, DesiredSize.Width, DesiredSize.Height));

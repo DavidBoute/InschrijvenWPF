@@ -63,6 +63,8 @@ namespace Inschrijven.ViewModels
 
         public string EigenGsm { get { return Leerling.TelefoonNummers.FirstOrDefault(x => x.TelefoonSoort.TelefoonSoortNaam == "gsm")?.Nummer ?? ""; } }
 
+        public bool IsPRZichtbaar { get { return LijstLerenKennen.Any(); } }
+
         #endregion
 
         public List<MaaltijdSoort> LijstMaaltijden { get; private set; }
@@ -70,6 +72,7 @@ namespace Inschrijven.ViewModels
         public List<Contact> LijstContacten { get; private set; }
         public List<VoorgaandeInschrijving> LijstInschrijvingen { get; private set; }
         public List<Toestemming> LijstToestemmingen { get; private set; }
+        public List<LerenKennen> LijstLerenKennen { get; private set; }
 
         public ReportViewModel(Inschrijving inschrijving)
         {
@@ -117,6 +120,19 @@ namespace Inschrijven.ViewModels
             LijstInschrijvingen = VoorgaandeInschrijvingen.OrderBy(x=>x.Schooljaar).ToList();
 
             LijstToestemmingen = Toestemmingen.ToList();
+
+            LijstLerenKennen = Marketing.LerenKennenSchool.Where(x=>x.IsReden).ToList();
+            if (!String.IsNullOrWhiteSpace(Marketing.LerenKennenSchoolVaria))
+            {
+                LijstLerenKennen.Add(new LerenKennen()
+                {
+                    IsReden = true,
+                    LerenKennenSoort = new LerenKennenSoort()
+                    {
+                        LerenKennenSoortOmschrijving = Marketing.LerenKennenSchoolVaria
+                    }
+                });
+            }
         }
 
         public class AdresWrapper

@@ -14,6 +14,6 @@ namespace Inschrijven.Model
         public string WaaromGekozenSchool { get; set; }
 
         // Navigation Properties
-        public ICollection<LerenKennenSoort> LerenKennenSchool { get; set; }
+        public virtual ICollection<LerenKennen> LerenKennenSchool { get; set; }
     }
 }

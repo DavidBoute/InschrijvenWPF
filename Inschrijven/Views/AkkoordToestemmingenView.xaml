@@ -48,6 +48,7 @@
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Background" Value="{Binding IsAkkoord, Converter={StaticResource BoolColorConv}}"/>
                 </Style>
             </ListView.ItemContainerStyle>
         </ListView>

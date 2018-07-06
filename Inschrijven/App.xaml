@@ -9,6 +9,7 @@
 
         <BooleanToVisibilityConverter x:Key="BoolToVisConv" />
         <converters:InverseBooleanConverter x:Key="InverseBoolConv"/>
+        <converters:BooleanToColorConverter x:Key="BoolColorConv"/>
 
 
         <ControlTemplate x:Key="ValidationErrorTemplate">

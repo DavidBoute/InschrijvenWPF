@@ -223,8 +223,8 @@ namespace Inschrijven.DAL
             lerenKennen.Property(x => x.IsReden).IsRequired();
 
             lerenKennen.HasRequired(x => x.LerenKennenSoort)
-                .WithOptional();
-
+                .WithOptional()
+                .Map(fk => fk.MapKey("LerenKennenSoort_id")); // aangepaste columnname, conflict met PK
 
             // LerenKennenSoort
             var lerenKennenSoort = modelBuilder.Entity<LerenKennenSoort>();

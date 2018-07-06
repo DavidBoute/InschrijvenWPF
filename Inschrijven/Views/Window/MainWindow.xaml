@@ -25,7 +25,7 @@
 
         <!--Content-->
         <Frame Name="frmFormulier"
-               Grid.Row="1" Grid.Column="0"/>
+               Grid.Row="1" Grid.Column="0" Padding="10"/>
 
         <Frame Name="frmUitleg"
                Grid.Row="1" Grid.Column="1"/>
