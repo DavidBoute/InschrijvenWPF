@@ -9,6 +9,8 @@ namespace Inschrijven.Model
 {
     public class Toestemming:INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private bool _isAkkoord;
 
         public int ToestemmingId { get; set; }
@@ -21,11 +23,12 @@ namespace Inschrijven.Model
                 if (value != _isAkkoord)
                 {
                     _isAkkoord = value;
-                    PropertyChanged(this,new PropertyChangedEventArgs("IsAkkoord"));
+
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsAkkoord"));                  
                 }
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+       
     }
 }

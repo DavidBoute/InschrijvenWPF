@@ -345,6 +345,112 @@ namespace Inschrijven.Migrations
                     }
                 });
 
+            // Commit to database
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            // nieuwe inschrijving om op te testen
+            Inschrijving inschrijving = new Inschrijving()
+            {
+                InschrijvingId = Guid.Parse("3fc434b6-48e4-419d-acc1-f73a51df9ac2"),
+                Leerkracht = leerkrachten.Single(x => x.LeerkrachtId.ToString() == "4452533A-5ADA-4163-926C-464252E4CD56"),
+                InschrijvingStatus = inschrijvingStatussen.Single(x => x.InschrijvingStatusNaam == "gerealiseerd"),
+                Richting = richtingen.Single(x => x.Jaar == 1),
+                Schooljaar = schooljaren.Single(x => x.SchooljaarNaam == "2018-2019"),
+                StartTijd = new DateTime(2018, 7, 5),
+
+                Leerling = new Leerling()
+                {
+                    LeerlingId = Guid.Parse("{CBE2CDE4-2673-4C57-BD94-1C205FE80D48}"),
+                    Voornaam = "Freddy",
+                    Familienaam = "De Testaccount",
+                    Geboortedatum = new DateTime(2002, 4, 6),
+                    Geboorteland = "België",
+                    Geboorteplaats = "Brugge",
+                    Nationaliteit = "Belg",
+                    Geslacht = geslachten.Single(x => x.GeslachtAfkorting == "M"),
+                    Email = new Email() { EmailAdres = "Freddy.De.Testaccount@gmail.com" },
+
+                    Adressen = new List<Adres>()
+                    {
+                        new Adres()
+                        {
+                            AdresId = Guid.Parse("{43891708-FC1A-4FB3-87F2-6693A2E69247}"),
+                            Straat = "Staartstraat",
+                            Huisnummer = "9",
+                            Postcode = "8000",
+                            Gemeente = "Brugge",
+                            IsDomicilie = true,
+
+                            Aanschrijving = aanschrijvingSoorten.Single(x=> x.Aanspreking == "Aan de heer en mevrouw")
+                        }
+                    },
+
+                    Contacten = new List<Contact>()
+                    {
+                        new Contact()
+                        {
+                            ContactId = Guid.Parse("{B8073FA9-EA65-48A6-82CF-7956C6E0AF40}"),
+                            Voornaam = "Ronny",
+                            Familienaam = "De Testaccount",
+                            Opmerking = "Dit is een opmerking",
+
+                            Adres = new Adres()
+                            {
+                                AdresId = Guid.Parse("{B0C4C580-EE55-4167-8C10-352AACC0E29F}"),
+                                Straat = "Staartstraat",
+                                Huisnummer = "10",
+                                Postcode = "8000",
+                                Gemeente = "Brugge",
+                                IsDomicilie = false,
+
+                                Aanschrijving = aanschrijvingSoorten.Single(x=> x.Aanspreking == "Aan de heer")
+                            },
+
+                            Relatie = relatieSoorten.Single(x=> x.RelatieNaam == "vader"),
+
+                            Email = new Email
+                            {
+                                EmailId = Guid.Parse("{D5E2D720-9E0C-4ABF-B246-45ADD2090653}"),
+                                EmailAdres = "Ronny@test.com"
+                            }
+                        }
+                    }
+                },
+
+                Maaltijden = new Maaltijden()
+                {
+                    MaaltijdenId = Guid.Parse("{EF186777-48B7-4E00-BE35-9CAD17A6D4B9}"),
+                    MaandagMaaltijdSoort = maaltijdSoorten.Single(x => x.MaaltijdSoortNaam == "warme maaltijd"),
+                    DinsdagMaaltijdSoort = maaltijdSoorten.Single(x => x.MaaltijdSoortNaam == "warme maaltijd"),
+                    WoensdagMaaltijdSoort = maaltijdSoorten.Single(x => x.MaaltijdSoortNaam == "thuis"),
+                    DonderdagMaaltijdSoort = maaltijdSoorten.Single(x => x.MaaltijdSoortNaam == "warme maaltijd"),
+                    VrijdagMaaltijdSoort = maaltijdSoorten.Single(x => x.MaaltijdSoortNaam == "warme maaltijd"),
+                },
+
+                VoorgaandeInschrijvingen = new List<VoorgaandeInschrijving>()
+                {
+                    new VoorgaandeInschrijving()
+                    {
+                        VoorgaandeInschrijvingId = Guid.Parse("{680B1887-0060-4BC1-817D-A974491EA093}"),
+                        Schooljaar = schooljaren.Single(x=>x.SchooljaarNaam=="2017-2018"),
+                        School = scholen.Single(x=>x.OfficieleNaam =="Sint-Jozefsinstituut - ASO"),
+                        BehaaldAttest = attestSoorten.Single(x=>x.AttestNaam == "A"),
+                        Jaar = 1,
+                        Richting = "latijn",
+                        IsAttestGezien = true
+                    }
+                }
+            };
+
+            context.Inschrijvingen.AddOrUpdate(inschrijving);
+
 
             // Commit to database
             try

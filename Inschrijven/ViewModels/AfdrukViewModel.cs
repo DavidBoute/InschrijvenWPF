@@ -35,9 +35,11 @@ namespace Inschrijven.ViewModels
 
                        StackPanel reportPanel = ExtractReportStackPanel(view);
                        ResourceDictionary resourceDictionary = ExtractReportResources(view);
+                       DataTemplate footerTemplate = ExtractReportFooter(view);
 
-                       Report.PrintReport(reportPanel, view.DataContext,ReportOrientation.Portrait,
-                           resourceDictionary: resourceDictionary);
+                       Report.ExportReportAsPdf(reportPanel, view.DataContext,ReportOrientation.Portrait,
+                           resourceDictionary: resourceDictionary,
+                           reportFooterDataTemplate: footerTemplate);
 
                    });
             }
@@ -51,9 +53,6 @@ namespace Inschrijven.ViewModels
                    async (object obj) =>
                    {
                        ReportView view = new ReportView(_inschrijving);
-
-                       StackPanel reportPanel = ExtractReportStackPanel(view);
-                       ResourceDictionary resourceDictionary = ExtractReportResources(view);
 
                        frame.Content = view;
 
@@ -73,6 +72,13 @@ namespace Inschrijven.ViewModels
         {
             ResourceDictionary resourceDictionary = reportView.Resources;
             return resourceDictionary;
+        }
+
+        public DataTemplate ExtractReportFooter(ReportView reportView)
+        {
+            ResourceDictionary resourceDictionary = reportView.Resources;
+            DataTemplate footerTemplate = resourceDictionary["ReportFooterDataTemplate"] as DataTemplate;
+            return footerTemplate;
         }
 
         #endregion

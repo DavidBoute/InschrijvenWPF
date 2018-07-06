@@ -27,6 +27,9 @@ namespace Inschrijven.Views
             DataContext = new ReportViewModel(inschrijving);
 
             InitializeComponent();
+
+            Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            Arrange(new Rect(0, 0, DesiredSize.Width, DesiredSize.Height));
         }
     }
 }

@@ -391,7 +391,8 @@ namespace Inschrijven.DAL
             toestemming.Property(x => x.IsAkkoord).IsRequired();
 
             toestemming.HasRequired(x => x.ToestemmingSoort)
-                .WithOptional();
+                .WithOptional()
+                .Map(fk => fk.MapKey("ToestemmingSoort_id")); // aangepaste columnname, conflict met PK
 
             // ToestemmingSoort
             var toestemmingSoort = modelBuilder.Entity<ToestemmingSoort>();
