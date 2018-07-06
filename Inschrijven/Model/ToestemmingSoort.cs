@@ -12,7 +12,5 @@ namespace Inschrijven.Model
         public string Omschrijving { get; set; }
         public bool IsEnkelVoorEersteGraad { get; set; }
         public string Code { get; set; }
-
-        public virtual ICollection<Toestemming> Toestemmingen { get; set; }
     }
 }

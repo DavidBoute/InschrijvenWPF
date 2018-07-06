@@ -156,14 +156,15 @@ namespace Inschrijven.DAL
                 .WithOptionalDependent();
             inschrijving.HasRequired(x => x.InschrijvingStatus)
                 .WithMany();
+            inschrijving.HasOptional(x => x.Toestemmingen)
+                .WithOptionalDependent();
             inschrijving.HasOptional(x => x.Marketing)
                 .WithOptionalDependent();
 
             inschrijving.HasMany(x => x.VoorgaandeInschrijvingen)
                 .WithOptional();
-            inschrijving.HasMany(x=> x.Toestemmingen)
-                .WithRequired();
-
+            inschrijving.HasMany(x => x.Toestemmingen)
+                .WithOptional();
 
             // InschrijvingStatus
             var inschrijvingStatus = modelBuilder.Entity<InschrijvingStatus>();
@@ -383,28 +384,22 @@ namespace Inschrijven.DAL
             // Toestemming
             var toestemming = modelBuilder.Entity<Toestemming>();
 
-            toestemming.HasKey(x => x.Id);
-            toestemming.Property(x => x.Id)
+            toestemming.HasKey(x => x.ToestemmingId);
+            toestemming.Property(x => x.ToestemmingId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             toestemming.Property(x => x.IsAkkoord).IsRequired();
 
-            toestemming.HasRequired(x => x.Inschrijving)
-                .WithMany(x => x.Toestemmingen);
-
             toestemming.HasRequired(x => x.ToestemmingSoort)
-                .WithMany(x => x.Toestemmingen);
-
+                .WithOptional();
 
             // ToestemmingSoort
             var toestemmingSoort = modelBuilder.Entity<ToestemmingSoort>();
 
             toestemmingSoort.HasKey(x => x.ToestemmingSoortId);
-            toestemmingSoort.Property(x => x.ToestemmingSoortId)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             toestemmingSoort.Property(x => x.Omschrijving).IsRequired();
             toestemmingSoort.Property(x => x.IsEnkelVoorEersteGraad).IsRequired();
-            toestemmingSoort.Property(x => x.Code).IsOptional();
+            toestemmingSoort.Property(x => x.Code).IsRequired();
 
 
             // VoorgaandeInschrijving

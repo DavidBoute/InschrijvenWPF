@@ -87,33 +87,21 @@
     <Compile Include="Extensions\IEnumerableExtension.cs" />
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="DAL\Configuration.cs" />
-    <Compile Include="Migrations\201807021342033_Initial.cs" />
-    <Compile Include="Migrations\201807021342033_Initial.Designer.cs">
-      <DependentUpon>201807021342033_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201806261204199_initial.cs" />
+    <Compile Include="Migrations\201806261204199_initial.Designer.cs">
+      <DependentUpon>201806261204199_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807021413127_toestemming.cs" />
-    <Compile Include="Migrations\201807021413127_toestemming.Designer.cs">
-      <DependentUpon>201807021413127_toestemming.cs</DependentUpon>
+    <Compile Include="Migrations\201806280718234_Geboorteland.cs" />
+    <Compile Include="Migrations\201806280718234_Geboorteland.Designer.cs">
+      <DependentUpon>201806280718234_Geboorteland.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807021419430_toestemming_many_soort.cs" />
-    <Compile Include="Migrations\201807021419430_toestemming_many_soort.Designer.cs">
-      <DependentUpon>201807021419430_toestemming_many_soort.cs</DependentUpon>
+    <Compile Include="Migrations\201806280808279_Moedertaal.cs" />
+    <Compile Include="Migrations\201806280808279_Moedertaal.Designer.cs">
+      <DependentUpon>201806280808279_Moedertaal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807021427557_toestemming_many_inschrijving.cs" />
-    <Compile Include="Migrations\201807021427557_toestemming_many_inschrijving.Designer.cs">
-      <DependentUpon>201807021427557_toestemming_many_inschrijving.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807021434582_toestemmingsoort_no_identity.cs" />
-    <Compile Include="Migrations\201807021434582_toestemmingsoort_no_identity.Designer.cs">
-      <DependentUpon>201807021434582_toestemmingsoort_no_identity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807021440015_toestemmingsoort_code_opt.cs" />
-    <Compile Include="Migrations\201807021440015_toestemmingsoort_code_opt.Designer.cs">
-      <DependentUpon>201807021440015_toestemmingsoort_code_opt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807021442385_test.cs" />
-    <Compile Include="Migrations\201807021442385_test.Designer.cs">
-      <DependentUpon>201807021442385_test.cs</DependentUpon>
+    <Compile Include="Migrations\201806291452015_Toestemming_code.cs" />
+    <Compile Include="Migrations\201806291452015_Toestemming_code.Designer.cs">
+      <DependentUpon>201806291452015_Toestemming_code.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\LerenKennen.cs" />
     <Compile Include="Model\ToestemmingSoort.cs" />
@@ -309,26 +297,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201807021342033_Initial.resx">
-      <DependentUpon>201807021342033_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806261204199_initial.resx">
+      <DependentUpon>201806261204199_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807021413127_toestemming.resx">
-      <DependentUpon>201807021413127_toestemming.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806280718234_Geboorteland.resx">
+      <DependentUpon>201806280718234_Geboorteland.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807021419430_toestemming_many_soort.resx">
-      <DependentUpon>201807021419430_toestemming_many_soort.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806280808279_Moedertaal.resx">
+      <DependentUpon>201806280808279_Moedertaal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807021427557_toestemming_many_inschrijving.resx">
-      <DependentUpon>201807021427557_toestemming_many_inschrijving.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807021434582_toestemmingsoort_no_identity.resx">
-      <DependentUpon>201807021434582_toestemmingsoort_no_identity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807021440015_toestemmingsoort_code_opt.resx">
-      <DependentUpon>201807021440015_toestemmingsoort_code_opt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807021442385_test.resx">
-      <DependentUpon>201807021442385_test.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806291452015_Toestemming_code.resx">
+      <DependentUpon>201806291452015_Toestemming_code.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

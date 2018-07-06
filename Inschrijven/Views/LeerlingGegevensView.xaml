@@ -73,7 +73,7 @@
         <Label Content="Geboorteland:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="4" Grid.Column="0"/>
-        <TextBox  Text="{Binding Geboorteland, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+        <TextBox  Text="{Binding Geboorteplaats, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Width="150"

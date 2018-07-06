@@ -11,7 +11,8 @@ namespace Inschrijven.Model
     {
         private bool _isAkkoord;
 
-        public int Id { get; set; }     
+        public int ToestemmingId { get; set; }
+        public virtual ToestemmingSoort ToestemmingSoort { get; set; }
         public bool IsAkkoord
         {
             get { return _isAkkoord; }
@@ -24,9 +25,6 @@ namespace Inschrijven.Model
                 }
             }
         }
-
-        public virtual ToestemmingSoort ToestemmingSoort { get; set; }
-        public virtual Inschrijving Inschrijving { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
