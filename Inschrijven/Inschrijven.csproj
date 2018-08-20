@@ -53,9 +53,6 @@
     <Reference Include="PdfSharp.Xps, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
       <HintPath>..\packages\PdfSharp.Xps.SimpleWPFReporting.1.0.0\lib\net45\PdfSharp.Xps.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleWPFReporting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleWPFReporting.1.1.0\lib\net45\SimpleWPFReporting.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -308,6 +305,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\SimpleWPFReporting-master\SimpleWPFReporting\SimpleWPFReporting.csproj">
+      <Project>{9846b28b-d22b-4b99-bfc1-420535730ce4}</Project>
+      <Name>SimpleWPFReporting</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

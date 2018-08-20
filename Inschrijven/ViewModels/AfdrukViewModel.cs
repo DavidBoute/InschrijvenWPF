@@ -16,10 +16,13 @@ using System.Windows.Media;
 
 namespace Inschrijven.ViewModels
 {
+
     public class AfdrukViewModel : BaseViewModel
     {
-        private Inschrijving _inschrijving;
+        const double A4_HEIGHT_CM = 29.7;
+        const double A4_WIDTH_CM = 21;
 
+        private Inschrijving _inschrijving;
 
         // Commands
         #region Commands
@@ -31,16 +34,35 @@ namespace Inschrijven.ViewModels
                 return new RelayCommand(
                    async (object obj) =>
                    {
-                       ReportView view = new ReportView(_inschrijving);
+                       ReportView view = new ReportView(_inschrijving, A4_HEIGHT_CM, A4_WIDTH_CM);
 
                        StackPanel reportPanel = ExtractReportStackPanel(view);
                        ResourceDictionary resourceDictionary = ExtractReportResources(view);
                        DataTemplate footerTemplate = ExtractReportFooter(view);
 
-                       Report.ExportReportAsPdf(reportPanel, view.DataContext,ReportOrientation.Portrait,
-                           resourceDictionary: resourceDictionary,
-                           reportFooterDataTemplate: footerTemplate);
+                       bool isDoneExporting = false;
 
+                       while (!isDoneExporting)
+                       {
+                           try
+                           {
+                               Report.ExportReportAsPdf(reportPanel, view.DataContext, ReportOrientation.Portrait,
+                                                         resourceDictionary: resourceDictionary,
+                                                         reportFooterDataTemplate: footerTemplate);
+                               isDoneExporting = true;
+                           }
+                           catch (System.IO.IOException)
+                           {
+                               MessageBoxResult messageBoxResult =  MessageBox.Show("Het bestand kan niet geschreven worden. Het is misschien in gebruik. Opnieuw proberen?",
+                                                                                    "Fout",
+                                                                                    MessageBoxButton.YesNo,
+                                                                                    MessageBoxImage.Error);
+                               if (messageBoxResult == MessageBoxResult.No)
+                               {
+                                   isDoneExporting = true;
+                               }
+                           }
+                       }
                    });
             }
         }
@@ -52,7 +74,7 @@ namespace Inschrijven.ViewModels
                 return new RelayCommand(
                    async (object obj) =>
                    {
-                       ReportView view = new ReportView(_inschrijving);
+                       ReportView view = new ReportView(_inschrijving, A4_HEIGHT_CM, A4_WIDTH_CM);
 
                        frame.Content = view;
 

@@ -446,6 +446,80 @@ namespace Inschrijven.Migrations
                         Richting = "latijn",
                         IsAttestGezien = true
                     }
+                },
+
+                Toestemmingen = new List<Toestemming>()
+                {
+                    new Toestemming()
+                    {
+                        ToestemmingId = 1,
+                        IsAkkoord = true,
+                        ToestemmingSoort = toestemmingSoorten.Single(x=>x.ToestemmingSoortId == 1)
+                    },
+                    new Toestemming()
+                    {
+                        ToestemmingId = 2,
+                        IsAkkoord = true,
+                        ToestemmingSoort = toestemmingSoorten.Single(x=>x.ToestemmingSoortId == 2)
+                    },
+                    new Toestemming()
+                    {
+                        ToestemmingId = 3,
+                        IsAkkoord = true,
+                        ToestemmingSoort = toestemmingSoorten.Single(x=>x.ToestemmingSoortId == 3)
+                    },
+                    new Toestemming()
+                    {
+                        ToestemmingId = 4,
+                        IsAkkoord = true,
+                        ToestemmingSoort = toestemmingSoorten.Single(x=>x.ToestemmingSoortId == 4)
+                    },
+                    new Toestemming()
+                    {
+                        ToestemmingId = 5,
+                        IsAkkoord = true,
+                        ToestemmingSoort = toestemmingSoorten.Single(x=>x.ToestemmingSoortId == 5)
+                    },
+                    new Toestemming()
+                    {
+                        ToestemmingId = 6,
+                        IsAkkoord = true,
+                        ToestemmingSoort = toestemmingSoorten.Single(x=>x.ToestemmingSoortId == 6)
+                    }
+                },
+
+                Marketing = new Marketing()
+                {
+                    MarketingId = Guid.Parse("38bc140c-5e68-424f-b514-0dfa67e2b5c9"),
+                    LerenKennenSchool = new List<Model.LerenKennen>()
+                    {
+                       new Model.LerenKennen()
+                       {
+                           LerenKennenId = 1,
+                           IsReden = true,
+                           LerenKennenSoort = lerenKennenSoorten.Single(x=>x.LerenKennenSoortId == 1)
+                       },
+                       new Model.LerenKennen()
+                       {
+                           LerenKennenId = 2,
+                           IsReden = true,
+                           LerenKennenSoort = lerenKennenSoorten.Single(x=>x.LerenKennenSoortId == 2)
+                       },
+                       new Model.LerenKennen()
+                       {
+                           LerenKennenId = 3,
+                           IsReden = false,
+                           LerenKennenSoort = lerenKennenSoorten.Single(x=>x.LerenKennenSoortId == 3)
+                       },
+                       new Model.LerenKennen()
+                       {
+                           LerenKennenId = 4,
+                           IsReden = false,
+                           LerenKennenSoort = lerenKennenSoorten.Single(x=>x.LerenKennenSoortId == 4)
+                       }
+                    },
+                    LerenKennenSchoolVaria = "Via een helderziende",
+                    WaaromGekozenSchool = "Voor een heel goede reden"
                 }
             };
 

@@ -35,10 +35,10 @@ namespace Inschrijven.Views
 
             InitializeComponent();
 
-            this.Height = heightInCM;
-            this.Width = widthInCM;
+            this.Height = heightInCM / 2.54 * 96; // px in WPF = 1/96 inch
+            this.Width = widthInCM / 2.54 * 96;
 
-            Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            Measure(new Size(this.Width-50, this.Height-50));
             Arrange(new Rect(0, 0, DesiredSize.Width, DesiredSize.Height));
         }
     }

@@ -3,11 +3,19 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       xmlns:local="clr-namespace:Inschrijven.Views"
       mc:Ignorable="d" 
-      Title="ReportView" Height="29.7cm" Width="21cm" FontSize="16pt">
+      Title="ReportView">
     <Page.Resources>
-        <Style x:Key="Titel" TargetType="TextBlock">
+        <!--Default Width voor textboxes in Listview-->
+        <sys:Double x:Key="Width">720</sys:Double>
+
+        <Style x:Key="DefaultFontSize" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <Style x:Key="Titel" TargetType="TextBlock" BasedOn="{StaticResource DefaultFontSize}">
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Background" Value="Red"/>
@@ -31,7 +39,7 @@
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
         </Style>
 
-        <Style x:Key="Info" TargetType="TextBlock">
+        <Style x:Key="Info" TargetType="TextBlock" BasedOn="{StaticResource DefaultFontSize}">
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="TextAlignment" Value="Left"/>
@@ -43,6 +51,7 @@
         <DataTemplate x:Key="ReportFooterDataTemplate">
             <TextBlock Text="{DynamicResource PageNumber}" HorizontalAlignment="Right"/>
         </DataTemplate>
+        
     </Page.Resources>
     <ScrollViewer CanContentScroll="True">
         <StackPanel Name="ReportStackPanel">
@@ -309,15 +318,14 @@
             </StackPanel>
 
             <StackPanel>
-                <TextBlock Text="AKKOORD EN PRIVACY" Style="{StaticResource SubTitel}"/>
-                <ListView ItemsSource="{Binding LijstToestemmingen, Mode=OneWay}">
+                <TextBlock Text="AKKOORD EN PRIVACY" Style="{StaticResource SubTitel}" Name="AkkoordTitel"/>
+                <ListView ItemsSource="{Binding LijstToestemmingen, Mode=OneWay}" HorizontalAlignment="Stretch"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel HorizontalAlignment="Stretch">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding ToestemmingSoort.Omschrijving , Mode=OneWay}" Style="{StaticResource Info}"/>
-                                    <CheckBox IsChecked="{Binding IsAkkoord, Mode=OneWay}" VerticalAlignment="Center"/>
-                                </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                <TextBlock Text="{Binding ToestemmingSoort.Omschrijving , Mode=OneWay}" Style="{StaticResource Info}" TextWrapping="Wrap"
+                                           Width="{StaticResource Width}"/>
+                                <CheckBox IsChecked="{Binding IsAkkoord, Mode=OneWay}" VerticalAlignment="Center" Margin="5"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListView.ItemTemplate>
@@ -327,10 +335,11 @@
             <StackPanel Visibility="{Binding IsPRZichtbaar, Converter={StaticResource BoolToVisConv}}">
                 <TextBlock Text="PR-BELEID" Style="{StaticResource SubTitel}"/>
                 <TextBlock Text="Hoe hebt u de school leren kennen?" Style="{StaticResource TussenTitel}"/>
-                <ListView ItemsSource="{Binding LijstLerenKennen, Mode=OneWay}">
+                <ListView ItemsSource="{Binding LijstLerenKennen, Mode=OneWay}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding LerenKennenSoort.LerenKennenSoortOmschrijving , Mode=OneWay}" Style="{StaticResource Info}"/>
+                            <TextBlock Text="{Binding LerenKennenSoort.LerenKennenSoortOmschrijving , Mode=OneWay}" Style="{StaticResource Info}" TextWrapping="Wrap"
+                                       Width="{StaticResource Width}"/>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

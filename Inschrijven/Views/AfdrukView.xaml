@@ -9,7 +9,14 @@
       Title="AfdrukView">
 
     <StackPanel>
-        <Button Content="Maak rapport" Command="{Binding AfdrukCommand}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Button Content="Toon rapport" Command="{Binding ToonCommand}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button Content="Maak rapport" 
+                Command="{Binding AfdrukCommand}"
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
+        
+        <Button Content="Toon rapport" 
+                Command="{Binding ToonCommand}" 
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center"/>
     </StackPanel>
 </Page>

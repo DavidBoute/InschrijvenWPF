@@ -17,13 +17,16 @@
                   VerticalAlignment="Center" HorizontalAlignment="Center"
                   DisplayMemberPath="VolledigeNaam"
                   Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150">
+                  Style="{StaticResource RoundedComboBoxStyle}"
+                  ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
+                  Margin="0,0,0,20">
         </ComboBox>
 
         <Button Content="Log in" Command="{Binding LoginCommand}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"/>
         
         <Button Content="Shortcut" Command="{Binding ShortcutCommand}"/>
+        
         <Button Content="Afdrukken" Command="{Binding AfdrukCommand}"/>
     </StackPanel>
 </Page>
