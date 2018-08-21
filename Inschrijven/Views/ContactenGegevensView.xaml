@@ -5,57 +5,86 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Inschrijven.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="300" d:DesignWidth="500"
       Title="ContactenGegevensView">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <ListView ItemsSource="{Binding LijstContacten, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   SelectedItem="{Binding GeselecteerdContact}"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="0" Grid.Column="0" Grid.RowSpan="3"
-                  Margin="10">
+                  Style="{StaticResource RoundedListView}"
+                  Grid.Row="0" Grid.Column="0"
+                  Margin="10"
+                  HorizontalAlignment="Stretch"
+                  BorderThickness="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Voornaam}" />
-                        <TextBlock Text="{Binding Familienaam}" />
-                    </StackPanel>
+                    <Border CornerRadius="{StaticResource Rounded_CornerRadius}"
+                            BorderBrush="{StaticResource Rounded_BorderColor}" 
+                            BorderThickness="1" 
+                            SnapsToDevicePixels="True">
+                        <Border CornerRadius="{StaticResource Rounded_CornerRadius}" 
+                                    Background="{StaticResource Rounded_HighlightColor}" 
+                                    BorderThickness="0" 
+                                    SnapsToDevicePixels="True" 
+                                    Padding="6,2">
+                            <Grid MinHeight="30">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Relatie.RelatieNaam}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch"
+                                            Margin="10,2.5"
+                                            Grid.Row="0" Grid.Column="1">
+                                    <TextBlock Text="{Binding Voornaam}"
+                                               Margin="2,0"/>
+                                    <TextBlock Text="{Binding Familienaam}"
+                                               Margin="2,0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
 
         </ListView>
 
-        <Button Command="{Binding MaakContactCommand}"
-                Grid.Row="0" Grid.Column="1"
-                Margin="10">
+        <StackPanel Margin="0,10"  Grid.Row="0" Grid.Column="1">
+           <Button Command="{Binding MaakContactCommand}"
+                Style="{StaticResource RoundedButton}">
             <TextBlock Text="Maak contact" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
         <Button Command="{Binding BewerkContactCommand}" CommandParameter="{Binding GeselecteerdContact, Mode=OneWay}"
-                Grid.Row="1" Grid.Column="1"
-                Margin="10">
+                Style="{StaticResource RoundedButton}">
             <TextBlock Text="Bewerk contact" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
         <Button Command="{Binding VerwijderContactCommand}" CommandParameter="{Binding GeselecteerdContact, Mode=OneWay}"
-                Grid.Row="2" Grid.Column="1"
-                Margin="10">
+                Style="{StaticResource RoundedButton}">
             <TextBlock Text="Verwijder contact" TextWrapping="Wrap" TextAlignment="Center"/>
-        </Button>
+        </Button> 
+        </StackPanel>
+        
 
         <Button Command="{Binding VolgendeCommand}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"
-                Grid.Row="3" Grid.Column="1"
-                Margin="0,10">
+                Grid.Row="5" Grid.Column="1"
+                Style="{StaticResource RoundedButton}">
             <TextBlock Text="Volgende" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
 

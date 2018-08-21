@@ -14,19 +14,21 @@
                VerticalAlignment="Center" HorizontalAlignment="Center"/>
         <ComboBox ItemsSource="{Binding LeerkrachtenLijst}"
                   SelectedItem="{Binding HuidigeLeerkracht, NotifyOnValidationError=True, ValidatesOnDataErrors=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
                   DisplayMemberPath="VolledigeNaam"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
                   Style="{StaticResource RoundedComboBoxStyle}"
                   ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
+                  HorizontalAlignment="Center"
                   Margin="0,0,0,20">
         </ComboBox>
 
         <Button Content="Log in" Command="{Binding LoginCommand}"
+                Style="{StaticResource RoundedButton}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"/>
         
-        <Button Content="Shortcut" Command="{Binding ShortcutCommand}"/>
+        <Button Content="Shortcut" Command="{Binding ShortcutCommand}"
+                Style="{StaticResource RoundedButton}"/>
         
-        <Button Content="Afdrukken" Command="{Binding AfdrukCommand}"/>
+        <Button Content="Afdrukken" Command="{Binding AfdrukCommand}"
+                Style="{StaticResource RoundedButton}"/>
     </StackPanel>
 </Page>

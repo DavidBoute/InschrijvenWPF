@@ -6,12 +6,12 @@
       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:local="clr-namespace:Inschrijven.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="600" d:DesignWidth="600"
       Title="LeerlingGegevensView">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -38,63 +38,49 @@
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="0" Grid.Column="0"/>
         <TextBox  Text="{Binding Voornaam, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="0" Grid.Column="1"/>
 
         <Label Content="Naam:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="1" Grid.Column="0"/>
         <TextBox  Text="{Binding Familienaam, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="1" Grid.Column="1"/>
 
         <Label Content="Geboortedatum:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="2" Grid.Column="0"/>
         <DatePicker  SelectedDate="{Binding GeboorteDatum, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                     VerticalAlignment="Center" HorizontalAlignment="Center"
-                     Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                     Width="150"
+                     Style="{StaticResource DatePickerStyle}"
                      Grid.Row="2" Grid.Column="1"/>
 
         <Label Content="Geboorteplaats:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="3" Grid.Column="0"/>
         <TextBox  Text="{Binding Geboorteplaats, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="3" Grid.Column="1"/>
 
         <Label Content="Geboorteland:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="4" Grid.Column="0"/>
-        <TextBox  Text="{Binding Geboorteplaats, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+        <TextBox  Text="{Binding Geboorteland, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="4" Grid.Column="1"/>
 
         <Label Content="Nationaliteit:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="5" Grid.Column="0"/>
         <TextBox  Text="{Binding Nationaliteit, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="5" Grid.Column="1"/>
 
         <Label Content="Rijksregisternummer:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="6" Grid.Column="0"/>
         <TextBox  Text="{Binding Rijksregisternummer, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="6" Grid.Column="1"/>
 
         <Label Content="Geslacht:"
@@ -103,23 +89,20 @@
         <ComboBox SelectedValue="{Binding Geslacht, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                   ItemsSource="{Binding LijstGeslachten, Mode=OneTime}"
                   DisplayMemberPath="GeslachtNaam"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150" Height="Auto"
+                  Style="{StaticResource RoundedComboBoxStyle}"
+                  ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
                   Grid.Row="7" Grid.Column="1"/>
 
         <Label Content="Email:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="8" Grid.Column="0"/>
         <TextBox  Text="{Binding Email.EmailAdres , ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="8" Grid.Column="1"/>
 
-        <Label Content="Domicilie adres:"
+        <Label Content="Domicilie adres" FontWeight="Bold"
                VerticalAlignment="Center" HorizontalAlignment="Left"
-               Grid.Row="9" Grid.Column="0"/>
+               Grid.Row="9" Grid.Column="1"/>
 
         <Label Content="Aanspreking:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
@@ -128,59 +111,50 @@
                   SelectedValuePath="AanschrijvingSoortId"
                   ItemsSource="{Binding LijstAanschrijvingSoorten, Mode=OneTime}"
                   DisplayMemberPath="Aanspreking"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150" Height="Auto"
+                  Style="{StaticResource RoundedComboBoxStyle}"
+                  ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
                   Grid.Row="10" Grid.Column="1"/>
 
         <Label Content="Straat:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="11" Grid.Column="0"/>
         <TextBox  Text="{Binding DomicilieStraat, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="11" Grid.Column="1"/>
 
         <Label Content="Huisnummer:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="12" Grid.Column="0"/>
         <TextBox  Text="{Binding DomicilieHuisnummer, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="12" Grid.Column="1"/>
 
         <Label Content="Postcode:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="13" Grid.Column="0"/>
         <TextBox  Text="{Binding DomiciliePostcode, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="13" Grid.Column="1"/>
 
         <Label Content="Gemeente:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="14" Grid.Column="0"/>
         <TextBox  Text="{Binding DomicilieGemeente, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="14" Grid.Column="1"/>
 
         <Label Content="Deelgemeente:"
                VerticalAlignment="Center" HorizontalAlignment="Right"
                Grid.Row="15" Grid.Column="0"/>
         <TextBox  Text="{Binding DomicilieDeelgemeente, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  VerticalAlignment="Center" HorizontalAlignment="Center"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Width="150"
+                  Style="{StaticResource RoundedTextbox}"
                   Grid.Row="15" Grid.Column="1"/>
 
         <Button Content="Volgende"
                 Command="{Binding VolgendeCommand}"
+                Style="{StaticResource RoundedButton}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"
+                HorizontalAlignment="Right"
                 Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="2"/>
     </Grid>
 </Page>
