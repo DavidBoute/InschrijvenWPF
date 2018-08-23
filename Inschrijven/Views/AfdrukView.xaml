@@ -12,11 +12,13 @@
         <Button Content="Maak rapport" 
                 Command="{Binding AfdrukCommand}"
                 HorizontalAlignment="Center" 
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center"
+                Style="{StaticResource RoundedButton}"/>
         
         <Button Content="Toon rapport" 
                 Command="{Binding ToonCommand}" 
                 HorizontalAlignment="Center" 
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center"
+                Style="{StaticResource RoundedButton}"/>
     </StackPanel>
 </Page>

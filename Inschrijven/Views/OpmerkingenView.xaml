@@ -5,75 +5,90 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Inschrijven.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="500" d:DesignWidth="500"
       Title="OpmerkingenView">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Label Content="Taal:"
+        <Label Content="Opmerkingen"
+               FontWeight="Bold"
+               HorizontalAlignment="Right" VerticalAlignment="Center"
+               Grid.Row="0" Grid.Column="0"/>
+
+        <Label Content="Taal"
+               HorizontalAlignment="Right"
                Grid.Row="1" Grid.Column="0"/>
         <TextBox Text="{Binding TaalOpmerkingen, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"/>
+                  Style="{StaticResource RoundedTextbox}"
+                 MinHeight="50"
+                  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"/>
 
-        <Label Content="Medisch:"
+        <Label Content="Medisch"
+               HorizontalAlignment="Right"
                Grid.Row="2" Grid.Column="0"/>
         <TextBox Text="{Binding MedischeOpmerkingen, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"/>
+                  Style="{StaticResource RoundedTextbox}"
+                 MinHeight="50"
+                  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"/>
 
-        <Label Content="Leerstoornis:"
+        <Label Content="Leerstoornis"
+               HorizontalAlignment="Right"
                Grid.Row="3" Grid.Column="0"/>
         <TextBox Text="{Binding LeerOpmerkingen, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"/>
+                  Style="{StaticResource RoundedTextbox}"
+                 MinHeight="50"
+                  Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"/>
 
 
-        <Label Content="Verhoogde zorgvraag:"
+        <Label Content="Verhoogde zorgvraag"
+               HorizontalAlignment="Right" VerticalAlignment="Center"
                Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
         <CheckBox IsChecked="{Binding VerhoogdeZorgVraag, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Style="{StaticResource RoundedCheckBoxStyle}"
                   Grid.Row="5" Grid.Column="2" VerticalAlignment="Center"/>
 
-        <Label Content="Verslag BuO:"
+        <Label Content="Verslag BuO"
+               HorizontalAlignment="Right" VerticalAlignment="Center"
                Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"/>
         <CheckBox IsChecked="{Binding VerslagBuitengewoonOnderwijs, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Style="{StaticResource RoundedCheckBoxStyle}"
                   Grid.Row="6" Grid.Column="2" VerticalAlignment="Center"/>
 
-        <Label Content="Gemotiveerd verslag:"
+        <Label Content="Gemotiveerd verslag"
+               HorizontalAlignment="Right" VerticalAlignment="Center"
                Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"/>
         <CheckBox IsChecked="{Binding GemotiveerdVerslag, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Style="{StaticResource RoundedCheckBoxStyle}"
                   Grid.Row="7" Grid.Column="2" VerticalAlignment="Center"/>
 
-        <Label Content="Ondersteuning (Gon):"
+        <Label Content="Ondersteuning (Gon)"
+               HorizontalAlignment="Right" VerticalAlignment="Center"
                Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"/>
         <CheckBox IsChecked="{Binding OndersteuningsUur, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
+                  Style="{StaticResource RoundedCheckBoxStyle}"
                   Grid.Row="8" Grid.Column="2" VerticalAlignment="Center"/>
 
         <Button Command="{Binding VolgendeCommand}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"
+                Style="{StaticResource RoundedButton}"
+                HorizontalAlignment="Right"
                 Grid.Row="9" Grid.Column="3" Grid.ColumnSpan="2"
                 Margin="0,5">
             <TextBlock Text="Volgende" TextWrapping="Wrap" TextAlignment="Center"/>

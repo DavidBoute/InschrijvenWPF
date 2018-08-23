@@ -23,7 +23,9 @@
         </Grid.ColumnDefinitions>
 
         <ListView ItemsSource="{Binding LijstToestemmingen}"
-                  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2"
+                  Style="{StaticResource RoundedListView}"
+                  HorizontalAlignment="Stretch"
+                  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.View>
                 <GridView AllowsColumnReorder="False">
@@ -31,7 +33,8 @@
                         <GridViewColumnHeader IsEnabled="False"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding ToestemmingSoort.Omschrijving}" TextWrapping="Wrap" Margin="0,5"/>
+                                <TextBlock Text="{Binding ToestemmingSoort.Omschrijving}" TextWrapping="Wrap" Margin="0,5"
+                                           VerticalAlignment="Center"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -39,7 +42,8 @@
                         <GridViewColumnHeader IsEnabled="False" Content="Akkoord"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox IsChecked="{Binding IsAkkoord}" HorizontalAlignment="Center"/>
+                                <CheckBox IsChecked="{Binding IsAkkoord}" HorizontalAlignment="Center"
+                                          Style="{StaticResource RoundedCheckBoxStyle}"/>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -56,16 +60,17 @@
         <Button Command="{Binding VolgendeCommand}"
                 Visibility="{Binding IsNietOverrideKnopZichtbaar, Mode=OneWay, Converter={StaticResource BoolToVisConv}}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"
-                Grid.Row="2" Grid.Column="1"
-                Margin="0,10">
+                Style="{StaticResource RoundedButton}"
+                HorizontalAlignment="Right"
+                Grid.Row="2" Grid.Column="1">
             <TextBlock Text="Volgende" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
 
         <Button Command="{Binding OverrideCommand}"
                 Visibility="{Binding IsOverrideKnopZichtbaar, Mode=OneWay, Converter={StaticResource BoolToVisConv}, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                Grid.Row="2" Grid.Column="1"
-                Margin="0,10">
+                Style="{StaticResource RoundedButton}"
+                HorizontalAlignment="Right"
+                Grid.Row="2" Grid.Column="1">
             <TextBlock Text="Geen akkoord schoolreglement" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
 

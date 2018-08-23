@@ -135,6 +135,7 @@
         <ListView ItemsSource="{Binding Telefoonnummers}"
                   Style="{StaticResource RoundedListView}"
                   HorizontalAlignment="Stretch"
+                  MinHeight="50"
                  Grid.Row="11" Grid.Column="1" Grid.RowSpan="2">
             <ListView.ItemTemplate>
                 <DataTemplate>

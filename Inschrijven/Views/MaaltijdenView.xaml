@@ -5,94 +5,126 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Inschrijven.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="500" d:DesignWidth="500"
       Title="MaaltijdenView">
-    
+    <Page.Resources>
+
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Label Content="Intern"
-               Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+               HorizontalAlignment="Right"
+               Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
         <CheckBox IsChecked="{Binding IsIntern, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
+                  Style="{DynamicResource RoundedCheckBoxStyle}"
+                  Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"/>
         <ComboBox ItemsSource="{Binding Internaten, Mode=OneTime}"
                   DisplayMemberPath="VolledigeNaam"
                   SelectedItem="{Binding InternaatContact}"
                   Visibility="{Binding IsIntern, Converter={StaticResource BoolToVisConv}, Mode=OneWay}"
-                  Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">
+                  Style="{StaticResource RoundedComboBoxStyle}"
+                  ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
+                  Grid.Row="0" Grid.Column="2" VerticalAlignment="Center">
         </ComboBox>
-        
-        <Label Content="Maandag"
+
+        <Label Content="Maaltijden"
+               HorizontalAlignment="Right"
+               Margin="0,20"
+               Grid.Row="1" Grid.Column="0"/>
+        <Grid  Margin="0,20"
+            Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Maandag"
+               Grid.Row="0" Grid.Column="0"/>
+            <ComboBox ItemsSource="{Binding Maaltijdsoorten, Mode=OneTime}"
+                      DisplayMemberPath="MaaltijdSoortNaam"
+                      SelectedItem="{Binding MaandagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                      Style="{StaticResource RoundedComboBoxStyle}"
+                      ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
+                      MinWidth="30"
+                      Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+            </ComboBox>
+
+            <Label Content="Dinsdag"
+               Grid.Row="1" Grid.Column="0"/>
+            <ComboBox ItemsSource="{Binding Maaltijdsoorten, Mode=OneTime}"
+                      DisplayMemberPath="MaaltijdSoortNaam"
+                      SelectedItem="{Binding DinsdagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                      Style="{StaticResource RoundedComboBoxStyle}"
+                      ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
+                      Grid.Row="1" Grid.Column="1" VerticalAlignment="Center">
+            </ComboBox>
+
+            <Label Content="Woensdag"
+               Grid.Row="2" Grid.Column="0"/>
+            <ComboBox ItemsSource="{Binding MaaltijdsoortenWoensdag, Mode=OneTime}"
+                      DisplayMemberPath="MaaltijdSoortNaam"
+                      SelectedItem="{Binding WoensdagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                      Style="{StaticResource RoundedComboBoxStyle}"
+                      ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
+                  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center">
+            </ComboBox>
+
+            <Label Content="Donderdag"
                Grid.Row="3" Grid.Column="0"/>
-        <ComboBox ItemsSource="{Binding Maaltijdsoorten, Mode=OneTime}"
-                  DisplayMemberPath="MaaltijdSoortNaam"
-                  SelectedItem="{Binding MaandagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">
-        </ComboBox>
+            <ComboBox ItemsSource="{Binding Maaltijdsoorten, Mode=OneTime}"
+                      DisplayMemberPath="MaaltijdSoortNaam"
+                      SelectedItem="{Binding DonderdagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                      Style="{StaticResource RoundedComboBoxStyle}"
+                      ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
+                      Grid.Row="3" Grid.Column="1" VerticalAlignment="Center">
+            </ComboBox>
 
-        <Label Content="Dinsdag"
-               Grid.Row="3" Grid.Column="1"/>
-        <ComboBox ItemsSource="{Binding Maaltijdsoorten, Mode=OneTime}"
-                  DisplayMemberPath="MaaltijdSoortNaam"
-                  SelectedItem="{Binding DinsdagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">
-        </ComboBox>
+            <Label Content="Vrijdag"
+               Grid.Row="4" Grid.Column="0"/>
+            <ComboBox ItemsSource="{Binding Maaltijdsoorten, Mode=OneTime}"
+                      DisplayMemberPath="MaaltijdSoortNaam"
+                      SelectedItem="{Binding VrijdagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                      Style="{StaticResource RoundedComboBoxStyle}"
+                      ItemContainerStyle="{StaticResource RoundedComboBoxItemStyle}"
+                      Grid.Row="4" Grid.Column="1" VerticalAlignment="Center">
+            </ComboBox>
 
-        <Label Content="Woensdag"
-               Grid.Row="3" Grid.Column="2"/>
-        <ComboBox ItemsSource="{Binding MaaltijdsoortenWoensdag, Mode=OneTime}"
-                  DisplayMemberPath="MaaltijdSoortNaam"
-                  SelectedItem="{Binding WoensdagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="4" Grid.Column="2" VerticalAlignment="Center">
-        </ComboBox>
+        </Grid>
 
-        <Label Content="Donderdag"
-               Grid.Row="3" Grid.Column="3"/>
-        <ComboBox ItemsSource="{Binding Maaltijdsoorten, Mode=OneTime}"
-                  DisplayMemberPath="MaaltijdSoortNaam"
-                  SelectedItem="{Binding DonderdagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="4" Grid.Column="3" VerticalAlignment="Center">
-        </ComboBox>
-
-        <Label Content="Vrijdag"
-               Grid.Row="3" Grid.Column="4"/>
-        <ComboBox ItemsSource="{Binding Maaltijdsoorten, Mode=OneTime}"
-                  DisplayMemberPath="MaaltijdSoortNaam"
-                  SelectedItem="{Binding VrijdagMaaltijdSoort, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="4" Grid.Column="4" VerticalAlignment="Center">
-        </ComboBox>
 
         <Label Content="Volgt avondstudie"
-               Grid.Row="5" Grid.Column="0"/>
+               HorizontalAlignment="Right"
+               Grid.Row="2" Grid.Column="0"/>
         <CheckBox IsChecked="{Binding VolgtAvondstudie, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" 
-                  Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}"
-                  Grid.Row="5" Grid.Column="1" VerticalAlignment="Center"/>
+                  Style="{DynamicResource RoundedCheckBoxStyle}"
+                  Grid.Row="2" Grid.Column="1" VerticalAlignment="Center"/>
 
         <Button Command="{Binding VolgendeCommand}"
                 IsEnabled="{Binding IsValid, Mode=OneWay}"
-                Grid.Row="6" Grid.Column="4"
-                Margin="0,10">
+                Style="{StaticResource RoundedButton}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Grid.Row="3" Grid.Column="2">
             <TextBlock Text="Volgende" TextWrapping="Wrap" TextAlignment="Center"/>
         </Button>
     </Grid>
